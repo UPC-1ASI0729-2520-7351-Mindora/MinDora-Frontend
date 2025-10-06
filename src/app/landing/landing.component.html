@@ -1,0 +1,489 @@
+<header class="position-relative overflow-hidden">
+  <div class="blob blob-1"></div>
+  <div class="blob blob-2"></div>
+
+  <div class="container py-5 position-relative" style="z-index: 1">
+    <div class="row align-items-center g-5">
+      <div class="col-lg-6">
+        <span class="badge bg-success-subtle text-success-emphasis rounded-pill fw-semibold"
+          >Nuevo • Estrés & Bienestar</span
+        >
+        <h1 class="display-5 fw-bold mt-3">Detecta tu estrés. Vive más ligero.</h1>
+        <p class="lead text-muted-600 mt-3">
+          NeuroZen ayuda a adultos de 20–50 años a
+          <strong>identificar y gestionar el estrés laboral</strong> con autoevaluaciones rápidas,
+          <strong>análisis de señales corporales visibles</strong> (postura, tensión facial,
+          respiración) y recomendaciones personalizadas. También puedes
+          <strong>contactar a psicólogos</strong> desde la app.
+        </p>
+        <form id="waitlistForm" class="row gy-2 gx-2 mt-4" autocomplete="on">
+          <div class="col-12 col-sm">
+            <input
+              type="email"
+              required
+              class="form-control form-control-lg rounded-2xl"
+              placeholder="Ingresa tu correo"
+              aria-label="Correo electrónico"
+            />
+          </div>
+          <div class="col-12 col-sm-auto d-grid">
+            <button class="btn btn-success btn-lg rounded-2xl" type="submit">
+              Unirme a la lista
+            </button>
+          </div>
+        </form>
+        <div class="mt-3 d-flex gap-3" id="download">
+          <a class="btn btn-primary btn-pill" routerLink="/coaching"
+            ><i class="fa-solid fa-users me-2"></i>Coaching & Comunidad</a
+          >
+          <a class="btn btn-outline-secondary btn-pill" href="#"
+            ><i class="fa-brands fa-apple me-2"></i>App Store</a
+          >
+          <a class="btn btn-outline-secondary btn-pill" href="#"
+            ><i class="fa-brands fa-google-play me-2"></i>Google Play</a
+          >
+        </div>
+        <ul class="small text-muted mt-3 list-inline">
+          <li class="list-inline-item">Sin spam. Puedes cancelar en cualquier momento.</li>
+          <li class="list-inline-item">• iOS y Android</li>
+          <li class="list-inline-item">• Privacidad por diseño</li>
+        </ul>
+      </div>
+      <div class="col-lg-6 d-flex justify-content-lg-end justify-content-center">
+        <div class="phone">
+          <div class="phone-inner">
+            <div class="d-flex align-items-center justify-content-between">
+              <span class="pill"></span>
+              <span class="dot"></span>
+            </div>
+
+            <div class="mt-3 d-flex align-items-start gap-2">
+              <span class="icon-bubble"><i class="fa-solid fa-heart-pulse"></i></span>
+              <div>
+                <p class="mb-0 fw-semibold">Check‑in de estrés</p>
+                <small class="text-muted">¿Cómo te sientes ahora mismo?</small>
+              </div>
+            </div>
+            <div class="mt-2 row g-2">
+              <div class="col-3">
+                <button class="btn btn-light w-100 rounded-2xl btn-sm">Calmado</button>
+              </div>
+              <div class="col-3">
+                <button class="btn btn-light w-100 rounded-2xl btn-sm">Bien</button>
+              </div>
+              <div class="col-3">
+                <button class="btn btn-light w-100 rounded-2xl btn-sm">Tenso</button>
+              </div>
+              <div class="col-3">
+                <button class="btn btn-light w-100 rounded-2xl btn-sm">Agobiado</button>
+              </div>
+            </div>
+
+            <div class="mt-3 p-3 border rounded-2xl">
+              <div class="d-flex align-items-center gap-2">
+                <i class="fa-solid fa-brain"></i>
+                <p class="mb-0 fw-semibold">Prueba respiración en caja</p>
+              </div>
+              <small class="text-muted">Patrón 4‑4‑4‑4 • 2 minutos</small>
+              <div
+                class="progress mt-2"
+                role="progressbar"
+                aria-label="Progreso del ejercicio"
+                aria-valuenow="33"
+                aria-valuemin="0"
+                aria-valuemax="100"
+              >
+                <div class="progress-bar" style="width: 33%"></div>
+              </div>
+            </div>
+
+            <div class="mt-3 p-3 border rounded-2xl">
+              <div class="d-flex align-items-center gap-2">
+                <i class="fa-solid fa-moon"></i>
+                <p class="mb-0 fw-semibold">Rutina de descanso a las 10:30 p. m.</p>
+              </div>
+              <small class="text-muted">Objetivo de sueño: 7 h 30 min</small>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section id="features" class="py-5">
+  <div class="container">
+    <div class="row g-4">
+      <div class="col-md-6 col-lg-4">
+        <div class="card rounded-2xl shadow-soft h-100">
+          <div class="card-body">
+            <div class="icon-bubble mb-3">
+              <i class="fa-solid fa-magnifying-glass-chart"></i>
+            </div>
+            <h5 class="card-title">Detección temprana</h5>
+            <p class="text-muted">
+              Observa señales corporales visibles (postura, tensión facial, respiración) y detecta
+              el estrés a tiempo.
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4">
+        <div class="card rounded-2xl shadow-soft h-100">
+          <div class="card-body">
+            <div class="icon-bubble mb-3">
+              <i class="fa-solid fa-clipboard-list"></i>
+            </div>
+            <h5 class="card-title">Autoevaluación integral</h5>
+            <p class="text-muted">
+              Combina test emocionales con registro de síntomas físicos para una visión completa.
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4">
+        <div class="card rounded-2xl shadow-soft h-100">
+          <div class="card-body">
+            <div class="icon-bubble mb-3">
+              <i class="fa-solid fa-wand-magic-sparkles"></i>
+            </div>
+            <h5 class="card-title">Recomendaciones personalizadas</h5>
+            <p class="text-muted">
+              Ejercicios de respiración, pausas activas y consejos adaptados a tu contexto laboral.
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4">
+        <div class="card rounded-2xl shadow-soft h-100">
+          <div class="card-body">
+            <div class="icon-bubble mb-3">
+              <i class="fa-solid fa-chart-line"></i>
+            </div>
+            <h5 class="card-title">Dashboard y seguimiento</h5>
+            <p class="text-muted">
+              Visualiza tendencias, identifica picos y mide tu progreso con el tiempo.
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4">
+        <div class="card rounded-2xl shadow-soft h-100">
+          <div class="card-body">
+            <div class="icon-bubble mb-3">
+              <i class="fa-solid fa-user-doctor"></i>
+            </div>
+            <h5 class="card-title">Conecta con psicólogos</h5>
+            <p class="text-muted">
+              Accede a especialistas en estrés laboral y agenda citas desde la plataforma.
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4">
+        <div class="card rounded-2xl shadow-soft h-100">
+          <div class="card-body">
+            <div class="icon-bubble mb-3">
+              <i class="fa-solid fa-shield-heart"></i>
+            </div>
+            <h5 class="card-title">Privacidad primero</h5>
+            <p class="text-muted">
+              Tus datos se cifran y tú decides qué compartir. Pensado para implementaciones
+              personales y corporativas.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="how" class="py-5 bg-white">
+  <div class="container text-center">
+    <h2 class="fw-bold display-6">Cómo funciona</h2>
+    <p class="text-muted">Cuatro pasos, de la detección a la mejora.</p>
+    <div class="row g-4 mt-1">
+      <div class="col-md-3">
+        <div class="p-4 border rounded-2xl h-100">
+          <div class="badge bg-success-subtle text-success-emphasis rounded-pill mb-2">1</div>
+          <h5>Evalúate</h5>
+          <p class="text-muted">Completa el test rápido cuando lo necesites.</p>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="p-4 border rounded-2xl h-100">
+          <div class="badge bg-success-subtle text-success-emphasis rounded-pill mb-2">2</div>
+          <h5>Analiza señales</h5>
+          <p class="text-muted">Usa la cámara para detectar postura, tensión y respiración.</p>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="p-4 border rounded-2xl h-100">
+          <div class="badge bg-success-subtle text-success-emphasis rounded-pill mb-2">3</div>
+          <h5>Recibe tu plan</h5>
+          <p class="text-muted">Ejercicios, pausas y consejos adaptados a tu jornada.</p>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="p-4 border rounded-2xl h-100">
+          <div class="badge bg-success-subtle text-success-emphasis rounded-pill mb-2">4</div>
+          <h5>Mide tu progreso</h5>
+          <p class="text-muted">Consulta el tablero y genera informes cuando quieras.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section id="pricing" class="py-5">
+  <div class="container text-center">
+    <h2 class="fw-bold display-6">Planes</h2>
+    <p class="text-muted">Empieza gratis y escala cuando lo necesites.</p>
+    <div class="row g-4 mt-1">
+      <div class="col-md-4">
+        <div class="card rounded-2xl h-100 shadow-soft">
+          <div class="card-body">
+            <h5 class="fw-semibold">Individual</h5>
+            <div class="display-6 fw-bold my-2">Gratis</div>
+            <ul class="list-unstyled text-muted">
+              <li>Check‑ins diarios</li>
+              <li>Biblioteca de respiración</li>
+              <li>Insights básicos</li>
+            </ul>
+            <a href="#" class="btn btn-dark w-100 btn-pill">Empezar</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card rounded-2xl h-100 shadow-soft card-popular">
+          <div class="card-body">
+            <div class="badge bg-success-subtle text-success-emphasis rounded-pill mb-2">
+              Más popular
+            </div>
+            <h5 class="fw-semibold">Pro</h5>
+            <div class="display-6 fw-bold my-2">$6/mes</div>
+            <ul class="list-unstyled text-muted">
+              <li>Planes personalizados</li>
+              <li>Sincronización opcional con wearables</li>
+              <li>Insights de sueño/actividad</li>
+              <li>Recordatorios inteligentes</li>
+            </ul>
+            <a href="#" class="btn btn-success w-100 btn-pill">Probar 7 días</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card rounded-2xl h-100 shadow-soft">
+          <div class="card-body">
+            <h5 class="fw-semibold">Empresas</h5>
+            <div class="display-6 fw-bold my-2">A medida</div>
+            <ul class="list-unstyled text-muted">
+              <li>Programa de bienestar laboral</li>
+              <li>Reportes anónimos para RR. HH.</li>
+              <li>Capacitaciones y activaciones</li>
+            </ul>
+            <a href="#" class="btn btn-outline-success w-100 btn-pill">Hablar con ventas</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="faq" class="py-5 bg-white">
+  <div class="container">
+    <h2 class="fw-bold display-6 text-center">Preguntas frecuentes</h2>
+    <div class="accordion mt-4" id="faqAccordion">
+      <div class="accordion-item rounded-2xl overflow-hidden mb-3">
+        <h2 class="accordion-header" id="q1">
+          <button
+            class="accordion-button"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#a1"
+            aria-expanded="true"
+            aria-controls="a1"
+          >
+            ¿Necesito un wearable?
+          </button>
+        </h2>
+        <div
+          id="a1"
+          class="accordion-collapse collapse show"
+          aria-labelledby="q1"
+          data-bs-parent="#faqAccordion"
+        >
+          <div class="accordion-body text-muted">
+            No. Los wearables son opcionales: los check‑ins manuales funcionan muy bien y te
+            mantienen en control.
+          </div>
+        </div>
+      </div>
+      <div class="accordion-item rounded-2xl overflow-hidden mb-3">
+        <h2 class="accordion-header" id="q2">
+          <button
+            class="accordion-button collapsed"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#a2"
+            aria-expanded="false"
+            aria-controls="a2"
+          >
+            ¿Cómo generan las recomendaciones?
+          </button>
+        </h2>
+        <div
+          id="a2"
+          class="accordion-collapse collapse"
+          aria-labelledby="q2"
+          data-bs-parent="#faqAccordion"
+        >
+          <div class="accordion-body text-muted">
+            Combinamos tus check‑ins con patrones de sueño/actividad y señales físicas observables
+            para sugerir el mejor momento y tipo de intervención.
+          </div>
+        </div>
+      </div>
+      <div class="accordion-item rounded-2xl overflow-hidden mb-3">
+        <h2 class="accordion-header" id="q3">
+          <button
+            class="accordion-button collapsed"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#a3"
+            aria-expanded="false"
+            aria-controls="a3"
+          >
+            ¿Mis datos son privados?
+          </button>
+        </h2>
+        <div
+          id="a3"
+          class="accordion-collapse collapse"
+          aria-labelledby="q3"
+          data-bs-parent="#faqAccordion"
+        >
+          <div class="accordion-body text-muted">
+            Sí. Ciframos tus datos en tránsito y en reposo. Puedes exportarlos o eliminarlos cuando
+            quieras. Para empresas, entregamos reportes agregados y anónimos.
+          </div>
+        </div>
+      </div>
+      <div class="accordion-item rounded-2xl overflow-hidden">
+        <h2 class="accordion-header" id="q4">
+          <button
+            class="accordion-button collapsed"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#a4"
+            aria-expanded="false"
+            aria-controls="a4"
+          >
+            ¿Puedo contactar a un especialista?
+          </button>
+        </h2>
+        <div
+          id="a4"
+          class="accordion-collapse collapse"
+          aria-labelledby="q4"
+          data-bs-parent="#faqAccordion"
+        >
+          <div class="accordion-body text-muted">
+            Sí. Puedes buscar psicólogos especializados en estrés laboral y agendar citas desde la
+            plataforma.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="py-5">
+  <div class="container">
+    <div
+      class="p-5 border rounded-3xl position-relative overflow-hidden"
+      style="background: linear-gradient(135deg, #ecfeff, #eef2ff)"
+    >
+      <i
+        class="fa-solid fa-sparkles position-absolute"
+        style="left: 0.5rem; top: 0.5rem; color: #a7f3d0"
+      ></i>
+      <div class="text-center">
+        <h3 class="fw-semibold">¿Listo para recuperar el equilibrio?</h3>
+        <p class="text-muted mx-auto" style="max-width: 60ch">
+          Construye hábitos de bienestar con pasos pequeños que sí se mantienen.
+        </p>
+        <div class="d-flex gap-3 justify-content-center mt-3 flex-wrap">
+          <a href="#" class="btn btn-success btn-pill">Crear mi plan</a>
+          <a href="#" class="btn btn-outline-secondary btn-pill">Explorar ejercicios</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="border-top">
+  <div class="container py-5">
+    <div class="row g-4">
+      <div class="col-md-4">
+        <div class="d-flex align-items-center gap-2 mb-2">
+          <span
+            style="
+              width: 24px;
+              height: 24px;
+              border-radius: 0.5rem;
+              background: linear-gradient(135deg, var(--brand-indigo), var(--brand-green));
+            "
+            class="d-inline-block"
+          ></span>
+          <span class="fw-semibold">NeuroZen</span>
+        </div>
+        <p class="text-muted">Identifica y gestiona tu estrés laboral.</p>
+      </div>
+      <div class="col-md-2">
+        <p class="fw-medium mb-2">Producto</p>
+        <ul class="list-unstyled small text-muted">
+          <li>
+            <a class="link-dark link-underline-opacity-0" href="#features">Características</a>
+          </li>
+          <li>
+            <a class="link-dark link-underline-opacity-0" href="#how">Cómo funciona</a>
+          </li>
+          <li>
+            <a class="link-dark link-underline-opacity-0" href="#pricing">Planes</a>
+          </li>
+        </ul>
+      </div>
+      <div class="col-md-2">
+        <p class="fw-medium mb-2">Empresa</p>
+        <ul class="list-unstyled small text-muted">
+          <li>
+            <a class="link-dark link-underline-opacity-0" href="#">Sobre nosotros</a>
+          </li>
+          <li>
+            <a class="link-dark link-underline-opacity-0" href="#">Empleos</a>
+          </li>
+          <li>
+            <a class="link-dark link-underline-opacity-0" href="#">Contacto</a>
+          </li>
+        </ul>
+      </div>
+      <div class="col-md-2">
+        <p class="fw-medium mb-2">Legal</p>
+        <ul class="list-unstyled small text-muted">
+          <li>
+            <a class="link-dark link-underline-opacity-0" href="#">Privacidad</a>
+          </li>
+          <li>
+            <a class="link-dark link-underline-opacity-0" href="#">Términos</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div
+      class="d-flex justify-content-between align-items-center pt-4 mt-4 border-top small text-muted"
+    >
+      <span>© <span id="year"></span> NeuroZen</span>
+      <a href="#" class="link-secondary">Soporte</a>
+    </div>
+  </div>
+</footer>
