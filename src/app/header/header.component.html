@@ -14,7 +14,7 @@
             background: linear-gradient(135deg, var(--brand-indigo), var(--brand-green));
           "
         ></span>
-        <strong>NeuroZen</strong>
+        <strong>{{ 'header.brand' | translate }}</strong>
       </a>
       <button
         class="navbar-toggler"
@@ -23,27 +23,30 @@
         data-bs-target="#nav"
         aria-controls="nav"
         aria-expanded="false"
-        aria-label="Abrir navegación"
+        [attr.aria-label]="'header.toggleNav' | translate"
       >
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="nav">
         <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-lg-center">
           <li class="nav-item">
-            <a class="nav-link" href="#features">Características</a>
+            <a class="nav-link" href="#features">{{ 'header.features' | translate }}</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#how">Cómo funciona</a>
+            <a class="nav-link" href="#how">{{ 'header.how' | translate }}</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#pricing">Planes</a>
+            <a class="nav-link" href="#pricing">{{ 'header.pricing' | translate }}</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#faq">Preguntas frecuentes</a>
+            <a class="nav-link" href="#faq">{{ 'header.faq' | translate }}</a>
+          </li>
+          <li class="nav-item ms-lg-2">
+            <app-lang-switch></app-lang-switch>
           </li>
           <li class="nav-item ms-lg-2">
             <a class="btn btn-dark btn-pill" href="#download"
-              ><i class="fa-solid fa-mobile-screen me-2"></i>Descargar</a
+              ><i class="fa-solid fa-mobile-screen me-2"></i>{{ 'header.download' | translate }}</a
             >
           </li>
         </ul>

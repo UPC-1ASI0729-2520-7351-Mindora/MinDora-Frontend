@@ -1,0 +1,23 @@
+.dropdown-toggle {
+  border: 1px solid #dee2e6;
+  transition: all 0.2s ease-in-out;
+}
+
+.dropdown-toggle:hover {
+  border-color: #adb5bd;
+  background-color: #f8f9fa;
+}
+
+.dropdown-item.active {
+  background-color: #e9ecef;
+  color: #495057;
+}
+
+.dropdown-item:hover {
+  background-color: #f8f9fa;
+}
+
+.dropdown-menu {
+  border: 1px solid #dee2e6;
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+}

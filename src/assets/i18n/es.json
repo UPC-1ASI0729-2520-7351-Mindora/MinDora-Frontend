@@ -1,0 +1,33 @@
+{
+  "header": {
+    "brand": "NeuroZen",
+    "features": "Características",
+    "how": "Cómo funciona",
+    "pricing": "Planes",
+    "faq": "Preguntas frecuentes",
+    "download": "Descargar",
+    "toggleNav": "Abrir navegación"
+  },
+  "hero": {
+    "badge": "Nuevo • Estrés & Bienestar",
+    "title": "Detecta tu estrés. Vive más ligero.",
+    "description": "NeuroZen ayuda a adultos de 20–50 años a <strong>identificar y gestionar el estrés laboral</strong> con autoevaluaciones rápidas, <strong>análisis de señales corporales visibles</strong> (postura, tensión facial, respiración) y recomendaciones personalizadas. También puedes <strong>contactar a psicólogos</strong> desde la app.",
+    "cta": "Descargar la app",
+    "watchDemo": "Ver demo"
+  },
+  "footer": {
+    "brand": "NeuroZen",
+    "description": "Identifica y gestiona tu estrés laboral.",
+    "product": "Producto",
+    "features": "Características",
+    "how": "Cómo funciona",
+    "pricing": "Planes",
+    "support": "Soporte",
+    "help": "Centro de Ayuda",
+    "contact": "Contacto",
+    "legal": "Legal",
+    "privacy": "Política de Privacidad",
+    "terms": "Términos de Servicio",
+    "allRights": "Todos los derechos reservados."
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "header": {
+    "brand": "NeuroZen",
+    "features": "Features",
+    "how": "How it works",
+    "pricing": "Plans",
+    "faq": "FAQ",
+    "download": "Download",
+    "toggleNav": "Toggle navigation"
+  },
+  "hero": {
+    "badge": "New • Stress & Wellness",
+    "title": "Detect your stress. Live lighter.",
+    "description": "NeuroZen helps adults aged 20-50 to <strong>identify and manage work stress</strong> with quick self-assessments, <strong>analysis of visible body signals</strong> (posture, facial tension, breathing) and personalized recommendations. You can also <strong>contact psychologists</strong> from the app.",
+    "cta": "Download the app",
+    "watchDemo": "Watch demo"
+  },
+  "footer": {
+    "brand": "NeuroZen",
+    "description": "Identify and manage your work stress.",
+    "product": "Product",
+    "features": "Features",
+    "how": "How it works",
+    "pricing": "Plans",
+    "support": "Support",
+    "help": "Help Center",
+    "contact": "Contact",
+    "legal": "Legal",
+    "privacy": "Privacy Policy",
+    "terms": "Terms of Service",
+    "allRights": "All rights reserved."
+  }
+}
