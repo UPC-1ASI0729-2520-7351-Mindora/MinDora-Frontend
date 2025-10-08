@@ -1,15 +1,15 @@
 <div class="register-container">
   <div class="register-card">
-    <h2>{{ 'auth.register.title' | translate }}</h2>
+    <h2>Registrarse</h2>
     
     <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="register-form">
       <div class="form-group">
-        <label for="name">{{ 'auth.register.name' | translate }}</label>
+        <label for="name">Nombre</label>
         <input
           type="text"
           id="name"
           formControlName="name"
-          [placeholder]="'auth.register.namePlaceholder' | translate"
+          placeholder="Ingresa tu nombre"
           [class.error]="getFieldError('name')"
         />
         <div class="error-message" *ngIf="getFieldError('name')">
@@ -18,12 +18,12 @@
       </div>
 
       <div class="form-group">
-        <label for="email">{{ 'auth.register.email' | translate }}</label>
+        <label for="email">Email</label>
         <input
           type="email"
           id="email"
           formControlName="email"
-          [placeholder]="'auth.register.emailPlaceholder' | translate"
+          placeholder="Ingresa tu email"
           [class.error]="getFieldError('email')"
         />
         <div class="error-message" *ngIf="getFieldError('email')">
@@ -32,12 +32,12 @@
       </div>
 
       <div class="form-group">
-        <label for="password">{{ 'auth.register.password' | translate }}</label>
+        <label for="password">Contraseña</label>
         <input
           type="password"
           id="password"
           formControlName="password"
-          [placeholder]="'auth.register.passwordPlaceholder' | translate"
+          placeholder="Crea una contraseña"
           [class.error]="getFieldError('password')"
         />
         <div class="error-message" *ngIf="getFieldError('password')">
@@ -46,12 +46,12 @@
       </div>
 
       <div class="form-group">
-        <label for="confirmPassword">{{ 'auth.register.confirmPassword' | translate }}</label>
+        <label for="confirmPassword">Confirmar Contraseña</label>
         <input
           type="password"
           id="confirmPassword"
           formControlName="confirmPassword"
-          [placeholder]="'auth.register.confirmPasswordPlaceholder' | translate"
+          placeholder="Repite tu contraseña"
           [class.error]="getFieldError('confirmPassword')"
         />
         <div class="error-message" *ngIf="getFieldError('confirmPassword')">
@@ -68,13 +68,13 @@
         class="register-btn"
         [disabled]="isLoading"
       >
-        <span *ngIf="!isLoading">{{ 'auth.register.submit' | translate }}</span>
-        <span *ngIf="isLoading">{{ 'auth.register.loading' | translate }}</span>
+        <span *ngIf="!isLoading">Registrarse</span>
+        <span *ngIf="isLoading">Cargando...</span>
       </button>
     </form>
 
     <div class="login-link">
-      <p>{{ 'auth.register.hasAccount' | translate }} <a (click)="goToLogin()">{{ 'auth.register.loginLink' | translate }}</a></p>
+      <p>¿Ya tienes cuenta? <a (click)="goToLogin()">Inicia sesión</a></p>
     </div>
   </div>
 </div>
