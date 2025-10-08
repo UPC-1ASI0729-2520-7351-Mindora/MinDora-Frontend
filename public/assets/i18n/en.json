@@ -153,5 +153,88 @@
     "terms": "Terms",
     "support": "Support",
     "copyright": "© {{year}} NeuroZen"
+  },
+  "coaching": {
+    "title": "Coaching & Community",
+    "subtitle": "Connect with specialists and a support community",
+    "tabs": {
+      "psychologists": "Psychologists",
+      "community": "Community",
+      "myAppointments": "My Appointments"
+    },
+    "psychologists": {
+      "title": "Find your specialist",
+      "searchPlaceholder": "Search by name or specialty...",
+      "filters": {
+        "all": "All",
+        "workStress": "Work stress",
+        "anxiety": "Anxiety",
+        "burnout": "Burnout",
+        "mindfulness": "Mindfulness"
+      },
+      "availability": "Availability",
+      "rating": "Rating",
+      "reviews": "reviews",
+      "session": "session",
+      "viewProfile": "View profile",
+      "bookAppointment": "Book appointment",
+      "specialties": "Specialties",
+      "experience": "years of experience",
+      "languages": "Languages",
+      "nextAvailable": "Next available"
+    },
+    "community": {
+      "title": "Support community",
+      "description": "Share experiences, find motivation, and learn from others on your wellness journey.",
+      "forum": {
+        "title": "Discussion forum",
+        "topics": "Topics",
+        "posts": "Posts",
+        "members": "Members",
+        "newTopic": "New topic",
+        "categories": {
+          "general": "General",
+          "workStress": "Work stress",
+          "techniques": "Techniques & exercises",
+          "success": "Success stories"
+        }
+      },
+      "chat": {
+        "title": "Live chat",
+        "moderatedBy": "Moderated by professionals",
+        "online": "online",
+        "joinChat": "Join chat"
+      },
+      "events": {
+        "title": "Events & workshops",
+        "upcoming": "Upcoming events",
+        "register": "Register"
+      }
+    },
+    "appointments": {
+      "title": "My appointments",
+      "upcoming": "Upcoming",
+      "past": "Past",
+      "noAppointments": "You have no scheduled appointments",
+      "bookFirst": "Book your first session with a specialist",
+      "date": "Date",
+      "time": "Time",
+      "with": "with",
+      "cancel": "Cancel",
+      "reschedule": "Reschedule",
+      "joinVideo": "Join video call",
+      "addToCalendar": "Add to calendar"
+    },
+    "profile": {
+      "about": "About",
+      "education": "Education",
+      "approach": "Therapeutic approach",
+      "reviews": "Reviews",
+      "schedule": "Available schedule",
+      "selectDate": "Select a date",
+      "selectTime": "Select a time",
+      "confirmBooking": "Confirm booking",
+      "writeReview": "Write review"
+    }
   }
 }

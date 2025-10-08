@@ -153,5 +153,88 @@
     "terms": "Términos",
     "support": "Soporte",
     "copyright": "© {{year}} NeuroZen"
+  },
+  "coaching": {
+    "title": "Coaching & Comunidad",
+    "subtitle": "Conecta con especialistas y una comunidad de apoyo",
+    "tabs": {
+      "psychologists": "Psicólogos",
+      "community": "Comunidad",
+      "myAppointments": "Mis Citas"
+    },
+    "psychologists": {
+      "title": "Encuentra tu especialista",
+      "searchPlaceholder": "Buscar por nombre o especialidad...",
+      "filters": {
+        "all": "Todos",
+        "workStress": "Estrés laboral",
+        "anxiety": "Ansiedad",
+        "burnout": "Burnout",
+        "mindfulness": "Mindfulness"
+      },
+      "availability": "Disponibilidad",
+      "rating": "Calificación",
+      "reviews": "reseñas",
+      "session": "sesión",
+      "viewProfile": "Ver perfil",
+      "bookAppointment": "Agendar cita",
+      "specialties": "Especialidades",
+      "experience": "años de experiencia",
+      "languages": "Idiomas",
+      "nextAvailable": "Próxima disponibilidad"
+    },
+    "community": {
+      "title": "Comunidad de apoyo",
+      "description": "Comparte experiencias, encuentra motivación y aprende de otros en tu camino hacia el bienestar.",
+      "forum": {
+        "title": "Foro de discusión",
+        "topics": "Temas",
+        "posts": "Publicaciones",
+        "members": "Miembros",
+        "newTopic": "Nuevo tema",
+        "categories": {
+          "general": "General",
+          "workStress": "Estrés laboral",
+          "techniques": "Técnicas y ejercicios",
+          "success": "Historias de éxito"
+        }
+      },
+      "chat": {
+        "title": "Chat en vivo",
+        "moderatedBy": "Moderado por profesionales",
+        "online": "en línea",
+        "joinChat": "Unirse al chat"
+      },
+      "events": {
+        "title": "Eventos y talleres",
+        "upcoming": "Próximos eventos",
+        "register": "Registrarse"
+      }
+    },
+    "appointments": {
+      "title": "Mis citas",
+      "upcoming": "Próximas",
+      "past": "Pasadas",
+      "noAppointments": "No tienes citas programadas",
+      "bookFirst": "Agenda tu primera sesión con un especialista",
+      "date": "Fecha",
+      "time": "Hora",
+      "with": "con",
+      "cancel": "Cancelar",
+      "reschedule": "Reprogramar",
+      "joinVideo": "Unirse a videollamada",
+      "addToCalendar": "Añadir al calendario"
+    },
+    "profile": {
+      "about": "Acerca de",
+      "education": "Formación",
+      "approach": "Enfoque terapéutico",
+      "reviews": "Reseñas",
+      "schedule": "Horarios disponibles",
+      "selectDate": "Selecciona una fecha",
+      "selectTime": "Selecciona un horario",
+      "confirmBooking": "Confirmar reserva",
+      "writeReview": "Escribir reseña"
+    }
   }
 }

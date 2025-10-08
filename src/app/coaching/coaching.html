@@ -1,0 +1,343 @@
+<div class="coaching-page">
+  <!-- Hero Section -->
+  <section class="hero-section py-5 bg-gradient">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-lg-8">
+          <h1 class="display-5 fw-bold">{{ 'coaching.title' | translate }}</h1>
+          <p class="lead text-muted">{{ 'coaching.subtitle' | translate }}</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Tabs Navigation -->
+  <section class="tabs-section bg-white border-bottom sticky-top" style="top: 72px; z-index: 1020">
+    <div class="container">
+      <ul class="nav nav-tabs border-0 pt-3">
+        <li class="nav-item">
+          <button
+            class="nav-link"
+            [class.active]="activeTab() === 'psychologists'"
+            (click)="setActiveTab('psychologists')"
+          >
+            <i class="fa-solid fa-user-doctor me-2"></i>
+            {{ 'coaching.tabs.psychologists' | translate }}
+          </button>
+        </li>
+        <li class="nav-item">
+          <button
+            class="nav-link"
+            [class.active]="activeTab() === 'community'"
+            (click)="setActiveTab('community')"
+          >
+            <i class="fa-solid fa-users me-2"></i>
+            {{ 'coaching.tabs.community' | translate }}
+          </button>
+        </li>
+        <li class="nav-item">
+          <button
+            class="nav-link"
+            [class.active]="activeTab() === 'appointments'"
+            (click)="setActiveTab('appointments')"
+          >
+            <i class="fa-solid fa-calendar-check me-2"></i>
+            {{ 'coaching.tabs.myAppointments' | translate }}
+          </button>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Psychologists Tab -->
+  @if (activeTab() === 'psychologists') {
+  <section class="py-5">
+    <div class="container">
+      <!-- Search and Filters -->
+      <div class="row mb-4">
+        <div class="col-lg-8">
+          <div class="input-group input-group-lg">
+            <span class="input-group-text bg-white">
+              <i class="fa-solid fa-search text-muted"></i>
+            </span>
+            <input
+              type="text"
+              class="form-control border-start-0"
+              [placeholder]="'coaching.psychologists.searchPlaceholder' | translate"
+            />
+          </div>
+        </div>
+        <div class="col-lg-4">
+          <div class="btn-group w-100" role="group">
+            <button
+              type="button"
+              class="btn btn-outline-secondary"
+              [class.active]="selectedFilter() === 'all'"
+              (click)="setFilter('all')"
+            >
+              {{ 'coaching.psychologists.filters.all' | translate }}
+            </button>
+            <button
+              type="button"
+              class="btn btn-outline-secondary"
+              [class.active]="selectedFilter() === 'workStress'"
+              (click)="setFilter('workStress')"
+            >
+              {{ 'coaching.psychologists.filters.workStress' | translate }}
+            </button>
+            <button
+              type="button"
+              class="btn btn-outline-secondary"
+              [class.active]="selectedFilter() === 'anxiety'"
+              (click)="setFilter('anxiety')"
+            >
+              {{ 'coaching.psychologists.filters.anxiety' | translate }}
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Psychologists Grid -->
+      <div class="row g-4">
+        @for (psychologist of filteredPsychologists; track psychologist.id) {
+        <div class="col-md-6 col-lg-4">
+          <div class="card h-100 shadow-sm hover-lift">
+            <div class="card-body">
+              <div class="d-flex align-items-start gap-3 mb-3">
+                <img
+                  [src]="psychologist.image"
+                  [alt]="psychologist.name"
+                  class="rounded-circle"
+                  width="64"
+                  height="64"
+                />
+                <div class="flex-grow-1">
+                  <h5 class="card-title mb-1">{{ psychologist.name }}</h5>
+                  <p class="text-muted small mb-2">{{ psychologist.specialty }}</p>
+                  <div class="d-flex align-items-center gap-2">
+                    <div class="text-warning">
+                      <i class="fa-solid fa-star"></i>
+                      <span class="text-dark ms-1">{{ psychologist.rating }}</span>
+                    </div>
+                    <span class="text-muted small"
+                      >({{ psychologist.reviews }}
+                      {{ 'coaching.psychologists.reviews' | translate }})</span
+                    >
+                  </div>
+                </div>
+              </div>
+
+              <div class="mb-3">
+                @for (specialty of psychologist.specialties; track specialty) {
+                <span class="badge bg-light text-dark me-1 mb-1">{{ specialty }}</span>
+                }
+              </div>
+
+              <div class="d-flex justify-content-between align-items-center mb-3">
+                <div>
+                  <small class="text-muted d-block">{{
+                    'coaching.psychologists.nextAvailable' | translate
+                  }}</small>
+                  <strong>{{ psychologist.nextAvailable }}</strong>
+                </div>
+                <div class="text-end">
+                  <div class="h5 mb-0">${{ psychologist.price }}</div>
+                  <small class="text-muted"
+                    >/{{ 'coaching.psychologists.session' | translate }}</small
+                  >
+                </div>
+              </div>
+
+              <div class="d-grid gap-2">
+                <button class="btn btn-primary">
+                  <i class="fa-solid fa-calendar-plus me-2"></i>
+                  {{ 'coaching.psychologists.bookAppointment' | translate }}
+                </button>
+                <button class="btn btn-outline-secondary">
+                  {{ 'coaching.psychologists.viewProfile' | translate }}
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        }
+      </div>
+    </div>
+  </section>
+  }
+
+  <!-- Community Tab -->
+  @if (activeTab() === 'community') {
+  <section class="py-5">
+    <div class="container">
+      <div class="row g-4">
+        <!-- Forum Section -->
+        <div class="col-lg-8">
+          <div class="card shadow-sm mb-4">
+            <div class="card-header bg-white d-flex justify-content-between align-items-center">
+              <h4 class="mb-0">
+                <i class="fa-solid fa-comments me-2"></i>
+                {{ 'coaching.community.forum.title' | translate }}
+              </h4>
+              <button class="btn btn-primary btn-sm">
+                <i class="fa-solid fa-plus me-2"></i>
+                {{ 'coaching.community.forum.newTopic' | translate }}
+              </button>
+            </div>
+            <div class="card-body">
+              @for (topic of forumTopics(); track topic.id) {
+              <div class="border-bottom pb-3 mb-3">
+                <h6 class="mb-2">
+                  <a href="#" class="text-decoration-none text-dark">{{ topic.title }}</a>
+                </h6>
+                <div class="d-flex justify-content-between align-items-center">
+                  <div class="small text-muted">
+                    <span class="me-3"
+                      ><i class="fa-solid fa-user me-1"></i>{{ topic.author }}</span
+                    >
+                    <span class="me-3"
+                      ><i class="fa-solid fa-reply me-1"></i>{{ topic.replies }}</span
+                    >
+                    <span><i class="fa-solid fa-eye me-1"></i>{{ topic.views }}</span>
+                  </div>
+                  <small class="text-muted">{{ topic.lastActivity }}</small>
+                </div>
+              </div>
+              }
+            </div>
+          </div>
+
+          <!-- Live Chat -->
+          <div class="card shadow-sm">
+            <div class="card-header bg-white">
+              <h5 class="mb-0">
+                <i class="fa-solid fa-message me-2"></i>
+                {{ 'coaching.community.chat.title' | translate }}
+              </h5>
+              <small class="text-muted">{{
+                'coaching.community.chat.moderatedBy' | translate
+              }}</small>
+            </div>
+            <div class="card-body">
+              <div class="alert alert-info">
+                <i class="fa-solid fa-circle text-success me-2"></i>
+                <strong>24</strong> {{ 'coaching.community.chat.online' | translate }}
+              </div>
+              <button class="btn btn-success w-100">
+                <i class="fa-solid fa-comments me-2"></i>
+                {{ 'coaching.community.chat.joinChat' | translate }}
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Events Sidebar -->
+        <div class="col-lg-4">
+          <div class="card shadow-sm">
+            <div class="card-header bg-white">
+              <h5 class="mb-0">
+                <i class="fa-solid fa-calendar-days me-2"></i>
+                {{ 'coaching.community.events.title' | translate }}
+              </h5>
+            </div>
+            <div class="card-body">
+              <div class="mb-3 pb-3 border-bottom">
+                <h6>Taller: Manejo de Estrés Laboral</h6>
+                <p class="small text-muted mb-2">
+                  <i class="fa-solid fa-calendar me-1"></i>15 Oct, 2025 - 6:00 PM
+                </p>
+                <button class="btn btn-sm btn-outline-primary w-100">
+                  {{ 'coaching.community.events.register' | translate }}
+                </button>
+              </div>
+              <div class="mb-3 pb-3 border-bottom">
+                <h6>Sesión de Mindfulness Grupal</h6>
+                <p class="small text-muted mb-2">
+                  <i class="fa-solid fa-calendar me-1"></i>18 Oct, 2025 - 7:00 PM
+                </p>
+                <button class="btn btn-sm btn-outline-primary w-100">
+                  {{ 'coaching.community.events.register' | translate }}
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  }
+
+  <!-- Appointments Tab -->
+  @if (activeTab() === 'appointments') {
+  <section class="py-5">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 mx-auto">
+          <!-- Upcoming Appointments -->
+          <h4 class="mb-4">{{ 'coaching.appointments.upcoming' | translate }}</h4>
+          @if (upcomingAppointments.length > 0) { @for (appointment of upcomingAppointments; track
+          appointment.id) {
+          <div class="card shadow-sm mb-3">
+            <div class="card-body">
+              <div class="row align-items-center">
+                <div class="col-md-8">
+                  <h5 class="mb-2">{{ appointment.psychologist }}</h5>
+                  <p class="text-muted mb-2">
+                    <i class="fa-solid fa-calendar me-2"></i>
+                    {{ appointment.date }} - {{ appointment.time }}
+                  </p>
+                  <span class="badge bg-primary">{{ appointment.type }}</span>
+                </div>
+                <div class="col-md-4 text-md-end">
+                  <button class="btn btn-success mb-2 w-100">
+                    <i class="fa-solid fa-video me-2"></i>
+                    {{ 'coaching.appointments.joinVideo' | translate }}
+                  </button>
+                  <button class="btn btn-outline-secondary btn-sm w-100">
+                    {{ 'coaching.appointments.reschedule' | translate }}
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          } } @else {
+          <div class="text-center py-5">
+            <i class="fa-solid fa-calendar-xmark fa-3x text-muted mb-3"></i>
+            <h5>{{ 'coaching.appointments.noAppointments' | translate }}</h5>
+            <p class="text-muted">{{ 'coaching.appointments.bookFirst' | translate }}</p>
+            <button class="btn btn-primary" (click)="setActiveTab('psychologists')">
+              <i class="fa-solid fa-search me-2"></i>
+              {{ 'coaching.psychologists.title' | translate }}
+            </button>
+          </div>
+          }
+
+          <!-- Past Appointments -->
+          @if (pastAppointments.length > 0) {
+          <h4 class="mb-4 mt-5">{{ 'coaching.appointments.past' | translate }}</h4>
+          @for (appointment of pastAppointments; track appointment.id) {
+          <div class="card shadow-sm mb-3 opacity-75">
+            <div class="card-body">
+              <div class="row align-items-center">
+                <div class="col-md-8">
+                  <h5 class="mb-2">{{ appointment.psychologist }}</h5>
+                  <p class="text-muted mb-0">
+                    <i class="fa-solid fa-calendar me-2"></i>
+                    {{ appointment.date }} - {{ appointment.time }}
+                  </p>
+                </div>
+                <div class="col-md-4 text-md-end">
+                  <button class="btn btn-outline-secondary btn-sm">
+                    {{ 'coaching.profile.writeReview' | translate }}
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          } }
+        </div>
+      </div>
+    </div>
+  </section>
+  }
+</div>
