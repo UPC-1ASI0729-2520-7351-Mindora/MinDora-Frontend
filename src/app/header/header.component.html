@@ -44,6 +44,31 @@
           <li class="nav-item ms-lg-2">
             <app-lang-switch></app-lang-switch>
           </li>
+          <!-- Opciones de autenticación -->
+          <ng-container *ngIf="!currentUser; else userMenu">
+            <li class="nav-item ms-lg-2">
+              <button class="btn btn-outline-primary btn-pill" (click)="goToLogin()">
+                {{ 'header.login' | translate }}
+              </button>
+            </li>
+            <li class="nav-item ms-lg-2">
+              <button class="btn btn-primary btn-pill" (click)="goToRegister()">
+                {{ 'header.register' | translate }}
+              </button>
+            </li>
+          </ng-container>
+          <ng-template #userMenu>
+            <li class="nav-item ms-lg-2">
+              <button class="btn btn-outline-primary btn-pill" (click)="goToCoaching()">
+                <i class="fa-solid fa-user me-2"></i>{{ currentUser?.name }}
+              </button>
+            </li>
+            <li class="nav-item ms-lg-2">
+              <button class="btn btn-outline-secondary btn-pill" (click)="logout()">
+                <i class="fa-solid fa-sign-out-alt me-2"></i>{{ 'header.logout' | translate }}
+              </button>
+            </li>
+          </ng-template>
           <li class="nav-item ms-lg-2">
             <a class="btn btn-dark btn-pill" href="#download"
               ><i class="fa-solid fa-mobile-screen me-2"></i>{{ 'header.download' | translate }}</a

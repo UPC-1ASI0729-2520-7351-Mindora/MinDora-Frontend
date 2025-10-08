@@ -6,7 +6,10 @@
     "pricing": "Plans",
     "faq": "FAQ",
     "download": "Download",
-    "toggleNav": "Toggle navigation"
+    "toggleNav": "Toggle navigation",
+    "login": "Login",
+    "register": "Register",
+    "logout": "Logout"
   },
   "hero": {
     "badge": "New • Stress & Wellness",
@@ -136,6 +139,48 @@
     "subtitle": "Build wellness habits with small steps that actually stick.",
     "createPlan": "Create my plan",
     "exploreExercises": "Explore exercises"
+  },
+  "auth": {
+    "login": {
+      "title": "Login",
+      "email": "Email",
+      "password": "Password",
+      "emailPlaceholder": "your@email.com",
+      "passwordPlaceholder": "Your password",
+      "submit": "Login",
+      "loading": "Logging in...",
+      "noAccount": "Don't have an account?",
+      "registerLink": "Register here",
+      "errors": {
+        "required": "is required",
+        "email": "Invalid email",
+        "minLength": "must be at least 6 characters",
+        "invalidCredentials": "Invalid email or password"
+      }
+    },
+    "register": {
+      "title": "Create Account",
+      "name": "Full name",
+      "email": "Email",
+      "password": "Password",
+      "confirmPassword": "Confirm password",
+      "namePlaceholder": "Your full name",
+      "emailPlaceholder": "your@email.com",
+      "passwordPlaceholder": "Minimum 6 characters",
+      "confirmPasswordPlaceholder": "Repeat your password",
+      "submit": "Create Account",
+      "loading": "Creating...",
+      "hasAccount": "Already have an account?",
+      "loginLink": "Login here",
+      "errors": {
+        "required": "is required",
+        "email": "Invalid email",
+        "minLength": "must be at least 6 characters",
+        "nameMinLength": "Name must be at least 2 characters",
+        "passwordMismatch": "Passwords don't match",
+        "emailExists": "Email already registered"
+      }
+    }
   },
   "footer": {
     "brand": "NeuroZen",

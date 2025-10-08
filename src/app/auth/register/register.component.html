@@ -1,0 +1,80 @@
+<div class="register-container">
+  <div class="register-card">
+    <h2>{{ 'auth.register.title' | translate }}</h2>
+    
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="register-form">
+      <div class="form-group">
+        <label for="name">{{ 'auth.register.name' | translate }}</label>
+        <input
+          type="text"
+          id="name"
+          formControlName="name"
+          [placeholder]="'auth.register.namePlaceholder' | translate"
+          [class.error]="getFieldError('name')"
+        />
+        <div class="error-message" *ngIf="getFieldError('name')">
+          {{ getFieldError('name') }}
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="email">{{ 'auth.register.email' | translate }}</label>
+        <input
+          type="email"
+          id="email"
+          formControlName="email"
+          [placeholder]="'auth.register.emailPlaceholder' | translate"
+          [class.error]="getFieldError('email')"
+        />
+        <div class="error-message" *ngIf="getFieldError('email')">
+          {{ getFieldError('email') }}
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="password">{{ 'auth.register.password' | translate }}</label>
+        <input
+          type="password"
+          id="password"
+          formControlName="password"
+          [placeholder]="'auth.register.passwordPlaceholder' | translate"
+          [class.error]="getFieldError('password')"
+        />
+        <div class="error-message" *ngIf="getFieldError('password')">
+          {{ getFieldError('password') }}
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="confirmPassword">{{ 'auth.register.confirmPassword' | translate }}</label>
+        <input
+          type="password"
+          id="confirmPassword"
+          formControlName="confirmPassword"
+          [placeholder]="'auth.register.confirmPasswordPlaceholder' | translate"
+          [class.error]="getFieldError('confirmPassword')"
+        />
+        <div class="error-message" *ngIf="getFieldError('confirmPassword')">
+          {{ getFieldError('confirmPassword') }}
+        </div>
+      </div>
+
+      <div class="error-message general-error" *ngIf="errorMessage">
+        {{ errorMessage }}
+      </div>
+
+      <button 
+        type="submit" 
+        class="register-btn"
+        [disabled]="isLoading"
+      >
+        <span *ngIf="!isLoading">{{ 'auth.register.submit' | translate }}</span>
+        <span *ngIf="isLoading">{{ 'auth.register.loading' | translate }}</span>
+      </button>
+    </form>
+
+    <div class="login-link">
+      <p>{{ 'auth.register.hasAccount' | translate }} <a (click)="goToLogin()">{{ 'auth.register.loginLink' | translate }}</a></p>
+    </div>
+  </div>
+</div>

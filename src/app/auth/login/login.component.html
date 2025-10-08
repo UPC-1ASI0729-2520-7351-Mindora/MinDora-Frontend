@@ -1,0 +1,52 @@
+<div class="login-container">
+  <div class="login-card">
+    <h2>{{ 'auth.login.title' | translate }}</h2>
+    
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="login-form">
+      <div class="form-group">
+        <label for="email">{{ 'auth.login.email' | translate }}</label>
+        <input
+          type="email"
+          id="email"
+          formControlName="email"
+          [placeholder]="'auth.login.emailPlaceholder' | translate"
+          [class.error]="getFieldError('email')"
+        />
+        <div class="error-message" *ngIf="getFieldError('email')">
+          {{ getFieldError('email') }}
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="password">{{ 'auth.login.password' | translate }}</label>
+        <input
+          type="password"
+          id="password"
+          formControlName="password"
+          [placeholder]="'auth.login.passwordPlaceholder' | translate"
+          [class.error]="getFieldError('password')"
+        />
+        <div class="error-message" *ngIf="getFieldError('password')">
+          {{ getFieldError('password') }}
+        </div>
+      </div>
+
+      <div class="error-message general-error" *ngIf="errorMessage">
+        {{ errorMessage }}
+      </div>
+
+      <button 
+        type="submit" 
+        class="login-btn"
+        [disabled]="isLoading"
+      >
+        <span *ngIf="!isLoading">{{ 'auth.login.submit' | translate }}</span>
+        <span *ngIf="isLoading">{{ 'auth.login.loading' | translate }}</span>
+      </button>
+    </form>
+
+    <div class="register-link">
+      <p>{{ 'auth.login.noAccount' | translate }} <a (click)="goToRegister()">{{ 'auth.login.registerLink' | translate }}</a></p>
+    </div>
+  </div>
+</div>

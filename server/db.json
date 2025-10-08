@@ -1,0 +1,116 @@
+{
+  "users": [
+    {
+      "id": "1",
+      "email": "juan@example.com",
+      "password": "123456",
+      "firstName": "Juan",
+      "lastName": "Pérez",
+      "role": "user",
+      "company_id": "10",
+      "picture": "juan.png"
+    },
+    {
+      "id": "2",
+      "email": "maria@example.com",
+      "password": "123456",
+      "firstName": "María",
+      "lastName": "López",
+      "role": "user",
+      "company_id": "10",
+      "picture": "maria.png"
+    },
+    {
+      "id": "3",
+      "email": "sofia@example.com",
+      "password": "123456",
+      "firstName": "Sofía",
+      "lastName": "Castro",
+      "role": "user",
+      "company_id": null,
+      "picture": "sofia.png"
+    },
+    {
+      "id": "4",
+      "email": "psico.ana@example.com",
+      "password": "123456",
+      "firstName": "Ana",
+      "lastName": "Gómez",
+      "role": "psychologist",
+      "specialty": "Estrés laboral",
+      "license": "PSY-001",
+      "picture": "ana.png"
+    },
+    {
+      "id": "5",
+      "email": "psico.carlos@example.com",
+      "password": "123456",
+      "firstName": "Carlos",
+      "lastName": "Ramírez",
+      "role": "psychologist",
+      "specialty": "Terapia cognitivo-conductual",
+      "license": "PSY-002",
+      "picture": "carlos.png"
+    },
+    {
+      "id": "10",
+      "email": "empresa@workplace.com",
+      "password": "empresa123",
+      "name": "Workplace SAC",
+      "role": "company",
+      "ruc": "20123456789",
+      "address": "Av. Empresarial 123, Lima"
+    }
+  ],
+  "companies": [
+    {
+      "id": "10",
+      "name": "Workplace SAC",
+      "ruc": "20123456789",
+      "address": "Av. Empresarial 123, Lima",
+      "contact_email": "contacto@workplace.com",
+      "phone": "999888777"
+    }
+  ],
+  "appointments": [
+    {
+      "id": "100",
+      "user_id": "1",
+      "psychologist_id": "4",
+      "company_id": "10",
+      "date": "2025-10-15T10:00:00",
+      "status": "scheduled",
+      "mode": "online",
+      "reason": "Estrés por exceso de trabajo"
+    },
+    {
+      "id": "101",
+      "user_id": "2",
+      "psychologist_id": "5",
+      "company_id": "10",
+      "date": "2025-10-20T15:00:00",
+      "status": "completed",
+      "mode": "presencial",
+      "reason": "Ansiedad laboral"
+    },
+    {
+      "id": "102",
+      "user_id": "3",
+      "psychologist_id": "4",
+      "company_id": null,
+      "date": "2025-11-02T14:00:00",
+      "status": "scheduled",
+      "mode": "online",
+      "reason": "Estrés general"
+    }
+  ],
+  "histories": [
+    {
+      "id": "500",
+      "appointment_id": "101",
+      "psychologist_notes": "Paciente presenta mejoras significativas.",
+      "recommendations": "Continuar con técnicas de respiración y seguimiento mensual.",
+      "created_at": "2025-10-20T16:00:00"
+    }
+  ]
+}
