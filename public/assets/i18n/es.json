@@ -304,5 +304,81 @@
       "appointmentCompleted": "Sesión completada con éxito",
       "breathingCompleted": "Ejercicio de respiración completado"
     }
+  },
+  "modals": {
+    "stressAssessment": {
+      "title": "Evaluación de Estrés",
+      "progress": "Progreso",
+      "questionCounter": "Pregunta {{current}} de {{total}}",
+      "scoreLabel": "Puntuación",
+      "submit": "Enviar Evaluación",
+      "retake": "Repetir Evaluación",
+      "saveResults": "Guardar Resultados",
+      "recommendationsTitle": "Recomendaciones Personalizadas",
+      "categories": {
+        "work": "Estrés Laboral",
+        "sleep": "Calidad del Sueño",
+        "physical": "Síntomas Físicos",
+        "emotional": "Estado Emocional"
+      },
+      "options": {
+        "never": "Nunca",
+        "rarely": "Raramente",
+        "sometimes": "A veces",
+        "often": "Frecuentemente",
+        "always": "Siempre"
+      },
+      "questions": {
+        "work_1": "¿Te sientes abrumado/a por la cantidad de trabajo?",
+        "work_2": "¿Tienes dificultad para desconectar del trabajo fuera del horario laboral?",
+        "work_3": "¿Sientes que no tienes control sobre tus tareas laborales?",
+        "work_4": "¿Experimentas conflictos con compañeros o superiores?",
+        "work_5": "¿Te preocupa el rendimiento o la seguridad de tu empleo?",
+        "sleep_1": "¿Tienes dificultad para conciliar el sueño?",
+        "sleep_2": "¿Te despiertas durante la noche y te cuesta volver a dormir?",
+        "sleep_3": "¿Te sientes cansado/a al despertar, incluso después de dormir?",
+        "physical_1": "¿Experimentas dolores de cabeza frecuentes?",
+        "physical_2": "¿Sientes tensión muscular o dolor en cuello/hombros?",
+        "physical_3": "¿Tienes problemas digestivos o malestar estomacal?",
+        "physical_4": "¿Notas cambios en tu apetito (comer más o menos de lo habitual)?",
+        "emotional_1": "¿Te sientes ansioso/a o nervioso/a sin razón aparente?",
+        "emotional_2": "¿Experimentas cambios de humor o irritabilidad?",
+        "emotional_3": "¿Te sientes triste, desmotivado/a o sin energía?"
+      },
+      "results": {
+        "level": {
+          "low": "Nivel de Estrés Bajo",
+          "moderate": "Nivel de Estrés Moderado",
+          "high": "Nivel de Estrés Alto"
+        },
+        "description": {
+          "low": "Tu nivel de estrés está dentro de un rango saludable. Continúa con tus hábitos de bienestar.",
+          "moderate": "Tu nivel de estrés es moderado. Es importante tomar medidas para manejarlo antes de que aumente.",
+          "high": "Tu nivel de estrés es alto. Te recomendamos buscar apoyo profesional y aplicar técnicas de manejo del estrés."
+        }
+      },
+      "recommendations": {
+        "low_1": "Mantén tus rutinas de ejercicio y descanso actuales",
+        "low_2": "Practica técnicas de mindfulness regularmente",
+        "low_3": "Continúa cultivando relaciones sociales positivas",
+        "moderate_1": "Incorpora ejercicios de respiración profunda diariamente",
+        "moderate_2": "Establece límites claros entre trabajo y vida personal",
+        "moderate_3": "Considera hablar con un profesional sobre técnicas de manejo del estrés",
+        "moderate_4": "Prioriza actividades que te ayuden a relajarte y desconectar",
+        "high_1": "Programa una consulta con un psicólogo especializado en manejo del estrés",
+        "high_2": "Implementa pausas regulares durante el día para ejercicios de relajación",
+        "high_3": "Evalúa tu carga de trabajo y comunica tus necesidades a tu supervisor",
+        "high_4": "Considera técnicas como meditación, yoga o terapia cognitivo-conductual"
+      }
+    }
+  },
+  "common": {
+    "close": "Cerrar",
+    "cancel": "Cancelar",
+    "save": "Guardar",
+    "next": "Siguiente",
+    "previous": "Anterior",
+    "submit": "Enviar",
+    "confirm": "Confirmar"
   }
 }

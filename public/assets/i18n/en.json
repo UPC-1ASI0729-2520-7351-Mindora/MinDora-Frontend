@@ -304,5 +304,81 @@
       "appointmentCompleted": "Session completed successfully",
       "breathingCompleted": "Breathing exercise completed"
     }
+  },
+  "modals": {
+    "stressAssessment": {
+      "title": "Stress Assessment",
+      "progress": "Progress",
+      "questionCounter": "Question {{current}} of {{total}}",
+      "scoreLabel": "Score",
+      "submit": "Submit Assessment",
+      "retake": "Retake Assessment",
+      "saveResults": "Save Results",
+      "recommendationsTitle": "Personalized Recommendations",
+      "categories": {
+        "work": "Work Stress",
+        "sleep": "Sleep Quality",
+        "physical": "Physical Symptoms",
+        "emotional": "Emotional State"
+      },
+      "options": {
+        "never": "Never",
+        "rarely": "Rarely",
+        "sometimes": "Sometimes",
+        "often": "Often",
+        "always": "Always"
+      },
+      "questions": {
+        "work_1": "Do you feel overwhelmed by the amount of work?",
+        "work_2": "Do you have difficulty disconnecting from work outside of work hours?",
+        "work_3": "Do you feel you have no control over your work tasks?",
+        "work_4": "Do you experience conflicts with colleagues or supervisors?",
+        "work_5": "Are you worried about your performance or job security?",
+        "sleep_1": "Do you have difficulty falling asleep?",
+        "sleep_2": "Do you wake up during the night and have trouble falling back asleep?",
+        "sleep_3": "Do you feel tired when you wake up, even after sleeping?",
+        "physical_1": "Do you experience frequent headaches?",
+        "physical_2": "Do you feel muscle tension or pain in your neck/shoulders?",
+        "physical_3": "Do you have digestive problems or stomach discomfort?",
+        "physical_4": "Do you notice changes in your appetite (eating more or less than usual)?",
+        "emotional_1": "Do you feel anxious or nervous for no apparent reason?",
+        "emotional_2": "Do you experience mood swings or irritability?",
+        "emotional_3": "Do you feel sad, unmotivated, or lacking energy?"
+      },
+      "results": {
+        "level": {
+          "low": "Low Stress Level",
+          "moderate": "Moderate Stress Level",
+          "high": "High Stress Level"
+        },
+        "description": {
+          "low": "Your stress level is within a healthy range. Continue with your wellness habits.",
+          "moderate": "Your stress level is moderate. It's important to take steps to manage it before it increases.",
+          "high": "Your stress level is high. We recommend seeking professional support and applying stress management techniques."
+        }
+      },
+      "recommendations": {
+        "low_1": "Maintain your current exercise and rest routines",
+        "low_2": "Practice mindfulness techniques regularly",
+        "low_3": "Continue cultivating positive social relationships",
+        "moderate_1": "Incorporate deep breathing exercises daily",
+        "moderate_2": "Establish clear boundaries between work and personal life",
+        "moderate_3": "Consider talking to a professional about stress management techniques",
+        "moderate_4": "Prioritize activities that help you relax and disconnect",
+        "high_1": "Schedule a consultation with a psychologist specialized in stress management",
+        "high_2": "Implement regular breaks during the day for relaxation exercises",
+        "high_3": "Evaluate your workload and communicate your needs to your supervisor",
+        "high_4": "Consider techniques such as meditation, yoga, or cognitive-behavioral therapy"
+      }
+    }
+  },
+  "common": {
+    "close": "Close",
+    "cancel": "Cancel",
+    "save": "Save",
+    "next": "Next",
+    "previous": "Previous",
+    "submit": "Submit",
+    "confirm": "Confirm"
   }
 }

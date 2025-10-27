@@ -3,6 +3,10 @@ import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 import { AuthService } from '../services/auth.service';
+import {
+  StressAssessmentModalComponent,
+  AssessmentResult,
+} from './modals/stress-assessment-modal/stress-assessment-modal.component';
 
 interface StressLevel {
   value: number; // 0-100
@@ -31,7 +35,7 @@ interface NavigationCard {
 
 @Component({
   selector: 'app-home',
-  imports: [CommonModule, RouterLink, TranslateModule],
+  imports: [CommonModule, RouterLink, TranslateModule, StressAssessmentModalComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css',
 })
@@ -129,22 +133,67 @@ export class HomeComponent {
     };
   });
 
+  // Modal states
+  showStressAssessmentModal = signal(false);
+  showBreathingModal = signal(false);
+  showRemindersModal = signal(false);
+  showBookSessionModal = signal(false);
+
   constructor(private authService: AuthService) {}
 
   // Quick action methods
   startAssessment() {
-    console.log('Starting stress assessment...');
-    // TODO: Navigate to assessment page or open modal
+    this.showStressAssessmentModal.set(true);
   }
 
   startBreathingExercise() {
+    this.showBreathingModal.set(true);
     console.log('Starting breathing exercise...');
-    // TODO: Navigate to breathing exercise page or open modal
+    // TODO: Implement breathing exercise modal
   }
 
   manageReminders() {
+    this.showRemindersModal.set(true);
     console.log('Managing reminders...');
-    // TODO: Navigate to reminders page or open modal
+    // TODO: Implement reminders modal
+  }
+
+  bookSession() {
+    this.showBookSessionModal.set(true);
+  }
+
+  // Modal event handlers
+  onStressAssessmentClose() {
+    this.showStressAssessmentModal.set(false);
+  }
+
+  onStressAssessmentCompleted(result: AssessmentResult) {
+    console.log('Assessment completed:', result);
+    // Update stress level with new result
+    let status: 'low' | 'moderate' | 'high';
+    if (result.score < 33) {
+      status = 'low';
+    } else if (result.score < 67) {
+      status = 'moderate';
+    } else {
+      status = 'high';
+    }
+
+    const colors = {
+      low: '#10b981',
+      moderate: '#ffc107',
+      high: '#ef4444',
+    };
+
+    this.stressLevel.set({
+      value: result.score,
+      status,
+      color: colors[status],
+      message: `home.stressLevel.${status}`,
+    });
+
+    // Close modal
+    this.showStressAssessmentModal.set(false);
   }
 
   // Helper method to get stress level color
@@ -160,4 +209,3 @@ export class HomeComponent {
     return 'home.greeting.evening';
   }
 }
-

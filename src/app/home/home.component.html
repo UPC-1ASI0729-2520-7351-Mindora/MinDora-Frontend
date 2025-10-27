@@ -11,7 +11,7 @@
         </div>
         <div class="col-lg-4 text-lg-end mt-3 mt-lg-0">
           <div class="d-flex gap-2 justify-content-lg-end">
-            <button class="btn btn-outline-primary">
+            <button class="btn btn-outline-primary" (click)="bookSession()">
               <i class="fa-solid fa-calendar-plus me-2"></i>
               {{ 'home.welcome.bookSession' | translate }}
             </button>
@@ -68,7 +68,9 @@
                             stroke-linecap="round"
                             class="gauge-progress"
                             [style.stroke-dasharray]="251.2"
-                            [style.stroke-dashoffset]="251.2 - (251.2 * stressLevelPercentage() / 100)"
+                            [style.stroke-dashoffset]="
+                              251.2 - (251.2 * stressLevelPercentage()) / 100
+                            "
                           />
                         </svg>
                         <div class="gauge-value">
@@ -80,14 +82,17 @@
                   </div>
                   <div class="col-md-6">
                     <div class="stress-status">
-                      <div class="status-badge mb-3" [style.background-color]="getStressLevelColor()">
+                      <div
+                        class="status-badge mb-3"
+                        [style.background-color]="getStressLevelColor()"
+                      >
                         <i class="fa-solid fa-circle-info me-2"></i>
                         {{ stressLevel().message | translate }}
                       </div>
                       <p class="text-muted mb-3">
                         {{ 'home.stressLevel.recommendation' | translate }}
                       </p>
-                      <button class="btn btn-primary">
+                      <button class="btn btn-primary" (click)="startAssessment()">
                         <i class="fa-solid fa-clipboard-list me-2"></i>
                         {{ 'home.stressLevel.takeAssessment' | translate }}
                       </button>
@@ -108,7 +113,9 @@
                   <div class="col-4">
                     <div class="legend-item">
                       <div class="legend-color" style="background-color: #ffc107"></div>
-                      <small class="text-muted">{{ 'home.stressLevel.moderateLabel' | translate }}</small>
+                      <small class="text-muted">{{
+                        'home.stressLevel.moderateLabel' | translate
+                      }}</small>
                     </div>
                   </div>
                   <div class="col-4">
@@ -258,3 +265,10 @@
   </section>
 </div>
 
+<!-- Modals -->
+@if (showStressAssessmentModal()) {
+<app-stress-assessment-modal
+  (close)="onStressAssessmentClose()"
+  (completed)="onStressAssessmentCompleted($event)"
+></app-stress-assessment-modal>
+}

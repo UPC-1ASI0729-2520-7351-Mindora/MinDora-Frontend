@@ -1,0 +1,159 @@
+<div class="modal-backdrop fade show" (click)="closeModal()"></div>
+
+<div class="modal fade show d-block" tabindex="-1" role="dialog" aria-labelledby="stressAssessmentModalTitle">
+  <div class="modal-dialog modal-dialog-centered modal-lg" role="document" (click)="$event.stopPropagation()">
+    <div class="modal-content">
+      <!-- Header -->
+      <div class="modal-header">
+        <h5 class="modal-title" id="stressAssessmentModalTitle">
+          <i class="fa-solid fa-clipboard-check me-2"></i>
+          {{ 'modals.stressAssessment.title' | translate }}
+        </h5>
+        <button
+          type="button"
+          class="btn-close"
+          [attr.aria-label]="'common.close' | translate"
+          (click)="closeModal()"
+        ></button>
+      </div>
+
+      <!-- Body -->
+      <div class="modal-body">
+        @if (!isComplete()) {
+          <!-- Progress Bar -->
+          <div class="progress-section mb-4">
+            <div class="d-flex justify-content-between align-items-center mb-2">
+              <span class="progress-text">
+                {{ 'modals.stressAssessment.progress' | translate }}
+              </span>
+              <span class="progress-percentage">{{ progress() }}%</span>
+            </div>
+            <div class="progress" style="height: 8px">
+              <div
+                class="progress-bar progress-bar-striped progress-bar-animated"
+                role="progressbar"
+                [style.width.%]="progress()"
+                [attr.aria-valuenow]="progress()"
+                aria-valuemin="0"
+                aria-valuemax="100"
+              ></div>
+            </div>
+            <div class="question-counter mt-2 text-muted">
+              {{ 'modals.stressAssessment.questionCounter' | translate: {current: currentStep() + 1, total: totalQuestions} }}
+            </div>
+          </div>
+
+          <!-- Question Card -->
+          <div class="question-card">
+            <div class="question-category mb-3">
+              <i [class]="getCategoryIcon(currentQuestion().category)" [style.color]="getCategoryColor(currentQuestion().category)"></i>
+              <span class="ms-2">{{ 'modals.stressAssessment.categories.' + currentQuestion().category | translate }}</span>
+            </div>
+
+            <h6 class="question-text mb-4">
+              {{ currentQuestion().question | translate }}
+            </h6>
+
+            <!-- Answer Options -->
+            <div class="answer-options">
+              @for (option of currentQuestion().options; track option.value) {
+                <div
+                  class="answer-option"
+                  [class.selected]="getSelectedAnswer() === option.value"
+                  (click)="selectAnswer(option.value)"
+                  role="button"
+                  tabindex="0"
+                  (keydown.enter)="selectAnswer(option.value)"
+                  (keydown.space)="selectAnswer(option.value)"
+                >
+                  <div class="option-radio">
+                    <div class="radio-circle" [class.checked]="getSelectedAnswer() === option.value">
+                      @if (getSelectedAnswer() === option.value) {
+                        <i class="fa-solid fa-check"></i>
+                      }
+                    </div>
+                  </div>
+                  <div class="option-label">
+                    {{ option.label | translate }}
+                  </div>
+                </div>
+              }
+            </div>
+          </div>
+        } @else {
+          <!-- Results Screen -->
+          <div class="results-screen">
+            <div class="results-header text-center mb-4">
+              <div class="score-circle mx-auto mb-3" [class]="'score-' + result()?.level">
+                <div class="score-value">{{ result()?.score }}</div>
+                <div class="score-label">{{ 'modals.stressAssessment.scoreLabel' | translate }}</div>
+              </div>
+              <h4 class="mb-2">
+                {{ 'modals.stressAssessment.results.level.' + result()?.level | translate }}
+              </h4>
+              <p class="text-muted">
+                {{ 'modals.stressAssessment.results.description.' + result()?.level | translate }}
+              </p>
+            </div>
+
+            <!-- Recommendations -->
+            <div class="recommendations-section">
+              <h6 class="mb-3">
+                <i class="fa-solid fa-lightbulb me-2 text-warning"></i>
+                {{ 'modals.stressAssessment.recommendationsTitle' | translate }}
+              </h6>
+              <ul class="recommendations-list">
+                @for (recommendation of result()?.recommendations; track recommendation) {
+                  <li>{{ recommendation | translate }}</li>
+                }
+              </ul>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="results-actions mt-4">
+              <button class="btn btn-outline-primary me-2" (click)="retakeAssessment()">
+                <i class="fa-solid fa-rotate-right me-2"></i>
+                {{ 'modals.stressAssessment.retake' | translate }}
+              </button>
+              <button class="btn btn-primary" (click)="saveResults()">
+                <i class="fa-solid fa-save me-2"></i>
+                {{ 'modals.stressAssessment.saveResults' | translate }}
+              </button>
+            </div>
+          </div>
+        }
+      </div>
+
+      <!-- Footer (Navigation) -->
+      @if (!isComplete()) {
+        <div class="modal-footer">
+          <button
+            class="btn btn-outline-secondary"
+            (click)="previousStep()"
+            [disabled]="!canGoPrevious()"
+          >
+            <i class="fa-solid fa-arrow-left me-2"></i>
+            {{ 'common.previous' | translate }}
+          </button>
+
+          @if (canSubmit()) {
+            <button class="btn btn-primary" (click)="submitAssessment()">
+              {{ 'modals.stressAssessment.submit' | translate }}
+              <i class="fa-solid fa-check ms-2"></i>
+            </button>
+          } @else {
+            <button
+              class="btn btn-primary"
+              (click)="nextStep()"
+              [disabled]="!canGoNext()"
+            >
+              {{ 'common.next' | translate }}
+              <i class="fa-solid fa-arrow-right ms-2"></i>
+            </button>
+          }
+        </div>
+      }
+    </div>
+  </div>
+</div>
+
