@@ -29,6 +29,21 @@
       </button>
       <div class="collapse navbar-collapse" id="nav">
         <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-lg-center">
+          <!-- Navigation for authenticated users -->
+          @if (currentUser) {
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/home" routerLinkActive="active">
+              <i class="fa-solid fa-home me-1"></i>Inicio
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/coaching" routerLinkActive="active">
+              <i class="fa-solid fa-users me-1"></i>Coaching
+            </a>
+          </li>
+          }
+          <!-- Navigation for non-authenticated users -->
+          @if (!currentUser) {
           <li class="nav-item">
             <a class="nav-link" href="#features">{{ 'header.features' | translate }}</a>
           </li>
@@ -41,34 +56,30 @@
           <li class="nav-item">
             <a class="nav-link" href="#faq">{{ 'header.faq' | translate }}</a>
           </li>
+          }
           <li class="nav-item ms-lg-2">
             <app-lang-switch></app-lang-switch>
           </li>
           <!-- Opciones de autenticación -->
-          <ng-container *ngIf="!currentUser; else userMenu">
-            <li class="nav-item ms-lg-2">
-              <button class="btn btn-outline-primary btn-pill" (click)="goToLogin()">
-                login
-              </button>
-            </li>
-            <li class="nav-item ms-lg-2">
-              <button class="btn btn-primary btn-pill" (click)="goToRegister()">
-                register
-              </button>
-            </li>
-          </ng-container>
-          <ng-template #userMenu>
-            <li class="nav-item ms-lg-2">
-              <button class="btn btn-outline-primary btn-pill" (click)="goToCoaching()">
-                <i class="fa-solid fa-user me-2"></i>{{ currentUser?.name }}
-              </button>
-            </li>
-            <li class="nav-item ms-lg-2">
-              <button class="btn btn-outline-secondary btn-pill" (click)="logout()">
-                <i class="fa-solid fa-sign-out-alt me-2"></i>Logout
-              </button>
-            </li>
-          </ng-template>
+          @if (!currentUser) {
+          <li class="nav-item ms-lg-2">
+            <button class="btn btn-outline-primary btn-pill" (click)="goToLogin()">login</button>
+          </li>
+          <li class="nav-item ms-lg-2">
+            <button class="btn btn-primary btn-pill" (click)="goToRegister()">register</button>
+          </li>
+          } @else {
+          <li class="nav-item ms-lg-2">
+            <button class="btn btn-outline-primary btn-pill" (click)="goToCoaching()">
+              <i class="fa-solid fa-user me-2"></i>{{ currentUser.name }}
+            </button>
+          </li>
+          <li class="nav-item ms-lg-2">
+            <button class="btn btn-outline-secondary btn-pill" (click)="logout()">
+              <i class="fa-solid fa-sign-out-alt me-2"></i>Logout
+            </button>
+          </li>
+          }
           <li class="nav-item ms-lg-2">
             <a class="btn btn-dark btn-pill" href="#download"
               ><i class="fa-solid fa-mobile-screen me-2"></i>{{ 'header.download' | translate }}</a

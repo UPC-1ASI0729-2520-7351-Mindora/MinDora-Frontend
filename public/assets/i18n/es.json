@@ -236,5 +236,73 @@
       "confirmBooking": "Confirmar reserva",
       "writeReview": "Escribir reseña"
     }
+  },
+  "home": {
+    "greeting": {
+      "morning": "Buenos días",
+      "afternoon": "Buenas tardes",
+      "evening": "Buenas noches"
+    },
+    "welcome": {
+      "subtitle": "Tu espacio personal de bienestar",
+      "bookSession": "Agendar sesión"
+    },
+    "stressLevel": {
+      "title": "Nivel de Estrés Actual",
+      "description": "Basado en tu última evaluación",
+      "level": "nivel",
+      "low": "Bajo (0-33)",
+      "moderate": "Tu nivel de estrés es moderado",
+      "moderateLabel": "Moderado (34-66)",
+      "high": "Alto (67-100)",
+      "recommendation": "Te recomendamos realizar ejercicios de respiración y considerar una sesión con un especialista.",
+      "takeAssessment": "Realizar evaluación",
+      "viewHistory": "Ver historial"
+    },
+    "quickActions": {
+      "title": "Acciones Rápidas",
+      "assessment": {
+        "title": "Test de Estrés",
+        "description": "Evalúa tu nivel actual de estrés"
+      },
+      "breathing": {
+        "title": "Ejercicios de Respiración",
+        "description": "Comienza una sesión de relajación"
+      },
+      "reminders": {
+        "title": "Recordatorios",
+        "description": "Configura alertas de bienestar"
+      }
+    },
+    "navigation": {
+      "title": "Explora",
+      "routines": {
+        "title": "Rutinas Diarias",
+        "description": "Gestiona tus hábitos de bienestar"
+      },
+      "community": {
+        "title": "Comunidad",
+        "description": "Conecta con especialistas y otros usuarios"
+      },
+      "reports": {
+        "title": "Reportes",
+        "description": "Visualiza tu progreso y estadísticas"
+      }
+    },
+    "sidebar": {
+      "upcomingAppointments": "Próximas Citas",
+      "joinSession": "Unirse a sesión",
+      "viewAll": "Ver todas",
+      "wellnessTips": {
+        "title": "Consejo de Bienestar",
+        "tip1": "Toma 5 minutos para practicar respiración profunda. Puede reducir significativamente tu nivel de estrés.",
+        "tryNow": "Probar ahora"
+      },
+      "recentActivity": "Actividad Reciente"
+    },
+    "activity": {
+      "appointmentCompleted": "Sesión completada con éxito",
+      "breathingCompleted": "Ejercicio de respiración completado"
+    }
   }
 }

@@ -1,33 +1,30 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Router } from '@angular/router';
+import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { LangSwitch } from '../shared/lang-switch/lang-switch';
 import { TranslateModule } from '@ngx-translate/core';
 import { AuthService, User } from '../services/auth.service';
 
 @Component({
   selector: 'app-header',
-  imports: [CommonModule, LangSwitch, TranslateModule],
+  imports: [CommonModule, LangSwitch, TranslateModule, RouterLink, RouterLinkActive],
   templateUrl: './header.component.html',
   styleUrl: './header.component.css',
 })
 export class HeaderComponent implements OnInit {
   currentUser: User | null = null;
 
-  constructor(
-    private authService: AuthService,
-    private router: Router
-  ) {}
+  constructor(private authService: AuthService, private router: Router) {}
 
   ngOnInit(): void {
-    this.authService.currentUser$.subscribe(user => {
+    this.authService.currentUser$.subscribe((user) => {
       this.currentUser = user;
     });
   }
 
   logout(): void {
     this.authService.logout();
-    this.router.navigate(['/']);
+    this.router.navigate(['/login']);
   }
 
   goToLogin(): void {
@@ -39,6 +36,6 @@ export class HeaderComponent implements OnInit {
   }
 
   goToCoaching(): void {
-    this.router.navigate(['/coaching']);
+    this.router.navigate(['/home']);
   }
 }

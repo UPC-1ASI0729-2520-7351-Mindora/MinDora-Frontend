@@ -236,5 +236,73 @@
       "confirmBooking": "Confirm booking",
       "writeReview": "Write review"
     }
+  },
+  "home": {
+    "greeting": {
+      "morning": "Good morning",
+      "afternoon": "Good afternoon",
+      "evening": "Good evening"
+    },
+    "welcome": {
+      "subtitle": "Your personal wellness space",
+      "bookSession": "Book session"
+    },
+    "stressLevel": {
+      "title": "Current Stress Level",
+      "description": "Based on your last assessment",
+      "level": "level",
+      "low": "Low (0-33)",
+      "moderate": "Your stress level is moderate",
+      "moderateLabel": "Moderate (34-66)",
+      "high": "High (67-100)",
+      "recommendation": "We recommend doing breathing exercises and considering a session with a specialist.",
+      "takeAssessment": "Take assessment",
+      "viewHistory": "View history"
+    },
+    "quickActions": {
+      "title": "Quick Actions",
+      "assessment": {
+        "title": "Stress Test",
+        "description": "Assess your current stress level"
+      },
+      "breathing": {
+        "title": "Breathing Exercises",
+        "description": "Start a relaxation session"
+      },
+      "reminders": {
+        "title": "Reminders",
+        "description": "Set wellness alerts"
+      }
+    },
+    "navigation": {
+      "title": "Explore",
+      "routines": {
+        "title": "Daily Routines",
+        "description": "Manage your wellness habits"
+      },
+      "community": {
+        "title": "Community",
+        "description": "Connect with specialists and other users"
+      },
+      "reports": {
+        "title": "Reports",
+        "description": "View your progress and statistics"
+      }
+    },
+    "sidebar": {
+      "upcomingAppointments": "Upcoming Appointments",
+      "joinSession": "Join session",
+      "viewAll": "View all",
+      "wellnessTips": {
+        "title": "Wellness Tip",
+        "tip1": "Take 5 minutes to practice deep breathing. It can significantly reduce your stress level.",
+        "tryNow": "Try now"
+      },
+      "recentActivity": "Recent Activity"
+    },
+    "activity": {
+      "appointmentCompleted": "Session completed successfully",
+      "breathingCompleted": "Breathing exercise completed"
+    }
   }
 }

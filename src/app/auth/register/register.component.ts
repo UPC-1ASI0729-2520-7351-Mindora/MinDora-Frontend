@@ -10,30 +10,29 @@ import { AuthService } from '../../services/auth.service';
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule, TranslateModule],
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.css']
+  styleUrls: ['./register.component.css'],
 })
 export class RegisterComponent {
   registerForm: FormGroup;
   errorMessage: string = '';
   isLoading: boolean = false;
 
-  constructor(
-    private fb: FormBuilder,
-    private authService: AuthService,
-    private router: Router
-  ) {
-    this.registerForm = this.fb.group({
-      name: ['', [Validators.required, Validators.minLength(2)]],
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(6)]],
-      confirmPassword: ['', [Validators.required]]
-    }, { validators: this.passwordMatchValidator });
+  constructor(private fb: FormBuilder, private authService: AuthService, private router: Router) {
+    this.registerForm = this.fb.group(
+      {
+        name: ['', [Validators.required, Validators.minLength(2)]],
+        email: ['', [Validators.required, Validators.email]],
+        password: ['', [Validators.required, Validators.minLength(6)]],
+        confirmPassword: ['', [Validators.required]],
+      },
+      { validators: this.passwordMatchValidator }
+    );
   }
 
   passwordMatchValidator(form: FormGroup) {
     const password = form.get('password');
     const confirmPassword = form.get('confirmPassword');
-    
+
     if (password && confirmPassword && password.value !== confirmPassword.value) {
       confirmPassword.setErrors({ passwordMismatch: true });
     } else {
@@ -41,7 +40,7 @@ export class RegisterComponent {
         confirmPassword.setErrors(null);
       }
     }
-    
+
     return null;
   }
 
@@ -54,7 +53,7 @@ export class RegisterComponent {
       const success = this.authService.register(credentials);
 
       if (success) {
-        this.router.navigate(['/coaching']);
+        this.router.navigate(['/home']);
       } else {
         this.errorMessage = 'El email ya está registrado';
       }
@@ -70,7 +69,7 @@ export class RegisterComponent {
   }
 
   private markFormGroupTouched(): void {
-    Object.keys(this.registerForm.controls).forEach(key => {
+    Object.keys(this.registerForm.controls).forEach((key) => {
       const control = this.registerForm.get(key);
       control?.markAsTouched();
     });
@@ -81,10 +80,10 @@ export class RegisterComponent {
     if (field?.errors && field.touched) {
       if (field.errors['required']) {
         const fieldLabels: { [key: string]: string } = {
-          'name': 'Nombre',
-          'email': 'Email',
-          'password': 'Contraseña',
-          'confirmPassword': 'Confirmar contraseña'
+          name: 'Nombre',
+          email: 'Email',
+          password: 'Contraseña',
+          confirmPassword: 'Confirmar contraseña',
         };
         return `${fieldLabels[fieldName]} es requerido`;
       }

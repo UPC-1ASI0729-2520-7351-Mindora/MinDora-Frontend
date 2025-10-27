@@ -1,0 +1,260 @@
+<div class="home-page">
+  <!-- Welcome Section -->
+  <section class="welcome-section py-4 bg-light">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-lg-8">
+          <h1 class="display-6 fw-bold mb-2">
+            {{ getGreeting() | translate }}, {{ currentUser()?.name || 'User' }}!
+          </h1>
+          <p class="lead text-muted mb-0">{{ 'home.welcome.subtitle' | translate }}</p>
+        </div>
+        <div class="col-lg-4 text-lg-end mt-3 mt-lg-0">
+          <div class="d-flex gap-2 justify-content-lg-end">
+            <button class="btn btn-outline-primary">
+              <i class="fa-solid fa-calendar-plus me-2"></i>
+              {{ 'home.welcome.bookSession' | translate }}
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Content -->
+  <section class="py-5">
+    <div class="container">
+      <div class="row g-4">
+        <!-- Left Column: Stress Level & Quick Actions -->
+        <div class="col-lg-8">
+          <!-- Stress Level Summary Card -->
+          <div class="card shadow-sm mb-4 stress-level-card">
+            <div class="card-body p-4">
+              <div class="d-flex justify-content-between align-items-start mb-4">
+                <div>
+                  <h4 class="card-title mb-1">
+                    <i class="fa-solid fa-heart-pulse me-2"></i>
+                    {{ 'home.stressLevel.title' | translate }}
+                  </h4>
+                  <p class="text-muted mb-0">{{ 'home.stressLevel.description' | translate }}</p>
+                </div>
+                <button class="btn btn-sm btn-outline-secondary">
+                  <i class="fa-solid fa-history me-1"></i>
+                  {{ 'home.stressLevel.viewHistory' | translate }}
+                </button>
+              </div>
+
+              <!-- Stress Level Gauge -->
+              <div class="stress-gauge-container mb-4">
+                <div class="row align-items-center">
+                  <div class="col-md-6">
+                    <div class="stress-gauge-wrapper">
+                      <div class="stress-gauge" [ngClass]="stressLevelClass()">
+                        <svg viewBox="0 0 200 120" class="gauge-svg">
+                          <!-- Background arc -->
+                          <path
+                            d="M 20 100 A 80 80 0 0 1 180 100"
+                            fill="none"
+                            stroke="#e9ecef"
+                            stroke-width="20"
+                            stroke-linecap="round"
+                          />
+                          <!-- Progress arc -->
+                          <path
+                            d="M 20 100 A 80 80 0 0 1 180 100"
+                            fill="none"
+                            [attr.stroke]="getStressLevelColor()"
+                            stroke-width="20"
+                            stroke-linecap="round"
+                            class="gauge-progress"
+                            [style.stroke-dasharray]="251.2"
+                            [style.stroke-dashoffset]="251.2 - (251.2 * stressLevelPercentage() / 100)"
+                          />
+                        </svg>
+                        <div class="gauge-value">
+                          <div class="value-number">{{ stressLevelPercentage() }}</div>
+                          <div class="value-label">{{ 'home.stressLevel.level' | translate }}</div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="stress-status">
+                      <div class="status-badge mb-3" [style.background-color]="getStressLevelColor()">
+                        <i class="fa-solid fa-circle-info me-2"></i>
+                        {{ stressLevel().message | translate }}
+                      </div>
+                      <p class="text-muted mb-3">
+                        {{ 'home.stressLevel.recommendation' | translate }}
+                      </p>
+                      <button class="btn btn-primary">
+                        <i class="fa-solid fa-clipboard-list me-2"></i>
+                        {{ 'home.stressLevel.takeAssessment' | translate }}
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Stress Level Legend -->
+              <div class="stress-legend">
+                <div class="row text-center">
+                  <div class="col-4">
+                    <div class="legend-item">
+                      <div class="legend-color" style="background-color: #28a745"></div>
+                      <small class="text-muted">{{ 'home.stressLevel.low' | translate }}</small>
+                    </div>
+                  </div>
+                  <div class="col-4">
+                    <div class="legend-item">
+                      <div class="legend-color" style="background-color: #ffc107"></div>
+                      <small class="text-muted">{{ 'home.stressLevel.moderateLabel' | translate }}</small>
+                    </div>
+                  </div>
+                  <div class="col-4">
+                    <div class="legend-item">
+                      <div class="legend-color" style="background-color: #dc3545"></div>
+                      <small class="text-muted">{{ 'home.stressLevel.high' | translate }}</small>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Quick Actions Section -->
+          <div class="card shadow-sm mb-4">
+            <div class="card-body p-4">
+              <h5 class="card-title mb-4">
+                <i class="fa-solid fa-bolt me-2"></i>
+                {{ 'home.quickActions.title' | translate }}
+              </h5>
+              <div class="row g-3">
+                @for (action of quickActions(); track action.id) {
+                <div class="col-md-4">
+                  <div class="quick-action-card" (click)="action.action && action.action()">
+                    <div class="action-icon">
+                      <i class="fa-solid {{ action.icon }}"></i>
+                    </div>
+                    <h6 class="action-title">{{ action.title | translate }}</h6>
+                    <p class="action-description text-muted">
+                      {{ action.description | translate }}
+                    </p>
+                  </div>
+                </div>
+                }
+              </div>
+            </div>
+          </div>
+
+          <!-- Navigation Cards Section -->
+          <div class="navigation-section">
+            <h5 class="mb-4">
+              <i class="fa-solid fa-compass me-2"></i>
+              {{ 'home.navigation.title' | translate }}
+            </h5>
+            <div class="row g-4">
+              @for (card of navigationCards(); track card.id) {
+              <div class="col-md-4">
+                <a [routerLink]="card.route" class="text-decoration-none">
+                  <div class="navigation-card" [style.border-left-color]="card.color">
+                    <div class="nav-card-icon" [style.color]="card.color">
+                      <i class="fa-solid {{ card.icon }}"></i>
+                    </div>
+                    <h6 class="nav-card-title">{{ card.title | translate }}</h6>
+                    <p class="nav-card-description text-muted">
+                      {{ card.description | translate }}
+                    </p>
+                    <div class="nav-card-arrow">
+                      <i class="fa-solid fa-arrow-right"></i>
+                    </div>
+                  </div>
+                </a>
+              </div>
+              }
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Column: Sidebar -->
+        <div class="col-lg-4">
+          <!-- Upcoming Appointments -->
+          <div class="card shadow-sm mb-4">
+            <div class="card-header bg-white">
+              <h6 class="mb-0">
+                <i class="fa-solid fa-calendar-check me-2"></i>
+                {{ 'home.sidebar.upcomingAppointments' | translate }}
+              </h6>
+            </div>
+            <div class="card-body">
+              <div class="appointment-item mb-3 pb-3 border-bottom">
+                <div class="d-flex justify-content-between align-items-start mb-2">
+                  <div>
+                    <h6 class="mb-1">Dra. María González</h6>
+                    <small class="text-muted">
+                      <i class="fa-solid fa-calendar me-1"></i>
+                      Oct 15, 2025 - 3:00 PM
+                    </small>
+                  </div>
+                </div>
+                <button class="btn btn-sm btn-outline-primary w-100">
+                  <i class="fa-solid fa-video me-1"></i>
+                  {{ 'home.sidebar.joinSession' | translate }}
+                </button>
+              </div>
+              <a href="/coaching" class="btn btn-sm btn-link w-100">
+                {{ 'home.sidebar.viewAll' | translate }}
+                <i class="fa-solid fa-arrow-right ms-1"></i>
+              </a>
+            </div>
+          </div>
+
+          <!-- Wellness Tips -->
+          <div class="card shadow-sm mb-4">
+            <div class="card-header bg-white">
+              <h6 class="mb-0">
+                <i class="fa-solid fa-lightbulb me-2"></i>
+                {{ 'home.sidebar.wellnessTips.title' | translate }}
+              </h6>
+            </div>
+            <div class="card-body">
+              <div class="wellness-tip">
+                <p class="mb-3">{{ 'home.sidebar.wellnessTips.tip1' | translate }}</p>
+                <button class="btn btn-sm btn-outline-success w-100">
+                  <i class="fa-solid fa-play me-1"></i>
+                  {{ 'home.sidebar.wellnessTips.tryNow' | translate }}
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Recent Activity -->
+          <div class="card shadow-sm">
+            <div class="card-header bg-white">
+              <h6 class="mb-0">
+                <i class="fa-solid fa-clock-rotate-left me-2"></i>
+                {{ 'home.sidebar.recentActivity' | translate }}
+              </h6>
+            </div>
+            <div class="card-body">
+              @for (activity of recentActivity(); track activity.id) {
+              <div class="activity-item mb-3">
+                <div class="d-flex gap-3">
+                  <div class="activity-icon">
+                    <i class="fa-solid {{ activity.icon }}"></i>
+                  </div>
+                  <div class="flex-grow-1">
+                    <p class="mb-1 small">{{ activity.message | translate }}</p>
+                    <small class="text-muted">{{ activity.time }}</small>
+                  </div>
+                </div>
+              </div>
+              }
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
