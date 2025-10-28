@@ -380,5 +380,62 @@
     "previous": "Previous",
     "submit": "Submit",
     "confirm": "Confirm"
+  },
+  "tracking": {
+    "title": "Assessment & Tracking",
+    "subtitle": "Monitor your mental health journey and track your progress over time",
+    "newAssessment": "New Assessment",
+    "latestScore": "Latest Score",
+    "trendLabel": "Trend",
+    "daysSince": "Days Since Last",
+    "totalAssessments": "Total Assessments",
+    "recommendationsTitle": "Personalized Recommendations",
+    "trendChart": "Stress Level Trend",
+    "categoryChart": "Category Breakdown",
+    "historyTitle": "Assessment History",
+    "reminderTitle": "Assessment Reminders",
+    "reminderDescription": "Set up recurring reminders to track your stress levels regularly",
+    "configureReminders": "Configure Reminders",
+    "noChartData": "No data available for charts",
+    "noHistory": "No assessments yet. Take your first assessment to start tracking!",
+    "level": {
+      "low": "Low",
+      "moderate": "Moderate",
+      "high": "High"
+    },
+    "trend": {
+      "improving": "Improving",
+      "stable": "Stable",
+      "declining": "Declining",
+      "insufficient_data": "Insufficient Data"
+    },
+    "filter": {
+      "week": "Week",
+      "month": "Month",
+      "quarter": "3 Months",
+      "all": "All Time"
+    },
+    "table": {
+      "date": "Date",
+      "score": "Score",
+      "level": "Level",
+      "categories": "Categories",
+      "actions": "Actions"
+    },
+    "recommendations": {
+      "noData": "Take your first assessment to receive personalized recommendations",
+      "improving": "Great progress! Your stress levels are improving. Keep up the good work with your current strategies.",
+      "stable": "Your stress levels are stable. Continue with your current wellness practices.",
+      "declining": "Your stress levels are increasing. Consider scheduling a session with a specialist and increasing your self-care activities.",
+      "highStress": "Your stress level is high. We strongly recommend speaking with a mental health professional.",
+      "moderateStress": "Your stress level is moderate. Focus on stress management techniques and regular self-care.",
+      "lowStress": "Your stress level is low. Maintain your healthy habits and continue monitoring your well-being.",
+      "category": {
+        "work": "Work stress is your highest category. Consider setting better boundaries and taking regular breaks.",
+        "sleep": "Sleep quality is affecting your stress. Establish a consistent sleep routine and create a relaxing bedtime environment.",
+        "physical": "Physical symptoms are prominent. Incorporate regular exercise and relaxation techniques into your routine.",
+        "emotional": "Emotional well-being needs attention. Consider mindfulness practices and connecting with supportive people."
+      }
+    }
   }
 }

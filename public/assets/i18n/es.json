@@ -380,5 +380,62 @@
     "previous": "Anterior",
     "submit": "Enviar",
     "confirm": "Confirmar"
+  },
+  "tracking": {
+    "title": "Evaluación y Seguimiento",
+    "subtitle": "Monitorea tu viaje de salud mental y rastrea tu progreso a lo largo del tiempo",
+    "newAssessment": "Nueva Evaluación",
+    "latestScore": "Puntuación Reciente",
+    "trendLabel": "Tendencia",
+    "daysSince": "Días Desde Última",
+    "totalAssessments": "Total de Evaluaciones",
+    "recommendationsTitle": "Recomendaciones Personalizadas",
+    "trendChart": "Tendencia de Nivel de Estrés",
+    "categoryChart": "Desglose por Categoría",
+    "historyTitle": "Historial de Evaluaciones",
+    "reminderTitle": "Recordatorios de Evaluación",
+    "reminderDescription": "Configura recordatorios recurrentes para rastrear tus niveles de estrés regularmente",
+    "configureReminders": "Configurar Recordatorios",
+    "noChartData": "No hay datos disponibles para gráficos",
+    "noHistory": "Aún no hay evaluaciones. ¡Realiza tu primera evaluación para comenzar a rastrear!",
+    "level": {
+      "low": "Bajo",
+      "moderate": "Moderado",
+      "high": "Alto"
+    },
+    "trend": {
+      "improving": "Mejorando",
+      "stable": "Estable",
+      "declining": "Empeorando",
+      "insufficient_data": "Datos Insuficientes"
+    },
+    "filter": {
+      "week": "Semana",
+      "month": "Mes",
+      "quarter": "3 Meses",
+      "all": "Todo"
+    },
+    "table": {
+      "date": "Fecha",
+      "score": "Puntuación",
+      "level": "Nivel",
+      "categories": "Categorías",
+      "actions": "Acciones"
+    },
+    "recommendations": {
+      "noData": "Realiza tu primera evaluación para recibir recomendaciones personalizadas",
+      "improving": "¡Excelente progreso! Tus niveles de estrés están mejorando. Continúa con tus estrategias actuales.",
+      "stable": "Tus niveles de estrés son estables. Continúa con tus prácticas de bienestar actuales.",
+      "declining": "Tus niveles de estrés están aumentando. Considera programar una sesión con un especialista y aumentar tus actividades de autocuidado.",
+      "highStress": "Tu nivel de estrés es alto. Te recomendamos encarecidamente hablar con un profesional de salud mental.",
+      "moderateStress": "Tu nivel de estrés es moderado. Enfócate en técnicas de manejo del estrés y autocuidado regular.",
+      "lowStress": "Tu nivel de estrés es bajo. Mantén tus hábitos saludables y continúa monitoreando tu bienestar.",
+      "category": {
+        "work": "El estrés laboral es tu categoría más alta. Considera establecer mejores límites y tomar descansos regulares.",
+        "sleep": "La calidad del sueño está afectando tu estrés. Establece una rutina de sueño consistente y crea un ambiente relajante para dormir.",
+        "physical": "Los síntomas físicos son prominentes. Incorpora ejercicio regular y técnicas de relajación en tu rutina.",
+        "emotional": "El bienestar emocional necesita atención. Considera prácticas de mindfulness y conectar con personas de apoyo."
+      }
+    }
   }
 }

@@ -7,6 +7,7 @@ import {
   StressAssessmentModalComponent,
   AssessmentResult,
 } from './modals/stress-assessment-modal/stress-assessment-modal.component';
+import { AssessmentHistoryService } from '../services/assessment-history.service';
 
 interface StressLevel {
   value: number; // 0-100
@@ -139,7 +140,16 @@ export class HomeComponent {
   showRemindersModal = signal(false);
   showBookSessionModal = signal(false);
 
-  constructor(private authService: AuthService) {}
+  constructor(
+    private authService: AuthService,
+    private assessmentHistoryService: AssessmentHistoryService
+  ) {
+    // Load latest assessment from history
+    const latestAssessment = this.assessmentHistoryService.getLatestAssessment();
+    if (latestAssessment) {
+      this.updateStressLevelFromAssessment(latestAssessment);
+    }
+  }
 
   // Quick action methods
   startAssessment() {
@@ -169,16 +179,36 @@ export class HomeComponent {
 
   onStressAssessmentCompleted(result: AssessmentResult) {
     console.log('Assessment completed:', result);
-    // Update stress level with new result
-    let status: 'low' | 'moderate' | 'high';
-    if (result.score < 33) {
-      status = 'low';
-    } else if (result.score < 67) {
-      status = 'moderate';
-    } else {
-      status = 'high';
-    }
 
+    // Calculate category scores from answers (mock for now)
+    const categoryScores = {
+      work: Math.min(100, Math.max(0, result.score + Math.random() * 20 - 10)),
+      sleep: Math.min(100, Math.max(0, result.score + Math.random() * 20 - 10)),
+      physical: Math.min(100, Math.max(0, result.score + Math.random() * 20 - 10)),
+      emotional: Math.min(100, Math.max(0, result.score + Math.random() * 20 - 10)),
+    };
+
+    // Save to assessment history
+    const assessmentResult = {
+      id: '',
+      score: result.score,
+      level: result.level,
+      recommendations: result.recommendations,
+      timestamp: result.timestamp,
+      categoryScores,
+      answers: new Map(),
+    };
+
+    this.assessmentHistoryService.addAssessment(assessmentResult);
+
+    // Update stress level display
+    this.updateStressLevelFromAssessment(assessmentResult);
+
+    // Close modal
+    this.showStressAssessmentModal.set(false);
+  }
+
+  private updateStressLevelFromAssessment(assessment: any) {
     const colors = {
       low: '#10b981',
       moderate: '#ffc107',
@@ -186,14 +216,11 @@ export class HomeComponent {
     };
 
     this.stressLevel.set({
-      value: result.score,
-      status,
-      color: colors[status],
-      message: `home.stressLevel.${status}`,
+      value: assessment.score,
+      status: assessment.level,
+      color: colors[assessment.level],
+      message: `home.stressLevel.${assessment.level}`,
     });
-
-    // Close modal
-    this.showStressAssessmentModal.set(false);
   }
 
   // Helper method to get stress level color

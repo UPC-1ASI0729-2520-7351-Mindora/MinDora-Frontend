@@ -1,0 +1,316 @@
+<div class="assessment-tracking-page">
+  <!-- Page Header -->
+  <div class="page-header bg-gradient-primary text-white">
+    <div class="container py-5">
+      <div class="row align-items-center">
+        <div class="col-lg-8">
+          <h1 class="display-5 fw-bold mb-3">
+            <i class="fa-solid fa-chart-line me-3"></i>
+            {{ 'tracking.title' | translate }}
+          </h1>
+          <p class="lead mb-0">
+            {{ 'tracking.subtitle' | translate }}
+          </p>
+        </div>
+        <div class="col-lg-4 text-lg-end mt-4 mt-lg-0">
+          <button class="btn btn-light btn-lg shadow" (click)="startNewAssessment()">
+            <i class="fa-solid fa-clipboard-check me-2"></i>
+            {{ 'tracking.newAssessment' | translate }}
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <div class="container py-5">
+    <!-- Summary Cards -->
+    <div class="row g-4 mb-5">
+      <!-- Latest Score Card -->
+      <div class="col-md-6 col-lg-3">
+        <div class="stat-card card h-100 border-0 shadow-sm">
+          <div class="card-body">
+            <div class="d-flex justify-content-between align-items-start mb-3">
+              <div class="stat-icon bg-primary-subtle">
+                <i class="fa-solid fa-gauge-high text-primary"></i>
+              </div>
+              @if (latestAssessment()) {
+                <span [class]="getLevelBadgeClass(latestAssessment()!.level)">
+                  {{ 'tracking.level.' + latestAssessment()!.level | translate }}
+                </span>
+              }
+            </div>
+            <h3 class="stat-value mb-1">
+              {{ latestAssessment()?.score ?? '--' }}
+            </h3>
+            <p class="stat-label text-muted mb-0">
+              {{ 'tracking.latestScore' | translate }}
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Trend Card -->
+      <div class="col-md-6 col-lg-3">
+        <div class="stat-card card h-100 border-0 shadow-sm">
+          <div class="card-body">
+            <div class="stat-icon bg-success-subtle mb-3">
+              <i [class]="getTrendIcon()"></i>
+            </div>
+            <h3 class="stat-value mb-1">
+              {{ 'tracking.trend.' + trend() | translate }}
+            </h3>
+            <p class="stat-label text-muted mb-0">
+              {{ 'tracking.trendLabel' | translate }}
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Days Since Last Assessment -->
+      <div class="col-md-6 col-lg-3">
+        <div class="stat-card card h-100 border-0 shadow-sm">
+          <div class="card-body">
+            <div class="stat-icon bg-warning-subtle mb-3">
+              <i class="fa-solid fa-calendar-days text-warning"></i>
+            </div>
+            <h3 class="stat-value mb-1">
+              {{ daysSinceLastAssessment() ?? '--' }}
+            </h3>
+            <p class="stat-label text-muted mb-0">
+              {{ 'tracking.daysSince' | translate }}
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Total Assessments -->
+      <div class="col-md-6 col-lg-3">
+        <div class="stat-card card h-100 border-0 shadow-sm">
+          <div class="card-body">
+            <div class="stat-icon bg-info-subtle mb-3">
+              <i class="fa-solid fa-list-check text-info"></i>
+            </div>
+            <h3 class="stat-value mb-1">
+              {{ assessments().length }}
+            </h3>
+            <p class="stat-label text-muted mb-0">
+              {{ 'tracking.totalAssessments' | translate }}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Recommendations Section -->
+    @if (recommendations().length > 0) {
+      <div class="recommendations-section card border-0 shadow-sm mb-5">
+        <div class="card-body p-4">
+          <h4 class="mb-4">
+            <i class="fa-solid fa-lightbulb text-warning me-2"></i>
+            {{ 'tracking.recommendationsTitle' | translate }}
+          </h4>
+          <div class="row g-3">
+            @for (recommendation of recommendations(); track recommendation) {
+              <div class="col-md-6">
+                <div class="recommendation-item">
+                  <i class="fa-solid fa-check-circle text-success me-2"></i>
+                  <span>{{ recommendation | translate }}</span>
+                </div>
+              </div>
+            }
+          </div>
+        </div>
+      </div>
+    }
+
+    <!-- Charts Section -->
+    <div class="row g-4 mb-5">
+      <!-- Trend Chart -->
+      <div class="col-lg-8">
+        <div class="card border-0 shadow-sm h-100">
+          <div class="card-body p-4">
+            <h5 class="card-title mb-4">
+              <i class="fa-solid fa-chart-line me-2 text-primary"></i>
+              {{ 'tracking.trendChart' | translate }}
+            </h5>
+            @if (trendChartData()) {
+              <div class="chart-container">
+                <canvas id="trendChart"></canvas>
+              </div>
+            } @else {
+              <div class="text-center text-muted py-5">
+                <i class="fa-solid fa-chart-line fa-3x mb-3 opacity-25"></i>
+                <p>{{ 'tracking.noChartData' | translate }}</p>
+              </div>
+            }
+          </div>
+        </div>
+      </div>
+
+      <!-- Category Chart -->
+      <div class="col-lg-4">
+        <div class="card border-0 shadow-sm h-100">
+          <div class="card-body p-4">
+            <h5 class="card-title mb-4">
+              <i class="fa-solid fa-chart-pie me-2 text-primary"></i>
+              {{ 'tracking.categoryChart' | translate }}
+            </h5>
+            @if (categoryChartData()) {
+              <div class="chart-container">
+                <canvas id="categoryChart"></canvas>
+              </div>
+            } @else {
+              <div class="text-center text-muted py-5">
+                <i class="fa-solid fa-chart-pie fa-3x mb-3 opacity-25"></i>
+                <p>{{ 'tracking.noChartData' | translate }}</p>
+              </div>
+            }
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Assessment History Section -->
+    <div class="card border-0 shadow-sm mb-5">
+      <div class="card-body p-4">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+          <h4 class="mb-0">
+            <i class="fa-solid fa-clock-rotate-left me-2"></i>
+            {{ 'tracking.historyTitle' | translate }}
+          </h4>
+          
+          <!-- Date Range Filter -->
+          <div class="btn-group" role="group">
+            <button
+              type="button"
+              class="btn btn-sm"
+              [class.btn-primary]="dateRangeFilter() === 'week'"
+              [class.btn-outline-primary]="dateRangeFilter() !== 'week'"
+              (click)="setDateRangeFilter('week')"
+            >
+              {{ 'tracking.filter.week' | translate }}
+            </button>
+            <button
+              type="button"
+              class="btn btn-sm"
+              [class.btn-primary]="dateRangeFilter() === 'month'"
+              [class.btn-outline-primary]="dateRangeFilter() !== 'month'"
+              (click)="setDateRangeFilter('month')"
+            >
+              {{ 'tracking.filter.month' | translate }}
+            </button>
+            <button
+              type="button"
+              class="btn btn-sm"
+              [class.btn-primary]="dateRangeFilter() === 'quarter'"
+              [class.btn-outline-primary]="dateRangeFilter() !== 'quarter'"
+              (click)="setDateRangeFilter('quarter')"
+            >
+              {{ 'tracking.filter.quarter' | translate }}
+            </button>
+            <button
+              type="button"
+              class="btn btn-sm"
+              [class.btn-primary]="dateRangeFilter() === 'all'"
+              [class.btn-outline-primary]="dateRangeFilter() !== 'all'"
+              (click)="setDateRangeFilter('all')"
+            >
+              {{ 'tracking.filter.all' | translate }}
+            </button>
+          </div>
+        </div>
+
+        <!-- History Table -->
+        @if (assessments().length > 0) {
+          <div class="table-responsive">
+            <table class="table table-hover align-middle">
+              <thead class="table-light">
+                <tr>
+                  <th>{{ 'tracking.table.date' | translate }}</th>
+                  <th>{{ 'tracking.table.score' | translate }}</th>
+                  <th>{{ 'tracking.table.level' | translate }}</th>
+                  <th>{{ 'tracking.table.categories' | translate }}</th>
+                  <th class="text-end">{{ 'tracking.table.actions' | translate }}</th>
+                </tr>
+              </thead>
+              <tbody>
+                @for (assessment of assessments(); track assessment.id) {
+                  <tr class="assessment-row" (click)="viewAssessmentDetails(assessment)">
+                    <td>
+                      <i class="fa-solid fa-calendar me-2 text-muted"></i>
+                      {{ formatDate(assessment.timestamp) }}
+                    </td>
+                    <td>
+                      <strong class="fs-5">{{ assessment.score }}</strong>
+                    </td>
+                    <td>
+                      <span [class]="getLevelBadgeClass(assessment.level)">
+                        {{ 'tracking.level.' + assessment.level | translate }}
+                      </span>
+                    </td>
+                    <td>
+                      <div class="category-mini-bars">
+                        <div class="mini-bar" [style.width.%]="assessment.categoryScores.work" title="Trabajo"></div>
+                        <div class="mini-bar" [style.width.%]="assessment.categoryScores.sleep" title="Sueño"></div>
+                        <div class="mini-bar" [style.width.%]="assessment.categoryScores.physical" title="Físico"></div>
+                        <div class="mini-bar" [style.width.%]="assessment.categoryScores.emotional" title="Emocional"></div>
+                      </div>
+                    </td>
+                    <td class="text-end">
+                      <button
+                        class="btn btn-sm btn-outline-danger"
+                        (click)="deleteAssessment(assessment.id, $event)"
+                        title="Eliminar"
+                      >
+                        <i class="fa-solid fa-trash"></i>
+                      </button>
+                    </td>
+                  </tr>
+                }
+              </tbody>
+            </table>
+          </div>
+        } @else {
+          <div class="text-center text-muted py-5">
+            <i class="fa-solid fa-inbox fa-3x mb-3 opacity-25"></i>
+            <p class="mb-0">{{ 'tracking.noHistory' | translate }}</p>
+          </div>
+        }
+      </div>
+    </div>
+
+    <!-- Reminder Settings Section -->
+    <div class="card border-0 shadow-sm">
+      <div class="card-body p-4">
+        <h4 class="mb-4">
+          <i class="fa-solid fa-bell me-2"></i>
+          {{ 'tracking.reminderTitle' | translate }}
+        </h4>
+        
+        <div class="row align-items-center">
+          <div class="col-md-8">
+            <p class="text-muted mb-3 mb-md-0">
+              {{ 'tracking.reminderDescription' | translate }}
+            </p>
+          </div>
+          <div class="col-md-4 text-md-end">
+            <button class="btn btn-outline-primary" (click)="toggleReminderSettings()">
+              <i class="fa-solid fa-gear me-2"></i>
+              {{ 'tracking.configureReminders' | translate }}
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Stress Assessment Modal -->
+@if (showStressAssessmentModal()) {
+  <app-stress-assessment-modal
+    (close)="onAssessmentClose()"
+    (completed)="onAssessmentCompleted($event)"
+  ></app-stress-assessment-modal>
+}
+
