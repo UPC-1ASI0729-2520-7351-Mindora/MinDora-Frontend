@@ -209,17 +209,21 @@ export class HomeComponent {
   }
 
   private updateStressLevelFromAssessment(assessment: any) {
-    const colors = {
+    const colors: { [key: string]: string } = {
       low: '#10b981',
       moderate: '#ffc107',
       high: '#ef4444',
     };
 
+    // Ensure level is one of the valid types
+    const level = assessment.level as 'low' | 'moderate' | 'high';
+    const color = colors[level] || '#6c757d'; // Default gray if level not found
+
     this.stressLevel.set({
       value: assessment.score,
-      status: assessment.level,
-      color: colors[assessment.level],
-      message: `home.stressLevel.${assessment.level}`,
+      status: level,
+      color: color,
+      message: `home.stressLevel.${level}`,
     });
   }
 

@@ -6,7 +6,8 @@
   z-index: 1040;
   width: 100vw;
   height: 100vh;
-  background-color: rgba(0, 0, 0, 0.5);
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.3) 0%, rgba(20, 184, 166, 0.3) 100%);
+  backdrop-filter: blur(8px);
 }
 
 /* Modal */
@@ -27,23 +28,28 @@
 }
 
 .modal-content {
-  border-radius: 12px;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-xl);
+  border: 2px solid var(--primary-200);
+  background: linear-gradient(135deg, #ffffff 0%, var(--primary-50) 100%);
 }
 
 .modal-header {
-  border-bottom: 1px solid #e5e7eb;
+  background: var(--bg-gradient-primary);
+  color: white;
+  border-bottom: none;
   padding: 1.5rem;
+  border-radius: var(--radius-xl) var(--radius-xl) 0 0;
 }
 
 .modal-title {
   font-size: 1.25rem;
   font-weight: 600;
-  color: #1f2937;
+  color: white;
 }
 
 .modal-title i {
-  color: #6366f1;
+  color: white;
 }
 
 .modal-body {
@@ -141,9 +147,9 @@
 }
 
 .answer-option.selected {
-  background: #eff6ff;
-  border-color: #6366f1;
-  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+  background: linear-gradient(135deg, var(--primary-50) 0%, var(--secondary-50) 100%);
+  border-color: var(--primary-500);
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15);
 }
 
 .option-radio {

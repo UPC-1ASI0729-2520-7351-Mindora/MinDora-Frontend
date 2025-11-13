@@ -1,1 +1,78 @@
 /* Header component styles */
+
+/* Navbar Styling */
+.navbar {
+  background: linear-gradient(135deg, #ffffff 0%, #f9fafb 100%) !important;
+  border-bottom: 1px solid var(--border-light);
+  backdrop-filter: blur(10px);
+  transition: all var(--transition-base);
+}
+
+.navbar-brand {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text-primary) !important;
+  transition: all var(--transition-base);
+}
+
+.navbar-brand:hover {
+  color: var(--primary-600) !important;
+}
+
+.nav-link {
+  color: var(--text-secondary) !important;
+  font-weight: 500;
+  padding: 0.5rem 1rem !important;
+  border-radius: var(--radius-md);
+  transition: all var(--transition-base);
+  position: relative;
+}
+
+.nav-link:hover {
+  color: var(--primary-600) !important;
+  background-color: var(--primary-50);
+}
+
+.nav-link.active {
+  color: var(--primary-600) !important;
+  background-color: var(--primary-50);
+  font-weight: 600;
+}
+
+.nav-link.active::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60%;
+  height: 3px;
+  background: var(--primary-500);
+  border-radius: var(--radius-full);
+}
+
+/* Button Styling in Navbar */
+.navbar .btn-outline-primary {
+  border-width: 2px;
+}
+
+.navbar .btn-primary {
+  background: var(--bg-gradient-primary);
+  border: none;
+  box-shadow: var(--shadow-primary);
+}
+
+.navbar .btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px -5px rgba(99, 102, 241, 0.3);
+}
+
+.navbar .btn-dark {
+  background: var(--neutral-800);
+  border-color: var(--neutral-800);
+}
+
+.navbar .btn-dark:hover {
+  background: var(--neutral-900);
+  border-color: var(--neutral-900);
+}

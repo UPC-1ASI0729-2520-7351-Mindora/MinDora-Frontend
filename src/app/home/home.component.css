@@ -1,17 +1,69 @@
 /* Welcome Section */
 .welcome-section {
-  border-bottom: 1px solid #e9ecef;
+  background: linear-gradient(135deg, #e0e9ff 0%, #f0fdfa 100%) !important;
+  border-bottom: 2px solid var(--primary-200);
+  position: relative;
+  overflow: hidden;
+}
+
+.welcome-section::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -10%;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(99, 102, 241, 0.1) 0%, transparent 70%);
+  border-radius: 50%;
+}
+
+.welcome-section::after {
+  content: '';
+  position: absolute;
+  bottom: -30%;
+  left: -5%;
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, rgba(20, 184, 166, 0.1) 0%, transparent 70%);
+  border-radius: 50%;
+}
+
+.welcome-section .container {
+  position: relative;
+  z-index: 1;
+}
+
+.welcome-section h1 {
+  color: var(--text-primary);
+  background: linear-gradient(135deg, var(--primary-600) 0%, var(--secondary-600) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.welcome-section .lead {
+  color: var(--text-secondary);
 }
 
 /* Stress Level Card */
 .stress-level-card {
-  border: none;
-  border-radius: 12px;
+  border: 2px solid var(--primary-100);
+  border-radius: var(--radius-xl);
   overflow: hidden;
+  background: linear-gradient(135deg, #ffffff 0%, var(--primary-50) 100%);
+  box-shadow: var(--shadow-lg);
+  transition: all var(--transition-base);
+}
+
+.stress-level-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-xl);
+  border-color: var(--primary-200);
 }
 
 .stress-level-card .card-body {
-  background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+  background: transparent;
+  position: relative;
 }
 
 /* Stress Gauge */
@@ -95,50 +147,82 @@
 
 /* Quick Actions */
 .quick-action-card {
-  background: white;
-  border: 2px solid #e9ecef;
-  border-radius: 12px;
+  background: linear-gradient(135deg, #ffffff 0%, var(--secondary-50) 100%);
+  border: 2px solid var(--secondary-200);
+  border-radius: var(--radius-xl);
   padding: 24px;
   text-align: center;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all var(--transition-base);
   height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  box-shadow: var(--shadow-md);
+  position: relative;
+  overflow: hidden;
+}
+
+.quick-action-card::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(20, 184, 166, 0.1) 0%, transparent 70%);
+  transition: all var(--transition-slow);
+  transform: scale(0);
+}
+
+.quick-action-card:hover::before {
+  transform: scale(1);
 }
 
 .quick-action-card:hover {
-  border-color: #0d6efd;
-  box-shadow: 0 4px 12px rgba(13, 110, 253, 0.15);
-  transform: translateY(-4px);
+  border-color: var(--secondary-400);
+  box-shadow: var(--shadow-secondary);
+  transform: translateY(-6px);
 }
 
 .action-icon {
   width: 60px;
   height: 60px;
   border-radius: 50%;
-  background: linear-gradient(135deg, #0d6efd 0%, #0a58ca 100%);
+  background: var(--bg-gradient-secondary);
   color: white;
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 1.5rem;
   margin-bottom: 16px;
+  box-shadow: 0 4px 12px rgba(20, 184, 166, 0.3);
+  transition: all var(--transition-base);
+  position: relative;
+  z-index: 1;
+}
+
+.quick-action-card:hover .action-icon {
+  transform: scale(1.1) rotate(5deg);
 }
 
 .action-title {
   font-size: 1rem;
   font-weight: 600;
   margin-bottom: 8px;
-  color: #212529;
+  color: var(--text-primary);
+  position: relative;
+  z-index: 1;
 }
 
 .action-description {
   font-size: 0.875rem;
   margin-bottom: 0;
   line-height: 1.4;
+  color: var(--text-secondary);
+  position: relative;
+  z-index: 1;
 }
 
 /* Navigation Cards */
@@ -147,20 +231,39 @@
 }
 
 .navigation-card {
-  background: white;
-  border: 1px solid #e9ecef;
-  border-left: 4px solid;
-  border-radius: 8px;
+  background: linear-gradient(135deg, #ffffff 0%, var(--primary-50) 100%);
+  border: 2px solid var(--primary-200);
+  border-left: 5px solid var(--primary-500);
+  border-radius: var(--radius-lg);
   padding: 24px;
-  transition: all 0.3s ease;
+  transition: all var(--transition-base);
   height: 100%;
   display: block;
   position: relative;
+  box-shadow: var(--shadow-md);
+  overflow: hidden;
+}
+
+.navigation-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, transparent 0%, rgba(99, 102, 241, 0.05) 100%);
+  opacity: 0;
+  transition: opacity var(--transition-base);
+}
+
+.navigation-card:hover::before {
+  opacity: 1;
 }
 
 .navigation-card:hover {
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  transform: translateY(-4px);
+  box-shadow: var(--shadow-primary);
+  transform: translateY(-6px);
+  border-left-color: var(--primary-600);
 }
 
 .nav-card-icon {

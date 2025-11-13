@@ -1,1 +1,42 @@
 /* Footer component styles */
+
+footer {
+  background: linear-gradient(135deg, var(--neutral-800) 0%, var(--neutral-900) 100%);
+  color: var(--neutral-200);
+  padding: 3rem 0 1.5rem;
+  margin-top: 4rem;
+  border-top: 3px solid var(--primary-500);
+  position: relative;
+  overflow: hidden;
+}
+
+footer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--bg-gradient-primary);
+}
+
+footer h5 {
+  color: white;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+footer a {
+  color: var(--neutral-300);
+  text-decoration: none;
+  transition: all var(--transition-base);
+}
+
+footer a:hover {
+  color: var(--primary-400);
+  padding-left: 0.5rem;
+}
+
+footer .text-muted {
+  color: var(--neutral-400) !important;
+}

@@ -4,23 +4,54 @@
   align-items: center;
   min-height: 80vh;
   padding: 20px;
+  background: linear-gradient(135deg, var(--primary-50) 0%, var(--secondary-50) 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.login-container::before {
+  content: '';
+  position: absolute;
+  top: -20%;
+  right: -10%;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(99, 102, 241, 0.1) 0%, transparent 70%);
+  border-radius: 50%;
+}
+
+.login-container::after {
+  content: '';
+  position: absolute;
+  bottom: -20%;
+  left: -10%;
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, rgba(20, 184, 166, 0.1) 0%, transparent 70%);
+  border-radius: 50%;
 }
 
 .login-card {
   background: white;
-  border-radius: 12px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-xl);
   padding: 40px;
   width: 100%;
   max-width: 400px;
+  border: 2px solid var(--primary-100);
+  position: relative;
+  z-index: 1;
 }
 
 .login-card h2 {
   text-align: center;
   margin-bottom: 30px;
-  color: #333;
+  background: var(--bg-gradient-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
   font-size: 28px;
-  font-weight: 600;
+  font-weight: 700;
 }
 
 .login-form {
@@ -51,8 +82,8 @@
 
 .form-group input:focus {
   outline: none;
-  border-color: #007bff;
-  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
+  border-color: var(--primary-500);
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
 }
 
 .form-group input.error {
@@ -75,22 +106,22 @@
 }
 
 .login-btn {
-  background: linear-gradient(135deg, #007bff, #0056b3);
+  background: var(--bg-gradient-primary);
   color: white;
   border: none;
   padding: 14px 24px;
-  border-radius: 8px;
+  border-radius: var(--radius-md);
   font-size: 16px;
   font-weight: 600;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all var(--transition-base);
   margin-top: 10px;
+  box-shadow: var(--shadow-primary);
 }
 
 .login-btn:hover:not(:disabled) {
-  background: linear-gradient(135deg, #0056b3, #004085);
-  transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(0, 123, 255, 0.3);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px rgba(99, 102, 241, 0.4);
 }
 
 .login-btn:disabled {
@@ -113,7 +144,7 @@
 }
 
 .register-link a {
-  color: #007bff;
+  color: var(--primary-600);
   text-decoration: none;
   font-weight: 500;
   cursor: pointer;
