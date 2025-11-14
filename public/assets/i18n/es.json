@@ -1,6 +1,41 @@
 {
+  "register": {
+  "title": "Registrarse",
+  "nameLabel": "Nombre",
+  "namePlaceholder": "Ingresa tu nombre",
+  "emailLabel": "Correo Electrónico",
+  "emailPlaceholder": "Ingresa tu correo",
+  "passwordLabel": "Contraseña",
+  "passwordPlaceholder": "Crea una contraseña",
+  "confirmPasswordLabel": "Confirmar Contraseña",
+  "confirmPasswordPlaceholder": "Repite tu contraseña",
+  "registerButton": "Registrarse",
+  "loading": "Cargando...",
+  "haveAccount": "¿Ya tienes una cuenta?",
+  "loginLink": "Inicia sesión",
+  "errors": {
+    "required": "es requerido",
+    "invalidEmail": "Email no válido",
+    "nameMin": "El nombre debe tener al menos 2 caracteres",
+    "passwordMin": "La contraseña debe tener al menos 6 caracteres",
+    "passwordMismatch": "Las contraseñas no coinciden",
+    "emailTaken": "El email ya está registrado"
+  }
+},
+  
+  "login": {
+  "title": "Iniciar Sesión",
+  "emailLabel": "Correo Electrónico",
+  "emailPlaceholder": "Ingresa tu correo",
+  "passwordLabel": "Contraseña",
+  "passwordPlaceholder": "Ingresa tu contraseña",
+  "loginButton": "Ingresar",
+  "loading": "Cargando...",
+  "noAccount": "¿No tienes una cuenta?",
+  "registerLink": "Regístrate"
+},
   "header": {
-    "brand": "NeuroZen",
+    "brand": "MinDora",
     "features": "Características",
     "how": "Cómo funciona",
     "pricing": "Planes",
@@ -11,7 +46,7 @@
   "hero": {
     "badge": "Nuevo • Estrés & Bienestar",
     "title": "Detecta tu estrés. Vive más ligero.",
-    "description": "NeuroZen ayuda a adultos de 20–50 años a <strong>identificar y gestionar el estrés laboral</strong> con autoevaluaciones rápidas, <strong>análisis de señales corporales visibles</strong> (postura, tensión facial, respiración) y recomendaciones personalizadas. También puedes <strong>contactar a psicólogos</strong> desde la app.",
+    "description": "MinDora ayuda a adultos de 20–50 años a <strong>identificar y gestionar el estrés laboral</strong> con autoevaluaciones rápidas, <strong>análisis de señales corporales visibles</strong> (postura, tensión facial, respiración) y recomendaciones personalizadas. También puedes <strong>contactar a psicólogos</strong> desde la app.",
     "emailPlaceholder": "Ingresa tu correo",
     "emailLabel": "Correo electrónico",
     "joinWaitlist": "Unirme a la lista",
@@ -36,123 +71,123 @@
     "sleepGoal": "Objetivo de sueño: 7 h 30 min"
   },
   "features": {
-    "title": "Características",
-    "earlyDetection": {
-      "title": "Detección temprana",
-      "description": "Observa señales corporales visibles (postura, tensión facial, respiración) y detecta el estrés a tiempo."
-    },
-    "comprehensiveAssessment": {
-      "title": "Autoevaluación integral",
-      "description": "Combina test emocionales con registro de síntomas físicos para una visión completa."
-    },
-    "personalizedRecommendations": {
-      "title": "Recomendaciones personalizadas",
-      "description": "Ejercicios de respiración, pausas activas y consejos adaptados a tu contexto laboral."
-    },
-    "dashboardTracking": {
-      "title": "Dashboard y seguimiento",
-      "description": "Visualiza tendencias, identifica picos y mide tu progreso con el tiempo."
-    },
-    "connectPsychologists": {
-      "title": "Conecta con psicólogos",
-      "description": "Accede a especialistas en estrés laboral y agenda citas desde la plataforma."
-    },
-    "privacyFirst": {
-      "title": "Privacidad primero",
-      "description": "Tus datos se cifran y tú decides qué compartir. Pensado para implementaciones personales y corporativas."
-    }
+    "title1": "Detección temprana",
+    "desc1": "Observa señales corporales visibles (postura, tensión facial, respiración) y detecta el estrés a tiempo.",
+
+    "title2": "Autoevaluación integral",
+    "desc2": "Combina test emocionales con registro de síntomas físicos para una visión completa.",
+
+    "title3": "Recomendaciones personalizadas",
+    "desc3": "Ejercicios de respiración, pausas activas y consejos adaptados a tu contexto laboral.",
+
+    "title4": "Dashboard y seguimiento",
+    "desc4": "Visualiza tendencias, identifica picos y mide tu progreso con el tiempo.",
+
+    "title5": "Conecta con psicólogos",
+    "desc5": "Accede a especialistas en estrés laboral y agenda citas desde la plataforma.",
+
+    "title6": "Privacidad primero",
+    "desc6": "Tus datos se cifran y tú decides qué compartir. Pensado para implementaciones personales y corporativas."
   },
-  "howItWorks": {
-    "title": "Cómo funciona",
-    "subtitle": "Cuatro pasos, de la detección a la mejora.",
-    "step1": {
-      "title": "Evalúate",
-      "description": "Completa el test rápido cuando lo necesites."
-    },
-    "step2": {
-      "title": "Analiza señales",
-      "description": "Usa la cámara para detectar postura, tensión y respiración."
-    },
-    "step3": {
-      "title": "Recibe tu plan",
-      "description": "Ejercicios, pausas y consejos adaptados a tu jornada."
-    },
-    "step4": {
-      "title": "Mide tu progreso",
-      "description": "Consulta el tablero y genera informes cuando quieras."
-    }
+  "how": {
+  "title": "¿Cómo funciona MinDora?",
+  "subtitle": "Te acompañamos paso a paso para reducir el estrés y mejorar tu bienestar.",
+
+  "step1": {
+    "title": "Evalúa tu nivel de estrés",
+    "desc": "Responde un test diseñado por especialistas y descubre cómo te encuentras realmente."
   },
+  "step2": {
+    "title": "Recibe un plan personalizado",
+    "desc": "MinDora analiza tus resultados y te recomienda ejercicios, hábitos y rutinas."
+  },
+  "step3": {
+    "title": "Mejora día a día",
+    "desc": "Registra tu progreso y construye una vida más tranquila y equilibrada."
+  }
+},
   "pricing": {
-    "title": "Planes",
+    "title": "Planes MinDora",
     "subtitle": "Empieza gratis y escala cuando lo necesites.",
-    "individual": {
-      "title": "Individual",
-      "price": "Gratis",
-      "feature1": "Check‑ins diarios",
-      "feature2": "Biblioteca de respiración",
-      "feature3": "Insights básicos",
+
+    "free": {
+      "badge": "Gratis",
+      "title": "Plan Gratis",
+      "price": "S/0",
+      "feature1": "Test básico de estrés",
+      "feature2": "5 ejercicios guiados",
+      "feature3": "Reportes limitados",
       "cta": "Empezar"
     },
-    "pro": {
-      "badge": "Más popular",
-      "title": "Pro",
-      "price": "$6/mes",
-      "feature1": "Planes personalizados",
-      "feature2": "Sincronización opcional con wearables",
-      "feature3": "Insights de sueño/actividad",
-      "feature4": "Recordatorios inteligentes",
+
+    "popular": {
+      "popularBadge": "Más popular",
+      "title": "Plan Popular",
+      "price": "$8.42 / mes",
+      "feature1": "Hasta 5 perfiles",
+      "feature2": "Charla mensual con psicólogo",
+      "feature3": "20 ejercicios y meditaciones",
+      "feature4": "Reportes descargables",
+      "feature5": "Soporte por chat",
       "cta": "Probar 7 días"
     },
-    "enterprise": {
-      "title": "Empresas",
-      "price": "A medida",
-      "feature1": "Programa de bienestar laboral",
-      "feature2": "Reportes anónimos para RR. HH.",
-      "feature3": "Capacitaciones y activaciones",
+
+    "premium": {
+      "badge": "Profesional",
+      "title": "Plan Premium",
+      "price": "$22.93 / mes",
+      "feature1": "Perfiles ilimitados",
+      "feature2": "Tests personalizados",
+      "feature3": "Programas corporativos",
+      "feature4": "Métricas avanzadas",
+      "feature5": "Soporte prioritario",
       "cta": "Hablar con ventas"
     }
   },
   "faq": {
     "title": "Preguntas frecuentes",
+
     "q1": {
-      "question": "¿Necesito un wearable?",
-      "answer": "No. Los wearables son opcionales: los check‑ins manuales funcionan muy bien y te mantienen en control."
+      "title": "¿Necesito un wearable?",
+      "desc": "No. Los wearables son opcionales: los check-ins manuales funcionan muy bien y te mantienen en control."
     },
+
     "q2": {
-      "question": "¿Cómo generan las recomendaciones?",
-      "answer": "Combinamos tus check‑ins con patrones de sueño/actividad y señales físicas observables para sugerir el mejor momento y tipo de intervención."
+      "title": "¿Cómo generan las recomendaciones?",
+      "desc": "Combinamos tus check-ins con patrones de sueño/actividad y señales físicas observables para sugerir el mejor momento y tipo de intervención."
     },
+
     "q3": {
-      "question": "¿Mis datos son privados?",
-      "answer": "Sí. Ciframos tus datos en tránsito y en reposo. Puedes exportarlos o eliminarlos cuando quieras. Para empresas, entregamos reportes agregados y anónimos."
+      "title": "¿Mis datos son privados?",
+      "desc": "Sí. Ciframos tus datos en tránsito y en reposo. Puedes exportarlos o eliminarlos cuando quieras. Para empresas, entregamos reportes agregados y anónimos."
     },
+
     "q4": {
-      "question": "¿Puedo contactar a un especialista?",
-      "answer": "Sí. Puedes buscar psicólogos especializados en estrés laboral y agendar citas desde la plataforma."
+      "title": "¿Puedo contactar a un especialista?",
+      "desc": "Sí. Puedes buscar psicólogos especializados en estrés laboral y agendar citas desde la plataforma."
     }
   },
   "cta": {
     "title": "¿Listo para recuperar el equilibrio?",
-    "subtitle": "Construye hábitos de bienestar con pasos pequeños que sí se mantienen.",
-    "createPlan": "Crear mi plan",
-    "exploreExercises": "Explorar ejercicios"
+    "description": "Construye hábitos de bienestar con pasos pequeños que sí se mantienen.",
+    "button1": "Crear mi plan",
+    "button2": "Explorar ejercicios"
   },
   "footer": {
-    "brand": "NeuroZen",
-    "description": "Identifica y gestiona tu estrés laboral.",
-    "product": "Producto",
-    "features": "Características",
-    "how": "Cómo funciona",
-    "pricing": "Planes",
-    "company": "Empresa",
-    "aboutUs": "Sobre nosotros",
-    "jobs": "Empleos",
-    "contact": "Contacto",
-    "legal": "Legal",
-    "privacy": "Privacidad",
-    "terms": "Términos",
-    "support": "Soporte",
-    "copyright": "© {{year}} NeuroZen"
+    "description": "Tu compañero de bienestar mental. Apoyo profesional para una vida más sana y feliz.",
+    "quickLinks": {
+      "title": "Enlaces rápidos",
+      "about": "Sobre nosotros",
+      "services": "Servicios",
+      "privacy": "Política de privacidad",
+      "terms": "Términos de servicio"
+    },
+    "contact": {
+      "title": "Contacto",
+      "email": "support@mindora.com",
+      "phone": "+1 (555) 123-4567"
+    },
+    "copyright": "© 2025 MinDora. Todos los derechos reservados."
   },
   "coaching": {
     "title": "Coaching & Comunidad",
@@ -199,6 +234,27 @@
           "success": "Historias de éxito"
         }
       },
+"triggers": {
+  "title": "Desencadenantes de estrés",
+  "placeholder": "Escribe un desencadenante (ej., 'Reuniones seguidas')...",
+  "add": "Añadir",
+  "delete": "Eliminar",
+  "empty": "Aún no tienes desencadenantes. Añade el primero para aprender tus patrones.",
+  "tags": {
+    "meetings": "Reuniones",
+    "emails": "Correos",
+    "deadlines": "Plazos",
+    "conflicts": "Conflictos",
+    "overtime": "Horas extra"
+  }
+},
+      "challenges": {
+  "title": "Desafíos antiestrés",
+  "join": "Unirme",
+  "markOne": "+1 día",
+  "reset": "Reiniciar"
+},
+
       "chat": {
         "title": "Chat en vivo",
         "moderatedBy": "Moderado por profesionales",
@@ -209,12 +265,74 @@
         "title": "Eventos y talleres",
         "upcoming": "Próximos eventos",
         "register": "Registrarse"
-      }
+      },
+      "groups": {
+  "title": "Grupos de apoyo",
+  "join": "Unirme",
+  "leave": "Salir",
+  "members": "miembros",
+  "joined": "Ya eres parte de este grupo"
+},
+      "resources": {
+  "title": "Biblioteca de recursos",
+  "filters": {
+    "all": "Todos",
+    "articles": "Artículos",
+    "videos": "Videos",
+    "guides": "Guías"
+  },
+  "type": {
+    "guide": "GUÍA",
+    "article": "ARTÍCULO",
+    "video": "VIDEO"
+  },
+  "open": "Abrir",
+  "save": "Guardar",
+"saved": "Guardado"
+},
+"breathing": {
+  "boxTitle": "Respiración en caja 4-4-4-4",
+  "open": "Abrir respiración guiada",
+  "start": "Iniciar",
+  "resume": "Continuar",
+  "pause": "Pausar",
+  "reset": "Reiniciar",
+  "close": "Cerrar",
+  "remaining": "Tiempo restante",
+  "completed": "Ejercicio completado",
+  "logged": "Actividad registrada",
+  "inProgress": "Tienes una sesión en progreso.",
+  "phase": {
+    "inhale": "Inhala",
+    "hold": "Mantén",
+    "exhale": "Exhala"
+  }
+}
+
+
+
     },
     "appointments": {
       "title": "Mis citas",
       "upcoming": "Próximas",
       "past": "Pasadas",
+      
+      "downloadReport": "Descargar reporte (CSV)",
+"shareReport": "Compartir reporte",
+"share": {
+  "title": "Compartir reporte con especialista",
+  "emailLabel": "Correo del especialista",
+  "period": "Periodo",
+  "last30": "Últimos 30 días",
+  "all": "Todos los datos",
+  "send": "Enviar",
+  "invalidEmail": "Ingresa un correo válido",
+  "success": "Enlace generado. Cópialo y envíalo al especialista:",
+  "copy": "Copiar enlace",
+  "copied": "¡Copiado!"
+},
+
+
       "noAppointments": "No tienes citas programadas",
       "bookFirst": "Agenda tu primera sesión con un especialista",
       "date": "Fecha",
@@ -223,7 +341,13 @@
       "cancel": "Cancelar",
       "reschedule": "Reprogramar",
       "joinVideo": "Unirse a videollamada",
-      "addToCalendar": "Añadir al calendario"
+      "addToCalendar": "Añadir al calendario",
+      "confirmCancelTitle": "Cancelar cita",
+  "confirmCancelMsg": "¿Seguro que deseas cancelar esta cita?",
+  "yesCancel": "Sí, cancelar",
+  "noKeep": "No, mantener",
+  "rescheduleTitle": "Reprogramar cita",
+  "save": "Guardar cambios"
     },
     "profile": {
       "about": "Acerca de",

@@ -87,6 +87,8 @@ export class HomeComponent {
     },
   ]);
 
+  
+
   // Navigation cards
   navigationCards = signal<NavigationCard[]>([
     {
@@ -259,3 +261,5 @@ export class HomeComponent {
     return 'home.greeting.evening';
   }
 }
+
+

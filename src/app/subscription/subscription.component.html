@@ -1,0 +1,120 @@
+<section class="subscription-wrapper">
+
+  <!-- ========================================= -->
+  <!--   RECIBO DE PAGO (DESPUÉS DE PAGAR)       -->
+  <!-- ========================================= -->
+  <div *ngIf="showReceipt" class="receipt-container">
+
+    <h2 class="title">🎉 ¡Pago realizado con éxito!</h2>
+
+    <div class="receipt-box">
+      <h3>Comprobante de pago</h3>
+
+      <p><b>Plan:</b> {{ receiptData.planName }}</p>
+      <p><b>Monto:</b> {{ receiptData.amount }}</p>
+      <p><b>Método de pago:</b> {{ receiptData.method }}</p>
+      <p><b>Usuario:</b> {{ receiptData.user }}</p>
+      <p><b>Email:</b> {{ receiptData.email }}</p>
+      <p><b>Fecha:</b> {{ receiptData.date }}</p>
+
+      <div class="divider"></div>
+
+      <p class="thank">Gracias por confiar en Mindora, solo de click a MinDora para volver al inicio 💚</p>
+    </div>
+
+
+  </div>
+
+  <!-- ========================================= -->
+  <!--   CHECKOUT COMPLETO (SI AÚN NO PAGA)      -->
+  <!-- ========================================= -->
+  <div *ngIf="!showReceipt" class="checkout-container">
+
+    <!-- LEFT: Plan Summary -->
+    <div class="summary">
+      <h3 class="title">Tu suscripción</h3>
+
+      <div class="plan-box">
+        <h4>{{ plans[plan].name }}</h4>
+
+        <p class="price">
+          {{ plans[plan].display }}
+        </p>
+
+        <ul class="features">
+          <li *ngFor="let f of plans[plan].features">
+            ✔ {{ f }}
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- RIGHT: Payment Form -->
+    <div class="payment-section">
+
+      <h3 class="title">Datos de pago</h3>
+
+      <form [formGroup]="paymentForm" (ngSubmit)="submitPayment()">
+
+        <label>Nombre completo</label>
+        <input type="text" formControlName="fullName">
+
+        <label>Correo electrónico</label>
+        <input type="email" formControlName="email">
+
+        <h4>Método de pago</h4>
+
+        <div class="payment-methods">
+          <label>
+            <input type="radio" formControlName="method" value="card" />
+            💳 Tarjeta
+          </label>
+
+          <label>
+            <input type="radio" formControlName="method" value="yape" />
+            🟣 Yape
+          </label>
+
+          <label>
+            <input type="radio" formControlName="method" value="paypal" />
+            🟡 PayPal
+          </label>
+        </div>
+
+        <!-- Card Data -->
+        <div *ngIf="paymentForm.get('method')?.value === 'card'">
+          <label>Número de tarjeta</label>
+          <input type="text" formControlName="cardNumber">
+
+          <div class="row">
+            <div>
+              <label>Expira</label>
+              <input type="text" formControlName="expiry" placeholder="MM/AA">
+            </div>
+
+            <div>
+              <label>CVV</label>
+              <input type="password" formControlName="cvv">
+            </div>
+          </div>
+        </div>
+
+        <!-- Yape -->
+        <div *ngIf="paymentForm.get('method')?.value === 'yape'" class="yape-box">
+          <p>Escanea este QR para pagar</p>
+          <img src="assets/yape qr.jpeg" class="qr">
+        </div>
+
+        <!-- PayPal -->
+        <div *ngIf="paymentForm.get('method')?.value === 'paypal'" class="paypal-box">
+          <p>Serás redirigido a PayPal para completar el pago.</p>
+        </div>
+
+        <button class="btn-pay" type="submit">Confirmar pago</button>
+
+        <button class="btn-secondary" type="button" (click)="goBack()">Cancelar</button>
+      </form>
+    </div>
+  </div>
+
+</section>

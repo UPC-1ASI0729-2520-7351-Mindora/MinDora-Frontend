@@ -48,7 +48,7 @@
       </ul>
     </div>
   </section>
-
+  
   <!-- Psychologists Tab -->
   @if (activeTab() === 'psychologists') {
   <section class="py-5">
@@ -61,10 +61,12 @@
               <i class="fa-solid fa-search text-muted"></i>
             </span>
             <input
-              type="text"
-              class="form-control border-start-0"
-              [placeholder]="'coaching.psychologists.searchPlaceholder' | translate"
-            />
+  type="text"
+  class="form-control border-start-0"
+  [placeholder]="'coaching.psychologists.searchPlaceholder' | translate"
+  [ngModel]="searchQuery()"
+  (ngModelChange)="searchQuery.set($event)"
+/>
           </div>
         </div>
         <div class="col-lg-4">
@@ -149,19 +151,21 @@
               </div>
 
               <div class="d-grid gap-2">
-                <button class="btn btn-primary" (click)="openAppointmentModal(psychologist)">
+                <button class="btn btn-primary" (click)="openBooking(psychologist)">
                   <i class="fa-solid fa-calendar-plus me-2"></i>
                   {{ 'coaching.psychologists.bookAppointment' | translate }}
                 </button>
-                <button class="btn btn-outline-secondary">
-                  {{ 'coaching.psychologists.viewProfile' | translate }}
-                </button>
+                <button class="btn btn-outline-secondary" (click)="openProfile(psychologist)">
+  {{ 'coaching.psychologists.viewProfile' | translate }}
+</button>
+
               </div>
             </div>
           </div>
         </div>
         }
       </div>
+
     </div>
   </section>
   }
@@ -171,6 +175,56 @@
   <section class="py-5">
     <div class="container">
       <div class="row g-4">
+
+<!-- Support Groups (US16) -->
+<div class="col-12">
+  <div class="card shadow-sm mb-4">
+    <div class="card-header bg-white d-flex justify-content-between align-items-center">
+      <h5 class="mb-0">
+        <i class="fa-solid fa-people-group me-2"></i>
+        {{ 'coaching.community.groups.title' | translate }}
+      </h5>
+    </div>
+    <div class="card-body">
+      <div class="row g-3">
+        @for (g of groups(); track g.id) {
+          <div class="col-md-6 col-lg-4">
+            <div class="border rounded p-3 h-100 d-flex flex-column justify-content-between">
+              <div>
+                <strong class="d-block mb-1">{{ g.name }}</strong>
+                <small class="text-muted">
+                  {{ g.members }} {{ 'coaching.community.groups.members' | translate }}
+                </small>
+                @if (g.joined) {
+                  <div class="mt-1">
+                    <span class="badge bg-light text-dark">
+                      {{ 'coaching.community.groups.joined' | translate }}
+                    </span>
+                  </div>
+                }
+              </div>
+              <div class="d-grid mt-3">
+                @if (!g.joined) {
+                  <button class="btn btn-outline-primary btn-sm"
+                          (click)="joinGroup(g.id)">
+                    {{ 'coaching.community.groups.join' | translate }}
+                  </button>
+                } @else {
+                  <button class="btn btn-outline-secondary btn-sm"
+                          (click)="leaveGroup(g.id)">
+                    {{ 'coaching.community.groups.leave' | translate }}
+                  </button>
+                }
+              </div>
+            </div>
+          </div>
+        }
+      </div>
+    </div>
+  </div>
+</div>
+
+
         <!-- Forum Section -->
         <div class="col-lg-8">
           <div class="card shadow-sm mb-4">
@@ -262,10 +316,198 @@
             </div>
           </div>
         </div>
+        <!------------->
+        <!-- Breathing Exercise Card (US08) -->
+<div class="card shadow-sm mt-4">
+  <div class="card-body d-flex justify-content-between align-items-center flex-wrap gap-3">
+    <div>
+      <h5 class="mb-1">
+        <i class="fa-solid fa-wind me-2" aria-hidden="true"></i>
+        {{ 'breathing.boxTitle' | translate }}
+      </h5>
+      @if (hasBreathSaved()) {
+        <small class="text-muted">{{ 'breathing.inProgress' | translate }}</small>
+      }
+    </div>
+    <div class="d-flex gap-2">
+      <button class="btn btn-primary" (click)="openBreathing()" aria-label="{{ 'breathing.open' | translate }}">
+        {{ 'breathing.open' | translate }}
+      </button>
+    </div>
+  </div>
+</div>
+<!------------->
+
+<div class="card shadow-sm mt-4">
+  <div class="card-header bg-white">
+    <h5 class="mb-0">
+      <i class="fa-solid fa-flag-checkered me-2" aria-hidden="true"></i>
+      {{ 'coaching.community.challenges.title' | translate }}
+    </h5>
+  </div>
+  <div class="card-body">
+    @for (ch of challenges(); track ch.id) {
+      <div class="mb-3 pb-3 border-bottom">
+        <div class="d-flex justify-content-between align-items-center gap-3 flex-wrap">
+          <div class="flex-grow-1">
+            <strong class="d-block mb-1">{{ ch.title }}</strong>
+            <p class="small text-muted mb-2">{{ ch.description }}</p>
+            <div class="progress" style="height:6px" role="progressbar"
+                 [attr.aria-valuenow]="(ch.progress/ch.target)*100" aria-valuemin="0" aria-valuemax="100">
+              <div class="progress-bar" [style.width.%]="(ch.progress/ch.target)*100"></div>
+            </div>
+            <small class="text-muted">{{ ch.progress }}/{{ ch.target }}</small>
+          </div>
+
+          <div class="ms-auto" style="min-width: 180px;">
+            @if (!ch.joined) {
+              <button class="btn btn-outline-primary btn-sm w-100" (click)="joinChallenge(ch.id)">
+                {{ 'coaching.community.challenges.join' | translate }}
+              </button>
+            } @else {
+              <div class="d-grid gap-2">
+                <button class="btn btn-primary btn-sm" (click)="incrementChallenge(ch.id)">
+                  {{ 'coaching.community.challenges.markOne' | translate }}
+                </button>
+                <button class="btn btn-outline-secondary btn-sm" (click)="resetChallenge(ch.id)">
+                  {{ 'coaching.community.challenges.reset' | translate }}
+                </button>
+              </div>
+            }
+          </div>
+        </div>
       </div>
+    }
+  </div>
+</div>
+
+<!-- Stress Triggers (US12) -->
+<div class="card shadow-sm mt-4">
+  <div class="card-header bg-white d-flex justify-content-between align-items-center">
+    <h5 class="mb-0">
+      <i class="fa-solid fa-triangle-exclamation me-2" aria-hidden="true"></i>
+      {{ 'coaching.community.triggers.title' | translate }}
+    </h5>
+  </div>
+  <div class="card-body">
+    <!-- Input + Add -->
+    <div class="input-group mb-3">
+      <input
+        type="text"
+        class="form-control"
+        [placeholder]="'coaching.community.triggers.placeholder' | translate"
+        [ngModel]="triggerText()"
+        (ngModelChange)="triggerText.set($event)"
+      />
+      <button class="btn btn-primary" (click)="addTrigger()">
+        <i class="fa-solid fa-plus me-1"></i>
+        {{ 'coaching.community.triggers.add' | translate }}
+      </button>
+    </div>
+
+    <!-- Quick tags -->
+    <div class="mb-3">
+      <div class="btn-group flex-wrap" role="group" aria-label="Trigger tags">
+        @for (tag of triggerTagOptions; track tag) {
+          <button type="button"
+                  class="btn btn-sm btn-outline-secondary me-2 mb-2"
+                  [class.active]="isTagSelected(tag)"
+                  (click)="toggleTriggerTag(tag)">
+            {{ ('coaching.community.triggers.tags.' + tag) | translate }}
+          </button>
+        }
+      </div>
+    </div>
+
+    <!-- List -->
+    @if (triggers().length > 0) {
+      @for (t of triggers(); track t.id) {
+        <div class="d-flex justify-content-between align-items-start pb-3 mb-3 border-bottom">
+          <div class="me-3">
+            <strong class="d-block">{{ t.text }}</strong>
+            <div class="mt-1">
+              @for (tg of t.tags; track tg) {
+                <span class="badge bg-light text-dark me-1">{{ ('coaching.community.triggers.tags.' + tg) | translate }}</span>
+              }
+            </div>
+            <small class="text-muted d-block mt-1">{{ fmtDate(t.ts) }}</small>
+          </div>
+          <button class="btn btn-outline-danger btn-sm" (click)="removeTrigger(t.id)">
+            <i class="fa-solid fa-trash-can me-1"></i>
+            {{ 'coaching.community.triggers.delete' | translate }}
+          </button>
+        </div>
+      }
+    } @else {
+      <p class="text-muted mb-0">{{ 'coaching.community.triggers.empty' | translate }}</p>
+    }
+  </div>
+</div>
+<!-- /Stress Triggers -->
+ 
+      </div>
+
+
+      <!-- Resources Card -->
+<div class="card shadow-sm mt-4">
+  <div class="card-header bg-white d-flex justify-content-between align-items-center">
+    <h5 class="mb-0">
+      <i class="fa-solid fa-book me-2" aria-hidden="true"></i>
+      {{ 'resources.title' | translate }}
+    </h5>
+    <div class="btn-group btn-group-sm" role="group">
+      <button class="btn btn-outline-secondary" [class.active]="selectedResourceFilter()==='all'"
+              (click)="setResourceFilter('all')">{{ 'resources.filters.all' | translate }}</button>
+      <button class="btn btn-outline-secondary" [class.active]="selectedResourceFilter()==='article'"
+              (click)="setResourceFilter('article')">{{ 'resources.filters.articles' | translate }}</button>
+      <button class="btn btn-outline-secondary" [class.active]="selectedResourceFilter()==='video'"
+              (click)="setResourceFilter('video')">{{ 'resources.filters.videos' | translate }}</button>
+      <button class="btn btn-outline-secondary" [class.active]="selectedResourceFilter()==='guide'"
+              (click)="setResourceFilter('guide')">{{ 'resources.filters.guides' | translate }}</button>
+              <button class="btn btn-outline-secondary"
+        [class.active]="selectedResourceFilter()==='saved'"
+        (click)="setResourceFilter('saved')">
+  {{ 'resources.filters.saved' | translate }}
+</button>
+
+    </div>
+  </div>
+  <div class="card-body">
+    @for (res of filteredResources; track res.id) {
+      <div class="d-flex justify-content-between align-items-center pb-3 mb-3 border-bottom">
+        <div>
+          <span class="badge bg-light text-dark me-2 text-uppercase">{{ ('resources.type.' + res.category) | translate }}</span>
+          <strong class="d-block">{{ res.title }}</strong>
+        </div>
+        <div class="d-flex align-items-center gap-2">
+  <button class="btn btn-sm"
+          [ngClass]="isResourceSaved(res.id) ? 'btn-warning' : 'btn-outline-secondary'"
+          (click)="toggleResourceSaved(res.id)"
+          [attr.aria-pressed]="isResourceSaved(res.id)">
+    <i class="fa-bookmark"
+       [class.fa-solid]="isResourceSaved(res.id)"
+       [class.fa-regular]="!isResourceSaved(res.id)"></i>
+    <span class="visually-hidden">
+      {{ isResourceSaved(res.id) ? ('resources.saved' | translate) : ('resources.save' | translate) }}
+    </span>
+  </button>
+
+  <a class="btn btn-sm btn-outline-primary" target="_blank" rel="noopener"
+     [href]="res.url">{{ 'resources.open' | translate }}</a>
+</div>
+      </div>
+    }
+    @empty {
+      <p class="text-muted mb-0">No hay recursos en esta categoría.</p>
+    }
+  </div>
+</div>
+<!------------------------------------->
     </div>
   </section>
   }
+
+
 
   <!-- Appointments Tab -->
   @if (activeTab() === 'appointments') {
@@ -273,6 +515,21 @@
     <div class="container">
       <div class="row">
         <div class="col-lg-8 mx-auto">
+          <!-- Descargar reporte CSV -->
+          <div class="d-flex justify-content-end mb-3 gap-2">
+  <button class="btn btn-outline-primary btn-sm" (click)="downloadReport()">
+    <i class="fa-solid fa-download me-2"></i>
+    {{ 'coaching.appointments.downloadReport' | translate }}
+  </button>
+
+  <button class="btn btn-outline-secondary btn-sm" (click)="openShare()">
+    <i class="fa-solid fa-share-nodes me-2"></i>
+    {{ 'coaching.appointments.shareReport' | translate }}
+  </button>
+</div>
+
+
+
           <!-- Upcoming Appointments -->
           <h4 class="mb-4">{{ 'coaching.appointments.upcoming' | translate }}</h4>
           @if (upcomingAppointments.length > 0) { @for (appointment of upcomingAppointments; track
@@ -288,7 +545,7 @@
                   </p>
                   <span class="badge bg-primary">{{ appointment.type }}</span>
                 </div>
-                <div class="col-md-4 text-md-end">
+                <!--<div class="col-md-4 text-md-end">
                   <button class="btn btn-success mb-2 w-100">
                     <i class="fa-solid fa-video me-2"></i>
                     {{ 'coaching.appointments.joinVideo' | translate }}
@@ -296,7 +553,29 @@
                   <button class="btn btn-outline-secondary btn-sm w-100">
                     {{ 'coaching.appointments.reschedule' | translate }}
                   </button>
-                </div>
+                </div>-->
+                <div class="col-md-4 text-md-end">
+  <button class="btn btn-success mb-2 w-100">
+    <i class="fa-solid fa-video me-2"></i>
+    {{ 'coaching.appointments.joinVideo' | translate }}
+  </button>
+
+<a class="btn btn-outline-secondary btn-sm w-100"
+     [href]="icsFor(appointment)"
+     download="mindora-appointment.ics">
+    {{ 'coaching.appointments.addToCalendar' | translate }}
+</a>
+
+  <button class="btn btn-outline-secondary btn-sm w-100 mb-2"
+          (click)="openReschedule(appointment)">
+    {{ 'coaching.appointments.reschedule' | translate }}
+  </button>
+
+  <button class="btn btn-outline-danger btn-sm w-100"
+          (click)="openCancel(appointment)">
+    {{ 'coaching.appointments.cancel' | translate }}
+  </button>
+</div>
               </div>
             </div>
           </div>
@@ -305,11 +584,7 @@
             <i class="fa-solid fa-calendar-xmark fa-3x text-muted mb-3"></i>
             <h5>{{ 'coaching.appointments.noAppointments' | translate }}</h5>
             <p class="text-muted">{{ 'coaching.appointments.bookFirst' | translate }}</p>
-            <button class="btn btn-primary me-2" (click)="openAppointmentModal()">
-              <i class="fa-solid fa-calendar-plus me-2"></i>
-              Book Appointment
-            </button>
-            <button class="btn btn-outline-primary" (click)="setActiveTab('psychologists')">
+            <button class="btn btn-primary" (click)="setActiveTab('psychologists')">
               <i class="fa-solid fa-search me-2"></i>
               {{ 'coaching.psychologists.title' | translate }}
             </button>
@@ -344,12 +619,297 @@
     </div>
   </section>
   }
-</div>
-
-<!-- Modals -->
-@if (showAppointmentModal()) {
-<app-create-appointment-modal
-  (close)="closeAppointmentModal()"
-  (created)="onAppointmentCreated($event)"
-></app-create-appointment-modal>
+  <!-- Overlay simple -->
+@if (showBookingModal()) {
+  <div class="position-fixed top-0 start-0 w-100 h-100 d-flex align-items-center justify-content-center"
+       style="background: rgba(0,0,0,.5); z-index: 2000;">
+    <div class="card shadow" style="max-width: 520px; width: 92%;">
+      <div class="card-header d-flex justify-content-between align-items-center">
+        <h5 class="mb-0">
+          <i class="fa-solid fa-calendar-plus me-2" aria-hidden="true"></i>
+          {{ selectedPsychologist?.name }}
+        </h5>
+        <button class="btn btn-sm btn-outline-secondary" (click)="closeBooking()" aria-label="Cerrar">✕</button>
+      </div>
+      <div class="card-body">
+        @if (bookingError()) {
+          <div class="alert alert-danger py-2">{{ bookingError() }}</div>
+        }
+        <div class="mb-3">
+          <label class="form-label">{{ 'coaching.profile.selectDate' | translate }}</label>
+          <input type="date" class="form-control" [attr.min]="minDate"
+                 [ngModel]="bookingDate()" (ngModelChange)="bookingDate.set($event)" />
+        </div>
+        <div class="mb-3">
+          <label class="form-label">{{ 'coaching.profile.selectTime' | translate }}</label>
+          <input type="time" class="form-control"
+                 [ngModel]="bookingTime()" (ngModelChange)="bookingTime.set($event)" />
+        </div>
+        <div class="d-grid gap-2">
+          <button class="btn btn-primary" (click)="confirmBooking()">
+            {{ 'coaching.profile.confirmBooking' | translate }}
+          </button>
+          <button class="btn btn-outline-secondary" (click)="closeBooking()">
+            Cancelar
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
 }
+<!----------------------->
+
+<!-- Modal simple: Breathing -->
+@if (showBreathModal()) {
+  <div class="position-fixed top-0 start-0 w-100 h-100 d-flex align-items-center justify-content-center"
+       style="background: rgba(0,0,0,.5); z-index: 2000;">
+    <div class="card shadow" style="max-width: 560px; width: 92%;">
+      <div class="card-header d-flex justify-content-between align-items-center">
+        <h5 class="mb-0">
+          <i class="fa-solid fa-wind me-2" aria-hidden="true"></i>
+          {{ 'breathing.boxTitle' | translate }}
+        </h5>
+        <button class="btn btn-sm btn-outline-secondary" (click)="closeBreathing()" aria-label="{{ 'breathing.close' | translate }}">✕</button>
+      </div>
+
+      <div class="card-body">
+        @if (!breathCompleted()) {
+          <div class="text-center mb-3">
+            <div class="breath-phase h5 mb-1" aria-live="polite">
+              {{
+                ('breathing.phase.' +
+                  (breathPhase() === 'inhale' ? 'inhale' :
+                   breathPhase() === 'exhale' ? 'exhale' : 'hold')) | translate
+              }}
+            </div>
+            <div class="breath-timer" aria-live="polite">{{ breathSecondsLeft() }}s</div>
+            <small class="text-muted d-block mt-2">{{ 'breathing.remaining' | translate }}: {{ breathTotalLeft() }}s</small>
+
+            <div class="progress mt-3" role="progressbar" aria-label="Breathing progress"
+                 [attr.aria-valuenow]="breathProgress()" aria-valuemin="0" aria-valuemax="100">
+              <div class="progress-bar" [style.width.%]="breathProgress()"></div>
+            </div>
+          </div>
+
+          <div class="d-grid gap-2">
+            @if (!breathRunning()) {
+              <button class="btn btn-primary" (click)="startBreathing()">
+                {{ hasBreathSaved() ? ('breathing.resume' | translate) : ('breathing.start' | translate) }}
+              </button>
+            } @else {
+              <button class="btn btn-warning" (click)="pauseBreathing()">
+                {{ 'breathing.pause' | translate }}
+              </button>
+            }
+            <button class="btn btn-outline-secondary" (click)="resetBreathing()">
+              {{ 'breathing.reset' | translate }}
+            </button>
+          </div>
+        } @else {
+          <div class="alert alert-success" role="status">
+            <strong>{{ 'breathing.completed' | translate }}</strong> — {{ 'breathing.logged' | translate }}
+          </div>
+          <div class="d-grid">
+            <button class="btn btn-primary" (click)="closeBreathing()">
+              {{ 'breathing.close' | translate }}
+            </button>
+          </div>
+        }
+      </div>
+    </div>
+  </div>
+}
+
+@if (showRescheduleModal()) {
+  <div class="position-fixed top-0 start-0 w-100 h-100 d-flex align-items-center justify-content-center"
+       style="background: rgba(0,0,0,.5); z-index: 2000;">
+    <div class="card shadow" style="max-width: 520px; width: 92%;">
+      <div class="card-header d-flex justify-content-between align-items-center">
+        <h5 class="mb-0">
+          <i class="fa-solid fa-calendar-day me-2" aria-hidden="true"></i>
+          {{ 'coaching.appointments.reschedule' | translate }}
+        </h5>
+        <button class="btn btn-sm btn-outline-secondary" (click)="closeReschedule()" aria-label="Cerrar">✕</button>
+      </div>
+      <div class="card-body">
+        @if (rescheduleError()) {
+          <div class="alert alert-danger py-2">{{ rescheduleError() }}</div>
+        }
+        <div class="mb-3">
+          <label class="form-label">{{ 'coaching.profile.selectDate' | translate }}</label>
+          <input type="date" class="form-control" [attr.min]="minDate"
+                 [ngModel]="rescheduleDate()" (ngModelChange)="rescheduleDate.set($event)" />
+        </div>
+        <div class="mb-3">
+          <label class="form-label">{{ 'coaching.profile.selectTime' | translate }}</label>
+          <input type="time" class="form-control"
+                 [ngModel]="rescheduleTime()" (ngModelChange)="rescheduleTime.set($event)" />
+        </div>
+        <div class="d-grid gap-2">
+          <button class="btn btn-primary" (click)="confirmReschedule()">
+            {{ 'coaching.appointments.reschedule' | translate }}
+          </button>
+          <button class="btn btn-outline-secondary" (click)="closeReschedule()">Cerrar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+}
+@if (showCancelModal()) {
+  <div class="position-fixed top-0 start-0 w-100 h-100 d-flex align-items-center justify-content-center"
+       style="background: rgba(0,0,0,.5); z-index: 2000;">
+    <div class="card shadow" style="max-width: 520px; width: 92%;">
+      <div class="card-header d-flex justify-content-between align-items-center">
+        <h5 class="mb-0">
+          <i class="fa-solid fa-ban me-2" aria-hidden="true"></i>
+          {{ 'coaching.appointments.cancel' | translate }}
+        </h5>
+        <button class="btn btn-sm btn-outline-secondary" (click)="closeCancel()" aria-label="Cerrar">✕</button>
+      </div>
+      <div class="card-body">
+        <p class="mb-3">
+          ¿Seguro que quieres cancelar la cita con
+          <strong>{{ apptToEdit()?.psychologist }}</strong> ({{ apptToEdit()?.date }} {{ apptToEdit()?.time }})?
+        </p>
+        <div class="d-grid gap-2">
+          <button class="btn btn-danger" (click)="confirmCancel()">
+            {{ 'coaching.appointments.cancel' | translate }}
+          </button>
+          <button class="btn btn-outline-secondary" (click)="closeCancel()">Cerrar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+}
+@if (showShareModal()) {
+  <div class="position-fixed top-0 start-0 w-100 h-100 d-flex align-items-center justify-content-center"
+       style="background: rgba(0,0,0,.5); z-index: 2000;">
+    <div class="card shadow" style="max-width: 520px; width: 92%;">
+      <div class="card-header d-flex justify-content-between align-items-center">
+        <h5 class="mb-0">
+          <i class="fa-solid fa-share-nodes me-2" aria-hidden="true"></i>
+          {{ 'coaching.appointments.share.title' | translate }}
+        </h5>
+        <button class="btn btn-sm btn-outline-secondary" (click)="closeShare()" aria-label="Cerrar">✕</button>
+      </div>
+
+      <div class="card-body">
+        @if (shareError()) {
+          <div class="alert alert-danger py-2">{{ shareError() }}</div>
+        }
+
+        @if (!shareLink()) {
+          <div class="mb-3">
+            <label class="form-label">{{ 'coaching.appointments.share.emailLabel' | translate }}</label>
+            <input type="email" class="form-control"
+                   [ngModel]="shareEmail()" (ngModelChange)="shareEmail.set($event)" />
+          </div>
+          <div class="mb-3">
+            <label class="form-label">{{ 'coaching.appointments.share.period' | translate }}</label>
+            <select class="form-select"
+                    [ngModel]="sharePeriod()" (ngModelChange)="sharePeriod.set($event)">
+              <option value="30d">{{ 'coaching.appointments.share.last30' | translate }}</option>
+              <option value="all">{{ 'coaching.appointments.share.all' | translate }}</option>
+            </select>
+          </div>
+          <div class="d-grid gap-2">
+            <button class="btn btn-primary" (click)="confirmShare()">
+              {{ 'coaching.appointments.share.send' | translate }}
+            </button>
+            <button class="btn btn-outline-secondary" (click)="closeShare()">Cerrar</button>
+          </div>
+        } @else {
+          <div class="alert alert-success">
+            <strong>{{ 'coaching.appointments.share.success' | translate }}</strong>
+            <div class="mt-2 small">
+              <code class="d-block text-truncate">{{ shareLink() }}</code>
+            </div>
+          </div>
+          <div class="d-grid gap-2">
+            <button class="btn btn-primary" (click)="copyShareLink()">
+              {{ shareCopied() ? ('coaching.appointments.share.copied' | translate) : ('coaching.appointments.share.copy' | translate) }}
+            </button>
+            <a class="btn btn-outline-secondary" [href]="shareLink()" download="mindora-progress.csv">
+              <i class="fa-solid fa-download me-2"></i> {{ 'coaching.appointments.downloadReport' | translate }}
+            </a>
+            <button class="btn btn-outline-secondary" (click)="closeShare()">Cerrar</button>
+          </div>
+        }
+      </div>
+    </div>
+  </div>
+}
+@if (showProfileModal()) {
+  <div class="position-fixed top-0 start-0 w-100 h-100 d-flex align-items-center justify-content-center"
+       style="background: rgba(0,0,0,.5); z-index: 2000;">
+    <div class="card shadow" style="max-width: 680px; width: 92%;">
+      <div class="card-header d-flex justify-content-between align-items-center">
+        <h5 class="mb-0">
+          <i class="fa-solid fa-user-doctor me-2" aria-hidden="true"></i>
+          {{ selectedProfile?.name }}
+        </h5>
+        <button class="btn btn-sm btn-outline-secondary" (click)="closeProfile()" aria-label="Cerrar">✕</button>
+      </div>
+
+      <div class="card-body">
+        <div class="d-flex gap-3 mb-3">
+          <img [src]="selectedProfile?.image" [alt]="selectedProfile?.name" class="rounded-circle" width="72" height="72"/>
+          <div class="flex-grow-1">
+            <div class="mb-1">
+              <span class="badge bg-light text-dark me-2">{{ selectedProfile?.specialty }}</span>
+              <span class="text-warning me-2">
+                <i class="fa-solid fa-star"></i> {{ selectedProfile?.rating }}
+              </span>
+              <small class="text-muted">
+                ({{ selectedProfile?.reviews }} {{ 'coaching.psychologists.reviews' | translate }})
+              </small>
+            </div>
+            <div class="small text-muted">
+              {{ 'coaching.psychologists.experience' | translate | lowercase }}:
+              <strong>{{ selectedProfile?.experience }}</strong>
+              · {{ 'coaching.psychologists.languages' | translate }}:
+              <strong>{{ (selectedProfile?.languages || []).join(', ') }}</strong>
+
+            </div>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <h6 class="mb-2">{{ 'coaching.profile.about' | translate }}</h6>
+          <p class="mb-0">{{ selectedProfile?.about }}</p>
+        </div>
+
+        <div class="mb-3">
+          <h6 class="mb-2">{{ 'coaching.psychologists.specialties' | translate }}</h6>
+          @for (s of (selectedProfile?.specialties || []); track s) {
+            <span class="badge bg-light text-dark me-1 mb-1">{{ s }}</span>
+          }
+        </div>
+
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <div>
+            <small class="text-muted d-block">{{ 'coaching.psychologists.nextAvailable' | translate }}</small>
+            <strong>{{ selectedProfile?.nextAvailable }}</strong>
+          </div>
+          <div class="text-end">
+            <div class="h5 mb-0">${{ selectedProfile?.price }}</div>
+            <small class="text-muted">/{{ 'coaching.psychologists.session' | translate }}</small>
+          </div>
+        </div>
+
+        <div class="d-grid gap-2">
+          <button class="btn btn-primary" (click)="openBooking(selectedProfile!)">
+            <i class="fa-solid fa-calendar-plus me-2"></i>
+            {{ 'coaching.psychologists.bookAppointment' | translate }}
+          </button>
+          <button class="btn btn-outline-secondary" (click)="closeProfile()">
+            {{ 'coaching.appointments.cancel' | translate }}
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+}
+
+
+</div>
