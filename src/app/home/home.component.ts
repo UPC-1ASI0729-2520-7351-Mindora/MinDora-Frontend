@@ -7,6 +7,10 @@ import {
   StressAssessmentModalComponent,
   AssessmentResult,
 } from './modals/stress-assessment-modal/stress-assessment-modal.component';
+import {
+  CreateAppointmentModalComponent,
+  AppointmentData,
+} from './modals/create-appointment-modal/create-appointment-modal.component';
 import { AssessmentHistoryService } from '../services/assessment-history.service';
 
 interface StressLevel {
@@ -36,7 +40,13 @@ interface NavigationCard {
 
 @Component({
   selector: 'app-home',
-  imports: [CommonModule, RouterLink, TranslateModule, StressAssessmentModalComponent],
+  imports: [
+    CommonModule,
+    RouterLink,
+    TranslateModule,
+    StressAssessmentModalComponent,
+    CreateAppointmentModalComponent,
+  ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css',
 })
@@ -175,6 +185,15 @@ export class HomeComponent {
   // Modal event handlers
   onStressAssessmentClose() {
     this.showStressAssessmentModal.set(false);
+  }
+
+  onAppointmentModalClose() {
+    this.showBookSessionModal.set(false);
+  }
+
+  onAppointmentCreated(appointmentData: AppointmentData) {
+    console.log('Appointment created:', appointmentData);
+    // TODO: Refresh appointments list or show notification
   }
 
   onStressAssessmentCompleted(result: AssessmentResult) {

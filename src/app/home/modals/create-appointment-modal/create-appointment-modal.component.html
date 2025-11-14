@@ -1,0 +1,236 @@
+<div class="modal-backdrop fade show" (click)="onBackdropClick()"></div>
+
+<div class="modal fade show d-block" tabindex="-1" role="dialog" aria-labelledby="createAppointmentModalTitle">
+  <div class="modal-dialog modal-dialog-centered modal-lg" role="document" (click)="$event.stopPropagation()">
+    <div class="modal-content">
+      <!-- Header -->
+      <div class="modal-header">
+        <h5 class="modal-title" id="createAppointmentModalTitle">
+          <i class="fa-solid fa-calendar-plus me-2"></i>
+          Book an Appointment
+        </h5>
+        <button
+          type="button"
+          class="btn-close"
+          aria-label="Close"
+          (click)="closeModal()"
+          [disabled]="isSubmitting()"
+        ></button>
+      </div>
+
+      <!-- Body -->
+      <div class="modal-body">
+        @if (!submitSuccess()) {
+        <!-- Appointment Form -->
+        <form [formGroup]="appointmentForm" (ngSubmit)="submitAppointment()">
+          <!-- Select Psychologist -->
+          <div class="mb-4">
+            <label for="psychologist" class="form-label">
+              <i class="fa-solid fa-user-doctor me-2"></i>
+              Select Psychologist *
+            </label>
+            <select
+              id="psychologist"
+              class="form-select"
+              formControlName="psychologistId"
+              [class.is-invalid]="hasError('psychologistId')"
+            >
+              <option value="">Choose a psychologist...</option>
+              @for (psychologist of psychologists(); track psychologist.id) {
+              <option [value]="psychologist.id">
+                {{ psychologist.name }} - {{ psychologist.specialty }}
+                <span class="text-muted">(★ {{ psychologist.rating }})</span>
+              </option>
+              }
+            </select>
+            @if (hasError('psychologistId')) {
+            <div class="invalid-feedback">{{ getErrorMessage('psychologistId') }}</div>
+            }
+            @if (getSelectedPsychologist()) {
+            <small class="text-muted">
+              <i class="fa-solid fa-calendar-check me-1"></i>
+              Next available: {{ getSelectedPsychologist()?.nextAvailable }}
+            </small>
+            }
+          </div>
+
+          <!-- Date and Time -->
+          <div class="row mb-4">
+            <div class="col-md-6">
+              <label for="date" class="form-label">
+                <i class="fa-solid fa-calendar me-2"></i>
+                Date *
+              </label>
+              <input
+                type="date"
+                id="date"
+                class="form-control"
+                formControlName="date"
+                [min]="getMinDate()"
+                [class.is-invalid]="hasError('date')"
+              />
+              @if (hasError('date')) {
+              <div class="invalid-feedback">{{ getErrorMessage('date') }}</div>
+              }
+            </div>
+            <div class="col-md-6">
+              <label for="time" class="form-label">
+                <i class="fa-solid fa-clock me-2"></i>
+                Time *
+              </label>
+              <input
+                type="time"
+                id="time"
+                class="form-control"
+                formControlName="time"
+                [class.is-invalid]="hasError('time')"
+              />
+              @if (hasError('time')) {
+              <div class="invalid-feedback">{{ getErrorMessage('time') }}</div>
+              }
+            </div>
+          </div>
+
+          <!-- Appointment Type -->
+          <div class="mb-4">
+            <label class="form-label">
+              <i class="fa-solid fa-video me-2"></i>
+              Appointment Type *
+            </label>
+            <div class="appointment-types">
+              @for (type of appointmentTypes; track type.value) {
+              <div
+                class="type-option"
+                [class.selected]="appointmentForm.get('type')?.value === type.value"
+                (click)="selectType(type.value)"
+                role="button"
+                tabindex="0"
+              >
+                <i class="fa-solid {{ type.icon }} me-2"></i>
+                {{ type.label }}
+              </div>
+              }
+            </div>
+          </div>
+
+          <!-- Reason for Appointment -->
+          <div class="mb-4">
+            <label for="reason" class="form-label">
+              <i class="fa-solid fa-clipboard-question me-2"></i>
+              Reason for Appointment *
+            </label>
+            <select
+              id="reason"
+              class="form-select"
+              formControlName="reason"
+              [class.is-invalid]="hasError('reason')"
+            >
+              <option value="">Select a reason...</option>
+              @for (reason of commonReasons; track reason) {
+              <option [value]="reason">{{ reason }}</option>
+              }
+            </select>
+            @if (hasError('reason')) {
+            <div class="invalid-feedback">{{ getErrorMessage('reason') }}</div>
+            }
+          </div>
+
+          <!-- Additional Notes -->
+          <div class="mb-4">
+            <label for="notes" class="form-label">
+              <i class="fa-solid fa-note-sticky me-2"></i>
+              Additional Notes (Optional)
+            </label>
+            <textarea
+              id="notes"
+              class="form-control"
+              formControlName="notes"
+              rows="3"
+              placeholder="Any additional information you'd like to share..."
+              [class.is-invalid]="hasError('notes')"
+            ></textarea>
+            @if (hasError('notes')) {
+            <div class="invalid-feedback">{{ getErrorMessage('notes') }}</div>
+            }
+            <small class="text-muted">
+              {{ appointmentForm.get('notes')?.value?.length || 0 }}/500 characters
+            </small>
+          </div>
+
+          <!-- Error Message -->
+          @if (submitError()) {
+          <div class="alert alert-danger" role="alert">
+            <i class="fa-solid fa-exclamation-circle me-2"></i>
+            {{ submitError() }}
+          </div>
+          }
+
+          <!-- Form Actions -->
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-outline-secondary"
+              (click)="closeModal()"
+              [disabled]="isSubmitting()"
+            >
+              <i class="fa-solid fa-times me-2"></i>
+              Cancel
+            </button>
+            <button
+              type="submit"
+              class="btn btn-primary"
+              [disabled]="isSubmitting()"
+            >
+              @if (isSubmitting()) {
+              <span class="spinner-border spinner-border-sm me-2"></span>
+              Creating...
+              } @else {
+              <i class="fa-solid fa-check me-2"></i>
+              Book Appointment
+              }
+            </button>
+          </div>
+        </form>
+        } @else {
+        <!-- Success Message -->
+        <div class="success-container text-center py-5">
+          <div class="success-icon mb-4">
+            <i class="fa-solid fa-circle-check"></i>
+          </div>
+          <h4 class="mb-3">Appointment Booked Successfully!</h4>
+          <p class="text-muted mb-4">
+            Your appointment has been scheduled. You will receive a confirmation email shortly.
+          </p>
+          <div class="appointment-summary">
+            <div class="summary-item">
+              <i class="fa-solid fa-user-doctor me-2"></i>
+              <strong>Psychologist:</strong>
+              {{ getSelectedPsychologist()?.name }}
+            </div>
+            <div class="summary-item">
+              <i class="fa-solid fa-calendar me-2"></i>
+              <strong>Date:</strong>
+              {{ appointmentForm.get('date')?.value }}
+            </div>
+            <div class="summary-item">
+              <i class="fa-solid fa-clock me-2"></i>
+              <strong>Time:</strong>
+              {{ appointmentForm.get('time')?.value }}
+            </div>
+            <div class="summary-item">
+              <i class="fa-solid fa-video me-2"></i>
+              <strong>Type:</strong>
+              {{ appointmentForm.get('type')?.value }}
+            </div>
+          </div>
+          <button class="btn btn-primary mt-4" (click)="closeModal()">
+            <i class="fa-solid fa-check me-2"></i>
+            Done
+          </button>
+        </div>
+        }
+      </div>
+    </div>
+  </div>
+</div>
+

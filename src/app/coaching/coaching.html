@@ -149,7 +149,7 @@
               </div>
 
               <div class="d-grid gap-2">
-                <button class="btn btn-primary">
+                <button class="btn btn-primary" (click)="openAppointmentModal(psychologist)">
                   <i class="fa-solid fa-calendar-plus me-2"></i>
                   {{ 'coaching.psychologists.bookAppointment' | translate }}
                 </button>
@@ -305,7 +305,11 @@
             <i class="fa-solid fa-calendar-xmark fa-3x text-muted mb-3"></i>
             <h5>{{ 'coaching.appointments.noAppointments' | translate }}</h5>
             <p class="text-muted">{{ 'coaching.appointments.bookFirst' | translate }}</p>
-            <button class="btn btn-primary" (click)="setActiveTab('psychologists')">
+            <button class="btn btn-primary me-2" (click)="openAppointmentModal()">
+              <i class="fa-solid fa-calendar-plus me-2"></i>
+              Book Appointment
+            </button>
+            <button class="btn btn-outline-primary" (click)="setActiveTab('psychologists')">
               <i class="fa-solid fa-search me-2"></i>
               {{ 'coaching.psychologists.title' | translate }}
             </button>
@@ -341,3 +345,11 @@
   </section>
   }
 </div>
+
+<!-- Modals -->
+@if (showAppointmentModal()) {
+<app-create-appointment-modal
+  (close)="closeAppointmentModal()"
+  (created)="onAppointmentCreated($event)"
+></app-create-appointment-modal>
+}

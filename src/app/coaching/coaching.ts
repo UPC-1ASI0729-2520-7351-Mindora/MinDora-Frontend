@@ -2,6 +2,10 @@ import { Component, signal } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import {
+  CreateAppointmentModalComponent,
+  AppointmentData,
+} from '../home/modals/create-appointment-modal/create-appointment-modal.component';
 
 interface Psychologist {
   id: number;
@@ -39,7 +43,7 @@ interface Appointment {
 
 @Component({
   selector: 'app-coaching',
-  imports: [TranslateModule, CommonModule, FormsModule],
+  imports: [TranslateModule, CommonModule, FormsModule, CreateAppointmentModalComponent],
   templateUrl: './coaching.html',
   styleUrl: './coaching.css',
 })
@@ -145,12 +149,45 @@ export class Coaching {
     },
   ]);
 
+  // Modal state
+  showAppointmentModal = signal(false);
+  selectedPsychologistForBooking = signal<Psychologist | null>(null);
+
   setActiveTab(tab: 'psychologists' | 'community' | 'appointments') {
     this.activeTab.set(tab);
   }
 
   setFilter(filter: string) {
     this.selectedFilter.set(filter);
+  }
+
+  // Open appointment modal
+  openAppointmentModal(psychologist?: Psychologist) {
+    if (psychologist) {
+      this.selectedPsychologistForBooking.set(psychologist);
+    }
+    this.showAppointmentModal.set(true);
+  }
+
+  // Close appointment modal
+  closeAppointmentModal() {
+    this.showAppointmentModal.set(false);
+    this.selectedPsychologistForBooking.set(null);
+  }
+
+  // Handle appointment creation
+  onAppointmentCreated(appointmentData: AppointmentData) {
+    console.log('Appointment created:', appointmentData);
+    // Add to appointments list
+    const newAppointment: Appointment = {
+      id: this.appointments().length + 1,
+      psychologist: appointmentData.psychologistName,
+      date: appointmentData.date,
+      time: appointmentData.time,
+      type: appointmentData.type === 'video' ? 'Videollamada' : appointmentData.type,
+      status: 'upcoming',
+    };
+    this.appointments.update((apps) => [...apps, newAppointment]);
   }
 
   get filteredPsychologists() {

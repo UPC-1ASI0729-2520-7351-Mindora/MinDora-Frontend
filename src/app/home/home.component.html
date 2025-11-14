@@ -271,4 +271,9 @@
   (close)="onStressAssessmentClose()"
   (completed)="onStressAssessmentCompleted($event)"
 ></app-stress-assessment-modal>
+} @if (showBookSessionModal()) {
+<app-create-appointment-modal
+  (close)="onAppointmentModalClose()"
+  (created)="onAppointmentCreated($event)"
+></app-create-appointment-modal>
 }
