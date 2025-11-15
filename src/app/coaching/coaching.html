@@ -464,12 +464,7 @@
               (click)="setResourceFilter('video')">{{ 'resources.filters.videos' | translate }}</button>
       <button class="btn btn-outline-secondary" [class.active]="selectedResourceFilter()==='guide'"
               (click)="setResourceFilter('guide')">{{ 'resources.filters.guides' | translate }}</button>
-              <button class="btn btn-outline-secondary"
-        [class.active]="selectedResourceFilter()==='saved'"
-        (click)="setResourceFilter('saved')">
-  {{ 'resources.filters.saved' | translate }}
-</button>
-
+             
     </div>
   </div>
   <div class="card-body">
