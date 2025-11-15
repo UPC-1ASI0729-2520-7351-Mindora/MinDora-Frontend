@@ -191,6 +191,7 @@
     },
     "copyright": "© 2025 MinDora. Todos los derechos reservados."
   },
+
   "breathing": {
   "boxTitle": "Respiración en caja 4-4-4-4",
   "open": "Abrir respiración guiada",
@@ -360,7 +361,8 @@
       "confirmBooking": "Confirmar reserva",
       "writeReview": "Escribir reseña"
     }
-  },
+  }
+},
   "home": {
     "greeting": {
       "morning": "Buenos días",
@@ -546,6 +548,7 @@
       "categories": "Categorías",
       "actions": "Acciones"
     },
+
     "recommendations": {
       "noData": "Realiza tu primera evaluación para recibir recomendaciones personalizadas",
       "improving": "¡Excelente progreso! Tus niveles de estrés están mejorando. Continúa con tus estrategias actuales.",
@@ -559,8 +562,7 @@
         "sleep": "La calidad del sueño está afectando tu estrés. Establece una rutina de sueño consistente y crea un ambiente relajante para dormir.",
         "physical": "Los síntomas físicos son prominentes. Incorpora ejercicio regular y técnicas de relajación en tu rutina.",
         "emotional": "El bienestar emocional necesita atención. Considera prácticas de mindfulness y conectar con personas de apoyo."
+       }
       }
     }
   }
-}
-}
