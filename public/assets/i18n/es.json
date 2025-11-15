@@ -191,6 +191,25 @@
     },
     "copyright": "© 2025 MinDora. Todos los derechos reservados."
   },
+  "breathing": {
+  "boxTitle": "Respiración en caja 4-4-4-4",
+  "open": "Abrir respiración guiada",
+  "start": "Iniciar",
+  "resume": "Continuar",
+  "pause": "Pausar",
+  "reset": "Reiniciar",
+  "close": "Cerrar",
+  "remaining": "Tiempo restante",
+  "completed": "Ejercicio completado",
+  "logged": "Actividad registrada",
+  "inProgress": "Tienes una sesión en progreso.",
+  "phase": {
+    "inhale": "Inhala",
+    "hold": "Mantén",
+    "exhale": "Exhala"
+  }
+},
+
   "coaching": {
     "title": "Coaching & Comunidad",
     "subtitle": "Conecta con especialistas y una comunidad de apoyo",
@@ -292,28 +311,7 @@
   "save": "Guardar",
 "saved": "Guardado"
 },
-"breathing": {
-  "boxTitle": "Respiración en caja 4-4-4-4",
-  "open": "Abrir respiración guiada",
-  "start": "Iniciar",
-  "resume": "Continuar",
-  "pause": "Pausar",
-  "reset": "Reiniciar",
-  "close": "Cerrar",
-  "remaining": "Tiempo restante",
-  "completed": "Ejercicio completado",
-  "logged": "Actividad registrada",
-  "inProgress": "Tienes una sesión en progreso.",
-  "phase": {
-    "inhale": "Inhala",
-    "hold": "Mantén",
-    "exhale": "Exhala"
-  }
-}
 
-
-
-    },
     "appointments": {
       "title": "Mis citas",
       "upcoming": "Próximas",
@@ -564,4 +562,5 @@
       }
     }
   }
+}
 }
