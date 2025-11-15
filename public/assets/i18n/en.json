@@ -40,7 +40,9 @@
     "pricing": "Plans",
     "faq": "FAQ",
     "download": "Download",
-    "toggleNav": "Toggle navigation"
+    "toggleNav": "Toggle navigation",
+    "login": "Login",
+"register": "Register"
   },
   "hero": {
     "badge": "New • Stress & Wellness",

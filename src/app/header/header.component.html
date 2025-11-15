@@ -68,10 +68,14 @@
           <!-- Opciones de autenticación -->
           @if (!currentUser) {
           <li class="nav-item ms-lg-2">
-            <button class="btn btn-outline-primary btn-pill" (click)="goToLogin()">login</button>
+             <button class="btn btn-outline-primary btn-pill" (click)="goToLogin()">
+             {{ 'header.login' | translate }}
+             </button>
           </li>
           <li class="nav-item ms-lg-2">
-            <button class="btn btn-primary btn-pill" (click)="goToRegister()">register</button>
+            <button class="btn btn-primary btn-pill" (click)="goToRegister()">
+            {{ 'header.register' | translate }}
+           </button>
           </li>
           } @else {
           <li class="nav-item dropdown ms-lg-2">

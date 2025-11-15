@@ -41,7 +41,9 @@
     "pricing": "Planes",
     "faq": "Preguntas frecuentes",
     "download": "Descargar",
-    "toggleNav": "Abrir navegación"
+    "toggleNav": "Abrir navegación",
+    "login": "Iniciar sesión",
+  "register": "Registrarse"
   },
   "hero": {
     "badge": "Nuevo • Estrés & Bienestar",

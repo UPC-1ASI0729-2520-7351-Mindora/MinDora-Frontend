@@ -1,6 +1,6 @@
 {
   "hosting": {
-    "public": "dist/neuro",
+    "public": "dist/neuro/browser",
     "ignore": [
       "firebase.json",
       "**/.*",
