@@ -3,23 +3,35 @@
   <!-- ========================================= -->
   <!--   RECIBO DE PAGO (DESPUÉS DE PAGAR)       -->
   <!-- ========================================= -->
-  <div *ngIf="showReceipt" class="receipt-container">
+  <div *ngIf="showReceipt()" class="receipt-container">
 
-    <h2 class="title">🎉 ¡Pago realizado con éxito!</h2>
+    <h2 class="title">🎉 {{ 'subscription.receipt.success' | translate }}</h2>
 
     <div class="receipt-box">
-      <h3>Comprobante de pago</h3>
+      <h3>{{ 'subscription.receipt.title' | translate }}</h3>
 
-      <p><b>Plan:</b> {{ receiptData.planName }}</p>
-      <p><b>Monto:</b> {{ receiptData.amount }}</p>
-      <p><b>Método de pago:</b> {{ receiptData.method }}</p>
-      <p><b>Usuario:</b> {{ receiptData.user }}</p>
-      <p><b>Email:</b> {{ receiptData.email }}</p>
-      <p><b>Fecha:</b> {{ receiptData.date }}</p>
+      <p><b>{{ 'subscription.receipt.plan' | translate }}:</b> {{ receiptData.planName | translate }}</p>
+      <p><b>{{ 'subscription.receipt.amount' | translate }}:</b> {{ receiptData.amount }} / {{ 'subscription.receipt.perMonth' | translate }}</p>
+      <p><b>{{ 'subscription.receipt.method' | translate }}:</b> {{ ('subscription.methods.' + receiptData.method) | translate }}</p>
+      <p><b>{{ 'subscription.receipt.user' | translate }}:</b> {{ receiptData.user }}</p>
+      <p><b>{{ 'subscription.receipt.email' | translate }}:</b> {{ receiptData.email }}</p>
+      <p><b>{{ 'subscription.receipt.date' | translate }}:</b> {{ receiptData.date }}</p>
 
       <div class="divider"></div>
 
-      <p class="thank">Gracias por confiar en Mindora, solo de click a MinDora para volver al inicio 💚</p>
+      <p class="thank">{{ 'subscription.receipt.thankYou' | translate }} 💚</p>
+      
+      <div class="receipt-actions">
+        <button class="btn-home" type="button" (click)="goToHome()">
+          <i class="fa-solid fa-home me-2"></i>
+          {{ 'subscription.receipt.backHome' | translate }}
+        </button>
+        
+        <button class="btn-cancel-plan" type="button" (click)="openCancelConfirm()">
+          <i class="fa-solid fa-times-circle me-2"></i>
+          {{ 'subscription.receipt.cancelPlan' | translate }}
+        </button>
+      </div>
     </div>
 
 
@@ -28,22 +40,22 @@
   <!-- ========================================= -->
   <!--   CHECKOUT COMPLETO (SI AÚN NO PAGA)      -->
   <!-- ========================================= -->
-  <div *ngIf="!showReceipt" class="checkout-container">
+  <div *ngIf="!showReceipt()" class="checkout-container">
 
     <!-- LEFT: Plan Summary -->
     <div class="summary">
-      <h3 class="title">Tu suscripción</h3>
+      <h3 class="title">{{ 'subscription.checkout.yourSubscription' | translate }}</h3>
 
       <div class="plan-box">
-        <h4>{{ plans[plan].name }}</h4>
+        <h4>{{ plans[plan].name | translate }}</h4>
 
         <p class="price">
-          {{ plans[plan].display }}
+          {{ plans[plan].display }} / {{ 'subscription.receipt.perMonth' | translate }}
         </p>
 
         <ul class="features">
           <li *ngFor="let f of plans[plan].features">
-            ✔ {{ f }}
+            ✔ {{ f | translate }}
           </li>
         </ul>
       </div>
@@ -52,48 +64,48 @@
     <!-- RIGHT: Payment Form -->
     <div class="payment-section">
 
-      <h3 class="title">Datos de pago</h3>
+      <h3 class="title">{{ 'subscription.checkout.paymentData' | translate }}</h3>
 
       <form [formGroup]="paymentForm" (ngSubmit)="submitPayment()">
 
-        <label>Nombre completo</label>
+        <label>{{ 'subscription.checkout.fullName' | translate }}</label>
         <input type="text" formControlName="fullName">
 
-        <label>Correo electrónico</label>
+        <label>{{ 'subscription.checkout.email' | translate }}</label>
         <input type="email" formControlName="email">
 
-        <h4>Método de pago</h4>
+        <h4>{{ 'subscription.checkout.paymentMethod' | translate }}</h4>
 
         <div class="payment-methods">
           <label>
             <input type="radio" formControlName="method" value="card" />
-            💳 Tarjeta
+            💳 {{ 'subscription.methods.card' | translate }}
           </label>
 
           <label>
             <input type="radio" formControlName="method" value="yape" />
-            🟣 Yape
+            🟣 {{ 'subscription.methods.yape' | translate }}
           </label>
 
           <label>
             <input type="radio" formControlName="method" value="paypal" />
-            🟡 PayPal
+            🟡 {{ 'subscription.methods.paypal' | translate }}
           </label>
         </div>
 
         <!-- Card Data -->
         <div *ngIf="paymentForm.get('method')?.value === 'card'">
-          <label>Número de tarjeta</label>
+          <label>{{ 'subscription.checkout.cardNumber' | translate }}</label>
           <input type="text" formControlName="cardNumber">
 
           <div class="row">
             <div>
-              <label>Expira</label>
+              <label>{{ 'subscription.checkout.expiry' | translate }}</label>
               <input type="text" formControlName="expiry" placeholder="MM/AA">
             </div>
 
             <div>
-              <label>CVV</label>
+              <label>{{ 'subscription.checkout.cvv' | translate }}</label>
               <input type="password" formControlName="cvv">
             </div>
           </div>
@@ -101,19 +113,46 @@
 
         <!-- Yape -->
         <div *ngIf="paymentForm.get('method')?.value === 'yape'" class="yape-box">
-          <p>Escanea este QR para pagar</p>
+          <p>{{ 'subscription.checkout.scanQR' | translate }}</p>
           <img src="assets/yape qr.jpeg" class="qr">
         </div>
 
         <!-- PayPal -->
         <div *ngIf="paymentForm.get('method')?.value === 'paypal'" class="paypal-box">
-          <p>Serás redirigido a PayPal para completar el pago.</p>
+          <p>{{ 'subscription.checkout.paypalRedirect' | translate }}</p>
         </div>
 
-        <button class="btn-pay" type="submit">Confirmar pago</button>
+        <button class="btn-pay" type="submit">{{ 'subscription.checkout.confirmPayment' | translate }}</button>
 
-        <button class="btn-secondary" type="button" (click)="goBack()">Cancelar</button>
+        <button class="btn-secondary" type="button" (click)="goBack()">{{ 'subscription.checkout.cancel' | translate }}</button>
       </form>
+    </div>
+  </div>
+
+  <!-- Modal de confirmación para cancelar plan -->
+  <div *ngIf="showCancelConfirm()" class="modal-overlay">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4>{{ 'subscription.cancelModal.title' | translate }}</h4>
+        <button class="btn-close" (click)="closeCancelConfirm()">✕</button>
+      </div>
+      
+      <div class="modal-body">
+        <p>{{ 'subscription.cancelModal.message' | translate }}</p>
+        <p class="warning-text">
+          <i class="fa-solid fa-exclamation-triangle me-2"></i>
+          {{ 'subscription.cancelModal.warning' | translate }}
+        </p>
+      </div>
+      
+      <div class="modal-footer">
+        <button class="btn-confirm-cancel" (click)="confirmCancelPlan()">
+          {{ 'subscription.cancelModal.confirm' | translate }}
+        </button>
+        <button class="btn-keep-plan" (click)="closeCancelConfirm()">
+          {{ 'subscription.cancelModal.keepPlan' | translate }}
+        </button>
+      </div>
     </div>
   </div>
 

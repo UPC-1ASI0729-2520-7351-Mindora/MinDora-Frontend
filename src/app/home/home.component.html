@@ -194,21 +194,29 @@
               </h6>
             </div>
             <div class="card-body">
-              <div class="appointment-item mb-3 pb-3 border-bottom">
-                <div class="d-flex justify-content-between align-items-start mb-2">
-                  <div>
-                    <h6 class="mb-1">Dra. María González</h6>
-                    <small class="text-muted">
-                      <i class="fa-solid fa-calendar me-1"></i>
-                      Oct 15, 2025 - 3:00 PM
-                    </small>
+              @if (upcomingAppointments().length > 0) {
+                @for (appointment of upcomingAppointments(); track appointment.id) {
+                  <div class="appointment-item mb-3 pb-3 border-bottom">
+                    <div class="d-flex justify-content-between align-items-start mb-2">
+                      <div>
+                        <h6 class="mb-1">{{ appointment.psychologist }}</h6>
+                        <small class="text-muted">
+                          <i class="fa-solid fa-calendar me-1"></i>
+                          {{ formatAppointmentDate(appointment.date) }} - {{ appointment.time }}
+                        </small>
+                      </div>
+                    </div>
+                    @if (appointment.type === 'Videollamada') {
+                      <button class="btn btn-sm btn-outline-primary w-100" (click)="joinVideoCall(appointment)">
+                        <i class="fa-solid fa-video me-1"></i>
+                        {{ 'home.sidebar.joinSession' | translate }}
+                      </button>
+                    }
                   </div>
-                </div>
-                <button class="btn btn-sm btn-outline-primary w-100">
-                  <i class="fa-solid fa-video me-1"></i>
-                  {{ 'home.sidebar.joinSession' | translate }}
-                </button>
-              </div>
+                }
+              } @else {
+                <p class="text-muted text-center my-3">{{ 'home.sidebar.noAppointments' | translate }}</p>
+              }
               <a href="/coaching" class="btn btn-sm btn-link w-100">
                 {{ 'home.sidebar.viewAll' | translate }}
                 <i class="fa-solid fa-arrow-right ms-1"></i>
@@ -227,7 +235,7 @@
             <div class="card-body">
               <div class="wellness-tip">
                 <p class="mb-3">{{ 'home.sidebar.wellnessTips.tip1' | translate }}</p>
-                <button class="btn btn-sm btn-outline-success w-100">
+                <button class="btn btn-sm btn-outline-success w-100" (click)="tryWellnessTip()">
                   <i class="fa-solid fa-play me-1"></i>
                   {{ 'home.sidebar.wellnessTips.tryNow' | translate }}
                 </button>
@@ -276,4 +284,30 @@
   (close)="onAppointmentModalClose()"
   (created)="onAppointmentCreated($event)"
 ></app-create-appointment-modal>
+}
+
+@if (showBreathingModal()) {
+<app-breathing-exercises-modal
+  (close)="onBreathingModalClose()"
+></app-breathing-exercises-modal>
+}
+
+@if (showRemindersModal()) {
+<app-reminders-modal
+  (close)="onRemindersModalClose()"
+></app-reminders-modal>
+}
+
+@if (showWellnessTipModal()) {
+<app-wellness-tip-modal
+  (close)="onWellnessTipModalClose()"
+></app-wellness-tip-modal>
+}
+
+@if (showVideoCallModal() && selectedAppointmentForCall()) {
+<app-video-call-modal
+  [psychologistName]="selectedAppointmentForCall()!.psychologist"
+  [appointmentTime]="selectedAppointmentForCall()!.time"
+  (close)="onVideoCallClose()"
+></app-video-call-modal>
 }

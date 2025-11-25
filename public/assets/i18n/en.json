@@ -1,777 +1,1159 @@
-{
-"register": {
-  "title": "Register",
-  "nameLabel": "Name",
-  "namePlaceholder": "Enter your name",
-  "emailLabel": "Email",
-  "emailPlaceholder": "Enter your email",
-  "passwordLabel": "Password",
-  "passwordPlaceholder": "Create a password",
-  "confirmPasswordLabel": "Confirm Password",
-  "confirmPasswordPlaceholder": "Repeat your password",
-  "registerButton": "Register",
-  "loading": "Loading...",
-  "haveAccount": "Already have an account?",
-  "loginLink": "Log In",
-  "errors": {
-    "required": "is required",
-    "invalidEmail": "Invalid email",
-    "nameMin": "Name must have at least 2 characters",
-    "passwordMin": "Password must have at least 6 characters",
-    "passwordMismatch": "Passwords do not match",
-    "emailTaken": "Email is already registered"
-  }
-},
-  "login": {
-  "title": "Log In",
-  "emailLabel": "Email",
-  "emailPlaceholder": "Enter your email",
-  "passwordLabel": "Password",
-  "passwordPlaceholder": "Enter your password",
-  "loginButton": "Log In",
-  "loading": "Loading...",
-  "noAccount": "Don't have an account?",
-  "registerLink": "Register"
-},
-  "header": {
-    "brand": "MinDora",
-    "features": "Features",
-    "how": "How it works",
-    "pricing": "Plans",
-    "faq": "FAQ",
-    "download": "Download",
-    "toggleNav": "Toggle navigation",
-    "login": "Login",
-    "register": "Register"
-  },
-  "hero": {
-    "badge": "New • Stress & Wellness",
-    "title": "Detect your stress. Live lighter.",
-    "description": "MinDora helps adults aged 20-50 to <strong>identify and manage work stress</strong> with quick self-assessments, <strong>analysis of visible body signals</strong> (posture, facial tension, breathing) and personalized recommendations. You can also <strong>contact psychologists</strong> from the app.",
-    "emailPlaceholder": "Enter your email",
-    "emailLabel": "Email address",
-    "joinWaitlist": "Join the waitlist",
-    "coachingCommunity": "Coaching & Community",
-    "appStore": "App Store",
-    "googlePlay": "Google Play",
-    "noSpam": "No spam. You can cancel anytime.",
-    "platforms": "iOS and Android",
-    "privacy": "Privacy by design"
-  },
-  "phone": {
-    "stressCheckin": "Stress check-in",
-    "howFeeling": "How are you feeling right now?",
-    "calm": "Calm",
-    "good": "Good",
-    "tense": "Tense",
-    "overwhelmed": "Overwhelmed",
-    "tryBoxBreathing": "Try box breathing",
-    "breathingPattern": "4-4-4-4 pattern • 2 minutes",
-    "exerciseProgress": "Exercise progress",
-    "sleepRoutine": "Sleep routine at 10:30 PM",
-    "sleepGoal": "Sleep goal: 7h 30min"
-  },
-  "features": {
-    "title1": "Early Detection",
-    "desc1": "Identify stress early by observing visible body signals such as posture, facial tension, and breathing.",
-
-    "title2": "Comprehensive Self-Assessment",
-    "desc2": "Combine emotional tests with physical symptom tracking for a complete overview.",
-
-    "title3": "Personalized Recommendations",
-    "desc3": "Breathing exercises, active breaks, and tips adapted to your work context.",
-
-    "title4": "Dashboard & Tracking",
-    "desc4": "View trends, identify peaks, and measure your progress over time.",
-
-    "title5": "Connect with Psychologists",
-    "desc5": "Access specialists in work-related stress and book appointments directly from the platform.",
-
-    "title6": "Privacy First",
-    "desc6": "Your data is encrypted and you decide what to share. Designed for personal and corporate use."
-  },
-  "how": {
-  "title": "How does Mindora work?",
-  "subtitle": "We guide you step by step to reduce stress and improve your wellbeing.",
-
-  "step1": {
-    "title": "Check your stress level",
-    "desc": "Answer a specialist-designed test and understand how you're really feeling."
-  },
-  "step2": {
-    "title": "Get a personalized plan",
-    "desc": "Mindora analyzes your results and recommends habits, exercises, and routines."
-  },
-  "step3": {
-    "title": "Improve day by day",
-    "desc": "Track your progress and build a calmer, more balanced life."
-  }
-},
-  "pricing": {
-    "title": "Mindora Plans",
-    "subtitle": "Start free and upgrade when you need.",
-
-    "free": {
-      "badge": "Free",
-      "title": "Free Plan",
-      "price": "$0",
-      "feature1": "Basic stress test",
-      "feature2": "5 guided exercises",
-      "feature3": "Limited reports",
-      "cta": "Start"
-    },
-
-    "popular": {
-      "popularBadge": "Most popular",
-      "title": "Popular Plan",
-      "price": "$8.42 / month",
-      "feature1": "Up to 5 profiles",
-      "feature2": "Monthly session with a psychologist",
-      "feature3": "20 exercises & meditations",
-      "feature4": "Downloadable reports",
-      "feature5": "Chat support",
-      "cta": "Try 7 days"
-    },
-
-    "premium": {
-      "badge": "Premium",
-      "title": "Premium Plan",
-      "price": "$22.93 / month",
-      "feature1": "Unlimited profiles",
-      "feature2": "Custom tests and intervention route",
-      "feature3": "Corporate programs & analytics",
-      "feature4": "Direct access to specialists",
-      "feature5": "Priority support",
-      "cta": "Contact sales"
-    }
-  },
-  "faq": {
-    "title": "Frequently Asked Questions",
-
-    "q1": {
-      "title": "Do I need a wearable?",
-      "desc": "No. Wearables are optional — manual check-ins work very well and keep you in control."
-    },
-
-    "q2": {
-      "title": "How do you generate recommendations?",
-      "desc": "We combine your check-ins with sleep/activity patterns and observable physical signals to suggest the best moment and type of intervention."
-    },
-
-    "q3": {
-      "title": "Is my data private?",
-      "desc": "Yes. We encrypt your data in transit and at rest. You can export or delete it anytime. For companies, we provide aggregated and anonymous reports."
-    },
-
-    "q4": {
-      "title": "Can I contact a specialist?",
-      "desc": "Yes. You can search for psychologists specialized in work stress and book appointments through the platform."
-    }
-  },
-  "cta": {
-    "title": "Ready to regain your balance?",
-    "description": "Build wellness habits through small steps that truly stick.",
-    "button1": "Create my plan",
-    "button2": "Explore exercises"
-  },
-  "footer": {
-    "description": "Your mental wellness companion. Professional support for a healthier, happier you.",
-    "quickLinks": {
-      "title": "Quick Links",
-      "about": "About Us",
-      "services": "Services",
-      "privacy": "Privacy Policy",
-      "terms": "Terms of Service"
-    },
-    "contact": {
-      "title": "Contact",
-      "email": "support@mindora.com",
-      "phone": "+1 (555) 123-4567"
-    },
-    "copyright": "© 2025 MinDora. All rights reserved."
-  },
-  "resources": {
-  "title": "Resources library",
-  "filters": {
-    "all": "All",
-    "articles": "Articles",
-    "videos": "Videos",
-    "guides": "Guides"
-  },
-  "type": {
-    "guide": "GUIDE",
-    "article": "ARTICLE",
-    "video": "VIDEO"
-  },
-  "open": "Open",
-  "save": "Save",
-"saved": "Saved"
-},
-"breathing": {
-  "boxTitle": "Box breathing 4-4-4-4",
-  "open": "Open guided breathing",
-  "start": "Start",
-  "resume": "Resume",
-  "pause": "Pause",
-  "reset": "Reset",
-  "close": "Close",
-  "remaining": "Time remaining",
-  "completed": "Exercise completed",
-  "logged": "Activity recorded",
-  "inProgress": "You have a session in progress.",
-  "phase": {
-    "inhale": "Inhale",
-    "hold": "Hold",
-    "exhale": "Exhale"
-  }
-},
-  "coaching": {
-    "title": "Coaching & Community",
-    "subtitle": "Connect with specialists and a support community",
-    "tabs": {
-      "psychologists": "Psychologists",
-      "community": "Community",
-      "myAppointments": "My Appointments"
-    },
-    "psychologists": {
-      "title": "Find your specialist",
-      "searchPlaceholder": "Search by name or specialty...",
-      "filters": {
-        "all": "All",
-        "workStress": "Work stress",
-        "anxiety": "Anxiety",
-        "burnout": "Burnout",
-        "mindfulness": "Mindfulness"
-      },
-      "availability": "Availability",
-      "rating": "Rating",
-      "reviews": "reviews",
-      "session": "session",
-      "viewProfile": "View profile",
-      "bookAppointment": "Book appointment",
-      "specialties": "Specialties",
-      "experience": "years of experience",
-      "languages": "Languages",
-      "nextAvailable": "Next available"
-    },
-  "community": {
-      "title": "Support community",
-      "description": "Share experiences, find motivation, and learn from others on your wellness journey.",
-      "forum": {
-        "title": "Discussion forum",
-        "topics": "Topics",
-        "posts": "Posts",
-        "members": "Members",
-        "newTopic": "New topic",
-        "categories": {
-          "general": "General",
-          "workStress": "Work stress",
-          "techniques": "Techniques & exercises",
-          "success": "Success stories"
-        }
-      },
-"triggers": {
-  "title": "Stress triggers",
-  "placeholder": "Write a trigger (e.g., 'Back-to-back meetings')...",
-  "add": "Add",
-  "delete": "Delete",
-  "empty": "No triggers yet. Add the first one to start learning your patterns.",
-  "tags": {
-    "meetings": "Meetings",
-    "emails": "Emails",
-    "deadlines": "Deadlines",
-    "conflicts": "Conflicts",
-    "overtime": "Overtime"
-  }
-},
-
-      "challenges": {
-  "title": "Anti-stress challenges",
-  "join": "Join",
-  "markOne": "+1 day",
-  "reset": "Reset"
-},
-
-      "chat": {
-        "title": "Live chat",
-        "moderatedBy": "Moderated by professionals",
-        "online": "online",
-        "joinChat": "Join chat"
-      },
-      "events": {
-        "title": "Events & workshops",
-        "upcoming": "Upcoming events",
-        "register": "Register"
-      },
-      "groups": {
-  "title": "Support groups",
-  "join": "Join",
-  "leave": "Leave",
-  "members": "members",
-  "joined": "You’re in this group"
-}
-
-    },
-  "appointments": {
-      "title": "My appointments",
-      "upcoming": "Upcoming",
-      "past": "Past",
-
-"downloadReport": "Download report (CSV)",
-"shareReport": "Share report",
-"share": {
-  "title": "Share report with a specialist",
-  "emailLabel": "Specialist email",
-  "period": "Period",
-  "last30": "Last 30 days",
-  "all": "All data",
-  "send": "Send",
-  "invalidEmail": "Enter a valid email",
-  "success": "Link generated. Copy and send it to the specialist:",
-  "copy": "Copy link",
-  "copied": "Copied!"
-},
-
-      "noAppointments": "You have no scheduled appointments",
-      "bookFirst": "Book your first session with a specialist",
-      "date": "Date",
-      "time": "Time",
-      "with": "with",
-      "cancel": "Cancel",
-      "reschedule": "Reschedule",
-      "joinVideo": "Join video call",
-      "addToCalendar": "Add to calendar",
-
-  "confirmCancelTitle": "Cancel appointment",
-  "confirmCancelMsg": "Are you sure you want to cancel this appointment?",
-  "yesCancel": "Yes, cancel",
-  "noKeep": "No, keep",
-  "rescheduleTitle": "Reschedule appointment",
-  "save": "Save changes"
-    },
-    "profile": {
-      "about": "About",
-      "education": "Education",
-      "approach": "Therapeutic approach",
-      "reviews": "Reviews",
-      "schedule": "Available schedule",
-      "selectDate": "Select a date",
-      "selectTime": "Select a time",
-      "confirmBooking": "Confirm booking",
-      "writeReview": "Write review"
-    }
-  },
-  "home": {
-    "greeting": {
-      "morning": "Good morning",
-      "afternoon": "Good afternoon",
-      "evening": "Good evening"
-    },
-    "welcome": {
-      "subtitle": "Your personal wellness space",
-      "bookSession": "Book session"
-    },
-    "stressLevel": {
-      "title": "Current Stress Level",
-      "description": "Based on your last assessment",
-      "level": "level",
-      "low": "Low (0-33)",
-      "moderate": "Your stress level is moderate",
-      "moderateLabel": "Moderate (34-66)",
-      "high": "High (67-100)",
-      "recommendation": "We recommend doing breathing exercises and considering a session with a specialist.",
-      "takeAssessment": "Take assessment",
-      "viewHistory": "View history"
-    },
-    "quickActions": {
-      "title": "Quick Actions",
-      "assessment": {
-        "title": "Stress Test",
-        "description": "Assess your current stress level"
-      },
-      "breathing": {
-        "title": "Breathing Exercises",
-        "description": "Start a relaxation session"
-      },
-      "reminders": {
-        "title": "Reminders",
-        "description": "Set wellness alerts"
-      }
-    },
-    "navigation": {
-      "title": "Explore",
-      "routines": {
-        "title": "Daily Routines",
-        "description": "Manage your wellness habits"
-      },
-      "community": {
-        "title": "Community",
-        "description": "Connect with specialists and other users"
-      },
-      "reports": {
-        "title": "Reports",
-        "description": "View your progress and statistics"
-      }
-    },
-    "sidebar": {
-      "upcomingAppointments": "Upcoming Appointments",
-      "joinSession": "Join session",
-      "viewAll": "View all",
-      "wellnessTips": {
-        "title": "Wellness Tip",
-        "tip1": "Take 5 minutes to practice deep breathing. It can significantly reduce your stress level.",
-        "tryNow": "Try now"
-      },
-      "recentActivity": "Recent Activity"
-    },
-    "activity": {
-      "appointmentCompleted": "Session completed successfully",
-      "breathingCompleted": "Breathing exercise completed"
-    }
-  },
-  "modals": {
-    "stressAssessment": {
-      "title": "Stress Assessment",
-      "progress": "Progress",
-      "questionCounter": "Question {{current}} of {{total}}",
-      "scoreLabel": "Score",
-      "submit": "Submit Assessment",
-      "retake": "Retake Assessment",
-      "saveResults": "Save Results",
-      "recommendationsTitle": "Personalized Recommendations",
-      "categories": {
-        "work": "Work Stress",
-        "sleep": "Sleep Quality",
-        "physical": "Physical Symptoms",
-        "emotional": "Emotional State"
-      },
-      "options": {
-        "never": "Never",
-        "rarely": "Rarely",
-        "sometimes": "Sometimes",
-        "often": "Often",
-        "always": "Always"
-      },
-      "questions": {
-        "work_1": "Do you feel overwhelmed by the amount of work?",
-        "work_2": "Do you have difficulty disconnecting from work outside of work hours?",
-        "work_3": "Do you feel you have no control over your work tasks?",
-        "work_4": "Do you experience conflicts with colleagues or supervisors?",
-        "work_5": "Are you worried about your performance or job security?",
-        "sleep_1": "Do you have difficulty falling asleep?",
-        "sleep_2": "Do you wake up during the night and have trouble falling back asleep?",
-        "sleep_3": "Do you feel tired when you wake up, even after sleeping?",
-        "physical_1": "Do you experience frequent headaches?",
-        "physical_2": "Do you feel muscle tension or pain in your neck/shoulders?",
-        "physical_3": "Do you have digestive problems or stomach discomfort?",
-        "physical_4": "Do you notice changes in your appetite (eating more or less than usual)?",
-        "emotional_1": "Do you feel anxious or nervous for no apparent reason?",
-        "emotional_2": "Do you experience mood swings or irritability?",
-        "emotional_3": "Do you feel sad, unmotivated, or lacking energy?"
-      },
-      "results": {
-        "level": {
-          "low": "Low Stress Level",
-          "moderate": "Moderate Stress Level",
-          "high": "High Stress Level"
-        },
-        "description": {
-          "low": "Your stress level is within a healthy range. Continue with your wellness habits.",
-          "moderate": "Your stress level is moderate. It's important to take steps to manage it before it increases.",
-          "high": "Your stress level is high. We recommend seeking professional support and applying stress management techniques."
-        }
-      },
-      "recommendations": {
-        "low_1": "Maintain your current exercise and rest routines",
-        "low_2": "Practice mindfulness techniques regularly",
-        "low_3": "Continue cultivating positive social relationships",
-        "moderate_1": "Incorporate deep breathing exercises daily",
-        "moderate_2": "Establish clear boundaries between work and personal life",
-        "moderate_3": "Consider talking to a professional about stress management techniques",
-        "moderate_4": "Prioritize activities that help you relax and disconnect",
-        "high_1": "Schedule a consultation with a psychologist specialized in stress management",
-        "high_2": "Implement regular breaks during the day for relaxation exercises",
-        "high_3": "Evaluate your workload and communicate your needs to your supervisor",
-        "high_4": "Consider techniques such as meditation, yoga, or cognitive-behavioral therapy"
-      }
-    }
-  },
-  "common": {
-    "close": "Close",
-    "cancel": "Cancel",
-    "save": "Save",
-    "next": "Next",
-    "previous": "Previous",
-    "submit": "Submit",
-    "confirm": "Confirm"
-  },
-  "tracking": {
-    "title": "Assessment & Tracking",
-    "subtitle": "Monitor your mental health journey and track your progress over time",
-    "newAssessment": "New Assessment",
-    "latestScore": "Latest Score",
-    "trendLabel": "Trend",
-    "daysSince": "Days Since Last",
-    "totalAssessments": "Total Assessments",
-    "recommendationsTitle": "Personalized Recommendations",
-    "trendChart": "Stress Level Trend",
-    "categoryChart": "Category Breakdown",
-    "historyTitle": "Assessment History",
-    "reminderTitle": "Assessment Reminders",
-    "reminderDescription": "Set up recurring reminders to track your stress levels regularly",
-    "configureReminders": "Configure Reminders",
-    "noChartData": "No data available for charts",
-    "noHistory": "No assessments yet. Take your first assessment to start tracking!",
-    "level": {
-      "low": "Low",
-      "moderate": "Moderate",
-      "high": "High"
-    },
-    "trend": {
-      "improving": "Improving",
-      "stable": "Stable",
-      "declining": "Declining",
-      "insufficient_data": "Insufficient Data"
-    },
-    "filter": {
-      "week": "Week",
-      "month": "Month",
-      "quarter": "3 Months",
-      "all": "All Time"
-    },
-    "table": {
-      "date": "Date",
-      "score": "Score",
-      "level": "Level",
-      "categories": "Categories",
-      "actions": "Actions"
-    },
-    "recommendations": {
-      "noData": "Take your first assessment to receive personalized recommendations",
-      "improving": "Great progress! Your stress levels are improving. Keep up the good work with your current strategies.",
-      "stable": "Your stress levels are stable. Continue with your current wellness practices.",
-      "declining": "Your stress levels are increasing. Consider scheduling a session with a specialist and increasing your self-care activities.",
-      "highStress": "Your stress level is high. We strongly recommend speaking with a mental health professional.",
-      "moderateStress": "Your stress level is moderate. Focus on stress management techniques and regular self-care.",
-      "lowStress": "Your stress level is low. Maintain your healthy habits and continue monitoring your well-being.",
-      "category": {
-        "work": "Work stress is your highest category. Consider setting better boundaries and taking regular breaks.",
-        "sleep": "Sleep quality is affecting your stress. Establish a consistent sleep routine and create a relaxing bedtime environment.",
-        "physical": "Physical symptoms are prominent. Incorporate regular exercise and relaxation techniques into your routine.",
-        "emotional": "Emotional well-being needs attention. Consider mindfulness practices and connecting with supportive people."
-      }
-    }
-  },
-  "routines": {
-    "title": "Daily Routines",
-    "subtitle": "Simple exercises to reduce stress throughout your day",
-    "completed": "Completed",
-    "filters": {
-      "all": "All",
-      "morning": "Morning",
-      "work": "Work",
-      "evening": "Evening",
-      "anytime": "Anytime"
-    },
-    "difficulty": {
-      "easy": "Easy",
-      "medium": "Medium",
-      "hard": "Hard"
-    },
-    "categories": {
-      "morning": "Morning",
-      "work": "Work",
-      "evening": "Evening",
-      "anytime": "Anytime"
-    },
-    "list": {
-      "breathing": {
-        "title": "Deep Breathing",
-        "description": "Calm your mind and body with controlled breathing",
-        "category": "anytime",
-        "difficulty": "easy",
-        "duration": "5 min",
-        "steps": [
-          "Find a quiet and comfortable place",
-          "Close your eyes and relax your shoulders",
-          "Inhale slowly through your nose for 4 seconds",
-          "Hold your breath for 4 seconds",
-          "Exhale slowly through your mouth for 6 seconds",
-          "Repeat for 5 minutes"
-        ],
-        "benefits": [
-          "Reduces anxiety and stress",
-          "Lowers blood pressure",
-          "Improves focus and clarity",
-          "Induces relaxation"
-        ]
-      },
-      "stretching": {
-        "title": "Morning Stretching",
-        "description": "Start your day with energy and flexibility",
-        "category": "morning",
-        "difficulty": "easy",
-        "duration": "10 min",
-        "steps": [
-          "Stand up and stretch your arms upward",
-          "Gently rotate your neck in circles",
-          "Stretch your arms to the sides",
-          "Bend sideways, stretching each side",
-          "Do forward bends, touching your toes",
-          "Finish with hip rotations"
-        ],
-        "benefits": [
-          "Activates circulation",
-          "Reduces muscle stiffness",
-          "Improves flexibility",
-          "Increases energy"
-        ]
-      },
-      "meditation": {
-        "title": "Quick Meditation",
-        "description": "Find your inner peace in just minutes",
-        "category": "anytime",
-        "difficulty": "easy",
-        "duration": "10 min",
-        "steps": [
-          "Sit in a comfortable position",
-          "Close your eyes and relax your body",
-          "Focus on your breathing",
-          "When thoughts arise, acknowledge them and let them go",
-          "Maintain focus on your breath",
-          "Slowly open your eyes when finished"
-        ],
-        "benefits": [
-          "Reduces mental stress",
-          "Improves concentration",
-          "Promotes emotional well-being",
-          "Cultivates mindfulness"
-        ]
-      },
-      "walking": {
-        "title": "Active Walk",
-        "description": "Move your body and clear your mind",
-        "category": "work",
-        "difficulty": "easy",
-        "duration": "15 min",
-        "steps": [
-          "Leave your workspace",
-          "Walk at a comfortable pace",
-          "Observe your surroundings mindfully",
-          "Breathe deeply as you walk",
-          "Stretch gently after finishing"
-        ],
-        "benefits": [
-          "Improves mood",
-          "Increases energy",
-          "Reduces muscle tension",
-          "Clears the mind"
-        ]
-      },
-      "visualRest": {
-        "title": "Visual Rest",
-        "description": "Relieve eye strain from screens",
-        "category": "work",
-        "difficulty": "easy",
-        "duration": "5 min",
-        "steps": [
-          "Look at a distant object for 20 seconds",
-          "Close your eyes and rest them",
-          "Gently massage your temples",
-          "Blink several times",
-          "Look at different distances",
-          "Repeat the cycle"
-        ],
-        "benefits": [
-          "Reduces eye fatigue",
-          "Prevents headaches",
-          "Improves concentration",
-          "Prevents visual stress"
-        ]
-      },
-      "gratitude": {
-        "title": "Gratitude Practice",
-        "description": "End your day with a positive mindset",
-        "category": "evening",
-        "difficulty": "easy",
-        "duration": "10 min",
-        "steps": [
-          "Sit or lie down comfortably",
-          "Think of three positive things from your day",
-          "Reflect on why they are meaningful",
-          "Feel gratitude for those moments",
-          "Write them down if desired",
-          "Go to sleep with this positive feeling"
-        ],
-        "benefits": [
-          "Improves mood",
-          "Promotes better sleep",
-          "Cultivates optimism",
-          "Reduces anxiety"
-        ]
-      },
-      "muscleRelaxation": {
-        "title": "Muscle Relaxation",
-        "description": "Release accumulated physical tension",
-        "category": "evening",
-        "difficulty": "medium",
-        "duration": "15 min",
-        "steps": [
-          "Lie down comfortably",
-          "Tense your feet for 5 seconds, then relax",
-          "Tense your legs, then release",
-          "Continue with each muscle group upward",
-          "Include arms, shoulders, neck, and face",
-          "Feel the full relaxation at the end"
-        ],
-        "benefits": [
-          "Reduces muscle tension",
-          "Improves sleep quality",
-          "Decreases physical stress",
-          "Promotes deep relaxation"
-        ]
-      },
-      "mindfulCoffee": {
-        "title": "Mindful Coffee",
-        "description": "Transform your coffee break into a moment of calm",
-        "category": "morning",
-        "difficulty": "easy",
-        "duration": "10 min",
-        "steps": [
-          "Prepare your favorite beverage",
-          "Observe the color, aroma, and temperature",
-          "Take the first sip slowly",
-          "Feel the temperature and flavor in your mouth",
-          "Breathe between each sip",
-          "Enjoy each moment without distractions"
-        ],
-        "benefits": [
-          "Practices mindfulness",
-          "Reduces morning anxiety",
-          "Improves focus",
-          "Creates a peaceful start"
-        ]
-      }
-    },
-    "modal": {
-      "close": "Close",
-      "markComplete": "Mark as Completed",
-      "alreadyCompleted": "Routine completed today! Excellent work 🎉",
-      "cancelCompletion": "Cancel completion",
-      "duration": "Duration",
-      "difficulty": "Difficulty",
-      "category": "Category",
-      "steps": "Steps to Follow",
-      "benefits": "Benefits"
-    },
-    "congratulations": {
-      "title": "Congratulations!",
-      "message": "You have completed all of today's routines. That's all for today! 🎉",
-      "routinesCompleted": "Routines completed",
-      "minutesDedicated": "Minutes dedicated",
-      "motivationalMessage": "Your well-being is important. Keep it up and you will see great changes in your life.",
-      "understood": "Got it",
-      "redoActivities": "Redo activities"
-    }
-  }
+﻿{
+    "register":  {
+                     "title":  "Register",
+                     "nameLabel":  "Name",
+                     "namePlaceholder":  "Enter your name",
+                     "emailLabel":  "Email",
+                     "emailPlaceholder":  "Enter your email",
+                     "passwordLabel":  "Password",
+                     "passwordPlaceholder":  "Create a password",
+                     "confirmPasswordLabel":  "Confirm Password",
+                     "confirmPasswordPlaceholder":  "Repeat your password",
+                     "registerButton":  "Register",
+                     "loading":  "Loading...",
+                     "haveAccount":  "Already have an account?",
+                     "loginLink":  "Log In",
+                     "errors":  {
+                                    "required":  "is required",
+                                    "invalidEmail":  "Invalid email",
+                                    "nameMin":  "Name must have at least 2 characters",
+                                    "passwordMin":  "Password must have at least 6 characters",
+                                    "passwordMismatch":  "Passwords do not match",
+                                    "emailTaken":  "Email is already registered"
+                                }
+                 },
+    "login":  {
+                  "title":  "Log In",
+                  "emailLabel":  "Email",
+                  "emailPlaceholder":  "Enter your email",
+                  "passwordLabel":  "Password",
+                  "passwordPlaceholder":  "Enter your password",
+                  "loginButton":  "Log In",
+                  "loading":  "Loading...",
+                  "noAccount":  "Don\u0027t have an account?",
+                  "registerLink":  "Register"
+              },
+    "header":  {
+                   "brand":  "MinDora",
+                   "features":  "Features",
+                   "how":  "How it works",
+                   "pricing":  "Plans",
+                   "faq":  "FAQ",
+                   "download":  "Download",
+                   "toggleNav":  "Toggle navigation",
+                   "login":  "Login",
+                   "register":  "Register"
+               },
+    "hero":  {
+                 "badge":  "New • Stress \u0026 Wellness",
+                 "title":  "Detect your stress. Live lighter.",
+                 "description":  "MinDora helps adults aged 20-50 to \u003cstrong\u003eidentify and manage work stress\u003c/strong\u003e with quick self-assessments, \u003cstrong\u003eanalysis of visible body signals\u003c/strong\u003e (posture, facial tension, breathing) and personalized recommendations. You can also \u003cstrong\u003econtact psychologists\u003c/strong\u003e from the app.",
+                 "emailPlaceholder":  "Enter your email",
+                 "emailLabel":  "Email address",
+                 "joinWaitlist":  "Join the waitlist",
+                 "coachingCommunity":  "Coaching \u0026 Community",
+                 "appStore":  "App Store",
+                 "googlePlay":  "Google Play",
+                 "noSpam":  "No spam. You can cancel anytime.",
+                 "platforms":  "iOS and Android",
+                 "privacy":  "Privacy by design"
+             },
+    "phone":  {
+                  "stressCheckin":  "Stress check-in",
+                  "howFeeling":  "How are you feeling right now?",
+                  "calm":  "Calm",
+                  "good":  "Good",
+                  "tense":  "Tense",
+                  "overwhelmed":  "Overwhelmed",
+                  "tryBoxBreathing":  "Try box breathing",
+                  "breathingPattern":  "4-4-4-4 pattern • 2 minutes",
+                  "exerciseProgress":  "Exercise progress",
+                  "sleepRoutine":  "Sleep routine at 10:30 PM",
+                  "sleepGoal":  "Sleep goal: 7h 30min"
+              },
+    "features":  {
+                     "title1":  "Early Detection",
+                     "desc1":  "Identify stress early by observing visible body signals such as posture, facial tension, and breathing.",
+                     "title2":  "Comprehensive Self-Assessment",
+                     "desc2":  "Combine emotional tests with physical symptom tracking for a complete overview.",
+                     "title3":  "Personalized Recommendations",
+                     "desc3":  "Breathing exercises, active breaks, and tips adapted to your work context.",
+                     "title4":  "Dashboard \u0026 Tracking",
+                     "desc4":  "View trends, identify peaks, and measure your progress over time.",
+                     "title5":  "Connect with Psychologists",
+                     "desc5":  "Access specialists in work-related stress and book appointments directly from the platform.",
+                     "title6":  "Privacy First",
+                     "desc6":  "Your data is encrypted and you decide what to share. Designed for personal and corporate use."
+                 },
+    "how":  {
+                "title":  "How does Mindora work?",
+                "subtitle":  "We guide you step by step to reduce stress and improve your wellbeing.",
+                "step1":  {
+                              "title":  "Check your stress level",
+                              "desc":  "Answer a specialist-designed test and understand how you\u0027re really feeling."
+                          },
+                "step2":  {
+                              "title":  "Get a personalized plan",
+                              "desc":  "Mindora analyzes your results and recommends habits, exercises, and routines."
+                          },
+                "step3":  {
+                              "title":  "Improve day by day",
+                              "desc":  "Track your progress and build a calmer, more balanced life."
+                          }
+            },
+    "pricing":  {
+                    "title":  "Mindora Plans",
+                    "subtitle":  "Start free and upgrade when you need.",
+                    "free":  {
+                                 "badge":  "Free",
+                                 "title":  "Free Plan",
+                                 "price":  "$0",
+                                 "feature1":  "Basic stress test",
+                                 "feature2":  "5 guided exercises",
+                                 "feature3":  "Limited reports",
+                                 "cta":  "Start"
+                             },
+                    "popular":  {
+                                    "popularBadge":  "Most popular",
+                                    "title":  "Popular Plan",
+                                    "price":  "$8.42 / month",
+                                    "feature1":  "Up to 5 profiles",
+                                    "feature2":  "Monthly session with a psychologist",
+                                    "feature3":  "20 exercises \u0026 meditations",
+                                    "feature4":  "Downloadable reports",
+                                    "feature5":  "Chat support",
+                                    "cta":  "Try 7 days"
+                                },
+                    "premium":  {
+                                    "badge":  "Premium",
+                                    "title":  "Premium Plan",
+                                    "price":  "$22.93 / month",
+                                    "feature1":  "Unlimited profiles",
+                                    "feature2":  "Custom tests and intervention route",
+                                    "feature3":  "Corporate programs \u0026 analytics",
+                                    "feature4":  "Direct access to specialists",
+                                    "feature5":  "Priority support",
+                                    "cta":  "Contact sales"
+                                }
+                },
+    "faq":  {
+                "title":  "Frequently Asked Questions",
+                "q1":  {
+                           "title":  "Do I need a wearable?",
+                           "desc":  "No. Wearables are optional â€” manual check-ins work very well and keep you in control."
+                       },
+                "q2":  {
+                           "title":  "How do you generate recommendations?",
+                           "desc":  "We combine your check-ins with sleep/activity patterns and observable physical signals to suggest the best moment and type of intervention."
+                       },
+                "q3":  {
+                           "title":  "Is my data private?",
+                           "desc":  "Yes. We encrypt your data in transit and at rest. You can export or delete it anytime. For companies, we provide aggregated and anonymous reports."
+                       },
+                "q4":  {
+                           "title":  "Can I contact a specialist?",
+                           "desc":  "Yes. You can search for psychologists specialized in work stress and book appointments through the platform."
+                       }
+            },
+    "cta":  {
+                "title":  "Ready to regain your balance?",
+                "description":  "Build wellness habits through small steps that truly stick.",
+                "button1":  "Create my plan",
+                "button2":  "Explore exercises"
+            },
+    "footer":  {
+                   "description":  "Your mental wellness companion. Professional support for a healthier, happier you.",
+                   "quickLinks":  {
+                                      "title":  "Quick Links",
+                                      "about":  "About Us",
+                                      "services":  "Services",
+                                      "privacy":  "Privacy Policy",
+                                      "terms":  "Terms of Service"
+                                  },
+                   "contact":  {
+                                   "title":  "Contact",
+                                   "email":  "support@mindora.com",
+                                   "phone":  "+1 (555) 123-4567"
+                               },
+                   "copyright":  "Â© 2025 MinDora. All rights reserved."
+               },
+    "resources":  {
+                      "title":  "Resources library",
+                      "filters":  {
+                                      "all":  "All",
+                                      "articles":  "Articles",
+                                      "videos":  "Videos",
+                                      "guides":  "Guides"
+                                  },
+                      "type":  {
+                                   "guide":  "GUIDE",
+                                   "article":  "ARTICLE",
+                                   "video":  "VIDEO"
+                               },
+                      "open":  "Open",
+                      "save":  "Save",
+                      "saved":  "Saved"
+                  },
+    "breathing":  {
+                      "boxTitle":  "Box breathing 4-4-4-4",
+                      "open":  "Open guided breathing",
+                      "start":  "Start",
+                      "resume":  "Resume",
+                      "pause":  "Pause",
+                      "reset":  "Reset",
+                      "close":  "Close",
+                      "remaining":  "Time remaining",
+                      "completed":  "Exercise completed",
+                      "logged":  "Activity recorded",
+                      "inProgress":  "You have a session in progress.",
+                      "phase":  {
+                                    "inhale":  "Inhale",
+                                    "hold":  "Hold",
+                                    "exhale":  "Exhale"
+                                }
+                  },
+    "coaching":  {
+                     "title":  "Coaching \u0026 Community",
+                     "subtitle":  "Connect with specialists and a support community",
+                     "tabs":  {
+                                  "psychologists":  "Psychologists",
+                                  "community":  "Community",
+                                  "myAppointments":  "My Appointments"
+                              },
+                     "psychologists":  {
+                                           "title":  "Find your specialist",
+                                           "searchPlaceholder":  "Search by name or specialty...",
+                                           "filters":  {
+                                                           "all":  "All",
+                                                           "workStress":  "Work stress",
+                                                           "anxiety":  "Anxiety",
+                                                           "burnout":  "Burnout",
+                                                           "mindfulness":  "Mindfulness"
+                                                       },
+                                           "availability":  "Availability",
+                                           "rating":  "Rating",
+                                           "reviews":  "reviews",
+                                           "session":  "session",
+                                           "viewProfile":  "View profile",
+                                           "bookAppointment":  "Book appointment",
+                                           "specialties":  "Specialties",
+                                           "experience":  "years of experience",
+                                           "languages":  "Languages",
+                                           "nextAvailable":  "Next available"
+                                       },
+                     "community":  {
+                                       "title":  "Support community",
+                                       "description":  "Share experiences, find motivation, and learn from others on your wellness journey.",
+                                       "forum":  {
+                                                     "title":  "Discussion forum",
+                                                     "topics":  "Topics",
+                                                     "posts":  "Posts",
+                                                     "members":  "Members",
+                                                     "newTopic":  "New topic",
+                                                     "categories":  {
+                                                                        "general":  "General",
+                                                                        "workStress":  "Work stress",
+                                                                        "techniques":  "Techniques \u0026 exercises",
+                                                                        "success":  "Success stories"
+                                                                    }
+                                                 },
+                                       "triggers":  {
+                                                        "title":  "Stress triggers",
+                                                        "placeholder":  "Write a trigger (e.g., \u0027Back-to-back meetings\u0027)...",
+                                                        "add":  "Add",
+                                                        "delete":  "Delete",
+                                                        "empty":  "No triggers yet. Add the first one to start learning your patterns.",
+                                                        "tags":  {
+                                                                     "meetings":  "Meetings",
+                                                                     "emails":  "Emails",
+                                                                     "deadlines":  "Deadlines",
+                                                                     "conflicts":  "Conflicts",
+                                                                     "overtime":  "Overtime"
+                                                                 }
+                                                    },
+                                       "challenges":  {
+                                                          "title":  "Anti-stress challenges",
+                                                          "join":  "Join",
+                                                          "markOne":  "+1 day",
+                                                          "reset":  "Reset"
+                                                      },
+                                       "chat":  {
+                                                    "title":  "Live chat",
+                                                    "moderatedBy":  "Moderated by professionals",
+                                                    "online":  "online",
+                                                    "joinChat":  "Join chat"
+                                                },
+                                       "events":  {
+                                                      "title":  "Events \u0026 workshops",
+                                                      "upcoming":  "Upcoming events",
+                                                      "register":  "Register"
+                                                  },
+                                       "groups":  {
+                                                      "title":  "Support groups",
+                                                      "join":  "Join",
+                                                      "leave":  "Leave",
+                                                      "members":  "members",
+                                                      "joined":  "You\u0027re in this group"
+                                                  },
+                                       "stats":  {
+                                                     "title":  "Stats Dashboard",
+                                                     "appointments":  "Upcoming appointments",
+                                                     "groups":  "Joined groups",
+                                                     "resources":  "Saved resources",
+                                                     "triggers":  "Triggers"
+                                                 },
+                                       "tips":  {
+                                                    "title":  "Daily Wellness Tip",
+                                                    "categories":  {
+                                                                       "mindfulness":  "Mindfulness",
+                                                                       "physical":  "Physical Activity",
+                                                                       "sleep":  "Rest",
+                                                                       "nutrition":  "Nutrition",
+                                                                       "social":  "Social"
+                                                                   },
+                                                    "list":  {
+                                                                 "mindfulness":  {
+                                                                                     "title":  "Practice Mindfulness",
+                                                                                     "content":  "Spend 5 minutes each morning observing your breath. This simple practice can significantly reduce your stress levels throughout the day."
+                                                                                 },
+                                                                 "movement":  {
+                                                                                  "title":  "Move Every Hour",
+                                                                                  "content":  "Stand up and walk for 2-3 minutes every hour. Regular movement improves circulation, reduces muscle tension, and boosts your energy."
+                                                                              },
+                                                                 "sleep":  {
+                                                                               "title":  "Establish a Sleep Routine",
+                                                                               "content":  "Go to bed and wake up at the same time every day, even on weekends. A consistent schedule improves your rest quality."
+                                                                           },
+                                                                 "nutrition":  {
+                                                                                   "title":  "Eat Mindfully",
+                                                                                   "content":  "Take time to savor each bite. Eating slowly and without distractions improves digestion and helps you enjoy your food more."
+                                                                               },
+                                                                 "social":  {
+                                                                                "title":  "Connect with Someone",
+                                                                                "content":  "Call or message a friend or family member. Social connections are fundamental to your emotional well-being."
+                                                                            },
+                                                                 "hydration":  {
+                                                                                   "title":  "Stay Hydrated",
+                                                                                   "content":  "Drink a glass of water every 2 hours. Proper hydration improves your concentration and energy levels."
+                                                                               }
+                                                             }
+                                                }
+                                   },
+                     "appointments":  {
+                                          "title":  "My appointments",
+                                          "upcoming":  "Upcoming",
+                                          "past":  "Past",
+                                          "downloadReport":  "Download report (CSV)",
+                                          "shareReport":  "Share report",
+                                          "share":  {
+                                                        "title":  "Share report with a specialist",
+                                                        "emailLabel":  "Specialist email",
+                                                        "period":  "Period",
+                                                        "last30":  "Last 30 days",
+                                                        "all":  "All data",
+                                                        "send":  "Send",
+                                                        "invalidEmail":  "Enter a valid email",
+                                                        "success":  "Link generated. Copy and send it to the specialist:",
+                                                        "copy":  "Copy link",
+                                                        "copied":  "Copied!"
+                                                    },
+                                          "noAppointments":  "You have no scheduled appointments",
+                                          "bookFirst":  "Book your first session with a specialist",
+                                          "date":  "Date",
+                                          "time":  "Time",
+                                          "with":  "with",
+                                          "cancel":  "Cancel",
+                                          "reschedule":  "Reschedule",
+                                          "joinVideo":  "Join video call",
+                                          "addToCalendar":  "Add to calendar",
+                                          "confirmCancelTitle":  "Cancel appointment",
+                                          "confirmCancelMsg":  "Are you sure you want to cancel this appointment?",
+                                          "yesCancel":  "Yes, cancel",
+                                          "noKeep":  "No, keep",
+                                          "rescheduleTitle":  "Reschedule appointment",
+                                          "save":  "Save changes"
+                                      },
+                     "profile":  {
+                                     "about":  "About",
+                                     "education":  "Education",
+                                     "approach":  "Therapeutic approach",
+                                     "reviews":  "Reviews",
+                                     "schedule":  "Available schedule",
+                                     "selectDate":  "Select a date",
+                                     "selectTime":  "Select a time",
+                                     "confirmBooking":  "Confirm booking",
+                                     "writeReview":  "Write review"
+                                 }
+                 },
+    "home":  {
+                 "greeting":  {
+                                  "morning":  "Good morning",
+                                  "afternoon":  "Good afternoon",
+                                  "evening":  "Good evening"
+                              },
+                 "welcome":  {
+                                 "subtitle":  "Your personal wellness space",
+                                 "bookSession":  "Book session"
+                             },
+                 "stressLevel":  {
+                                     "title":  "Current Stress Level",
+                                     "description":  "Based on your last assessment",
+                                     "level":  "level",
+                                     "low":  "Low (0-33)",
+                                     "moderate":  "Your stress level is moderate",
+                                     "moderateLabel":  "Moderate (34-66)",
+                                     "high":  "High (67-100)",
+                                     "recommendation":  "We recommend doing breathing exercises and considering a session with a specialist.",
+                                     "takeAssessment":  "Take assessment",
+                                     "viewHistory":  "View history"
+                                 },
+                 "quickActions":  {
+                                      "title":  "Quick Actions",
+                                      "assessment":  {
+                                                         "title":  "Stress Test",
+                                                         "description":  "Assess your current stress level"
+                                                     },
+                                      "breathing":  {
+                                                        "title":  "Breathing Exercises",
+                                                        "description":  "Start a relaxation session"
+                                                    },
+                                      "reminders":  {
+                                                        "title":  "Reminders",
+                                                        "description":  "Set wellness alerts"
+                                                    }
+                                  },
+                 "navigation":  {
+                                    "title":  "Explore",
+                                    "routines":  {
+                                                     "title":  "Daily Routines",
+                                                     "description":  "Manage your wellness habits"
+                                                 },
+                                    "community":  {
+                                                      "title":  "Community",
+                                                      "description":  "Connect with specialists and other users"
+                                                  },
+                                    "reports":  {
+                                                    "title":  "Reports",
+                                                    "description":  "View your progress and statistics"
+                                                }
+                                },
+                 "sidebar":  {
+                                 "upcomingAppointments":  "Upcoming Appointments",
+                                 "noAppointments":  "No upcoming appointments",
+                                 "joinSession":  "Join session",
+                                 "viewAll":  "View all",
+                                 "wellnessTips":  {
+                                                      "title":  "Wellness Tip",
+                                                      "tip1":  "Take 5 minutes to practice deep breathing. It can significantly reduce your stress level.",
+                                                      "tryNow":  "Try now"
+                                                  },
+                                 "recentActivity":  "Recent Activity"
+                             },
+                 "activity":  {
+                                  "appointmentCompleted":  "Session completed successfully",
+                                  "breathingCompleted":  "Breathing exercise completed"
+                              }
+             },
+    "modals":  {
+                   "stressAssessment":  {
+                                            "title":  "Stress Assessment",
+                                            "progress":  "Progress",
+                                            "questionCounter":  "Question {{current}} of {{total}}",
+                                            "scoreLabel":  "Score",
+                                            "submit":  "Submit Assessment",
+                                            "retake":  "Retake Assessment",
+                                            "saveResults":  "Save Results",
+                                            "recommendationsTitle":  "Personalized Recommendations",
+                                            "categories":  {
+                                                               "work":  "Work Stress",
+                                                               "sleep":  "Sleep Quality",
+                                                               "physical":  "Physical Symptoms",
+                                                               "emotional":  "Emotional State"
+                                                           },
+                                            "options":  {
+                                                            "never":  "Never",
+                                                            "rarely":  "Rarely",
+                                                            "sometimes":  "Sometimes",
+                                                            "often":  "Often",
+                                                            "always":  "Always"
+                                                        },
+                                            "questions":  {
+                                                              "work_1":  "Do you feel overwhelmed by the amount of work?",
+                                                              "work_2":  "Do you have difficulty disconnecting from work outside of work hours?",
+                                                              "work_3":  "Do you feel you have no control over your work tasks?",
+                                                              "work_4":  "Do you experience conflicts with colleagues or supervisors?",
+                                                              "work_5":  "Are you worried about your performance or job security?",
+                                                              "sleep_1":  "Do you have difficulty falling asleep?",
+                                                              "sleep_2":  "Do you wake up during the night and have trouble falling back asleep?",
+                                                              "sleep_3":  "Do you feel tired when you wake up, even after sleeping?",
+                                                              "physical_1":  "Do you experience frequent headaches?",
+                                                              "physical_2":  "Do you feel muscle tension or pain in your neck/shoulders?",
+                                                              "physical_3":  "Do you have digestive problems or stomach discomfort?",
+                                                              "physical_4":  "Do you notice changes in your appetite (eating more or less than usual)?",
+                                                              "emotional_1":  "Do you feel anxious or nervous for no apparent reason?",
+                                                              "emotional_2":  "Do you experience mood swings or irritability?",
+                                                              "emotional_3":  "Do you feel sad, unmotivated, or lacking energy?"
+                                                          },
+                                            "results":  {
+                                                            "level":  {
+                                                                          "low":  "Low Stress Level",
+                                                                          "moderate":  "Moderate Stress Level",
+                                                                          "high":  "High Stress Level"
+                                                                      },
+                                                            "description":  {
+                                                                                "low":  "Your stress level is within a healthy range. Continue with your wellness habits.",
+                                                                                "moderate":  "Your stress level is moderate. It\u0027s important to take steps to manage it before it increases.",
+                                                                                "high":  "Your stress level is high. We recommend seeking professional support and applying stress management techniques."
+                                                                            }
+                                                        },
+                                            "recommendations":  {
+                                                                    "low_1":  "Maintain your current exercise and rest routines",
+                                                                    "low_2":  "Practice mindfulness techniques regularly",
+                                                                    "low_3":  "Continue cultivating positive social relationships",
+                                                                    "moderate_1":  "Incorporate deep breathing exercises daily",
+                                                                    "moderate_2":  "Establish clear boundaries between work and personal life",
+                                                                    "moderate_3":  "Consider talking to a professional about stress management techniques",
+                                                                    "moderate_4":  "Prioritize activities that help you relax and disconnect",
+                                                                    "high_1":  "Schedule a consultation with a psychologist specialized in stress management",
+                                                                    "high_2":  "Implement regular breaks during the day for relaxation exercises",
+                                                                    "high_3":  "Evaluate your workload and communicate your needs to your supervisor",
+                                                                    "high_4":  "Consider techniques such as meditation, yoga, or cognitive-behavioral therapy"
+                                                                }
+                                        }
+               },
+    "common":  {
+                   "close":  "Close",
+                   "cancel":  "Cancel",
+                   "save":  "Save",
+                   "next":  "Next",
+                   "previous":  "Previous",
+                   "submit":  "Submit",
+                   "confirm":  "Confirm"
+               },
+    "tracking":  {
+                     "title":  "Assessment \u0026 Tracking",
+                     "subtitle":  "Monitor your mental health journey and track your progress over time",
+                     "newAssessment":  "New Assessment",
+                     "latestScore":  "Latest Score",
+                     "trendLabel":  "Trend",
+                     "daysSince":  "Days Since Last",
+                     "totalAssessments":  "Total Assessments",
+                     "recommendationsTitle":  "Personalized Recommendations",
+                     "trendChart":  "Stress Level Trend",
+                     "categoryChart":  "Category Breakdown",
+                     "historyTitle":  "Assessment History",
+                     "reminderTitle":  "Assessment Reminders",
+                     "reminderDescription":  "Set up recurring reminders to track your stress levels regularly",
+                     "configureReminders":  "Configure Reminders",
+                     "noChartData":  "No data available for charts",
+                     "noHistory":  "No assessments yet. Take your first assessment to start tracking!",
+                     "level":  {
+                                   "low":  "Low",
+                                   "moderate":  "Moderate",
+                                   "high":  "High"
+                               },
+                     "trend":  {
+                                   "improving":  "Improving",
+                                   "stable":  "Stable",
+                                   "declining":  "Declining",
+                                   "insufficient_data":  "Insufficient Data"
+                               },
+                     "filter":  {
+                                    "week":  "Week",
+                                    "month":  "Month",
+                                    "quarter":  "3 Months",
+                                    "all":  "All Time"
+                                },
+                     "table":  {
+                                   "date":  "Date",
+                                   "score":  "Score",
+                                   "level":  "Level",
+                                   "categories":  "Categories",
+                                   "actions":  "Actions"
+                               },
+                     "recommendations":  {
+                                             "noData":  "Take your first assessment to receive personalized recommendations",
+                                             "improving":  "Great progress! Your stress levels are improving. Keep up the good work with your current strategies.",
+                                             "stable":  "Your stress levels are stable. Continue with your current wellness practices.",
+                                             "declining":  "Your stress levels are increasing. Consider scheduling a session with a specialist and increasing your self-care activities.",
+                                             "highStress":  "Your stress level is high. We strongly recommend speaking with a mental health professional.",
+                                             "moderateStress":  "Your stress level is moderate. Focus on stress management techniques and regular self-care.",
+                                             "lowStress":  "Your stress level is low. Maintain your healthy habits and continue monitoring your well-being.",
+                                             "category":  {
+                                                              "work":  "Work stress is your highest category. Consider setting better boundaries and taking regular breaks.",
+                                                              "sleep":  "Sleep quality is affecting your stress. Establish a consistent sleep routine and create a relaxing bedtime environment.",
+                                                              "physical":  "Physical symptoms are prominent. Incorporate regular exercise and relaxation techniques into your routine.",
+                                                              "emotional":  "Emotional well-being needs attention. Consider mindfulness practices and connecting with supportive people."
+                                                          }
+                                         }
+                 },
+    "routines":  {
+                     "title":  "Daily Routines",
+                     "subtitle":  "Simple exercises to reduce stress throughout your day",
+                     "completed":  "Completed",
+                     "filters":  {
+                                     "all":  "All",
+                                     "morning":  "Morning",
+                                     "work":  "Work",
+                                     "evening":  "Evening",
+                                     "anytime":  "Anytime"
+                                 },
+                     "difficulty":  {
+                                        "easy":  "Easy",
+                                        "medium":  "Medium",
+                                        "hard":  "Hard"
+                                    },
+                     "categories":  {
+                                        "morning":  "Morning",
+                                        "work":  "Work",
+                                        "evening":  "Evening",
+                                        "anytime":  "Anytime"
+                                    },
+                     "list":  {
+                                  "breathing":  {
+                                                    "title":  "Deep Breathing",
+                                                    "description":  "Calm your mind and body with controlled breathing",
+                                                    "category":  "anytime",
+                                                    "difficulty":  "easy",
+                                                    "duration":  "5 min",
+                                                    "steps":  [
+                                                                  "Find a quiet and comfortable place",
+                                                                  "Close your eyes and relax your shoulders",
+                                                                  "Inhale slowly through your nose for 4 seconds",
+                                                                  "Hold your breath for 4 seconds",
+                                                                  "Exhale slowly through your mouth for 6 seconds",
+                                                                  "Repeat for 5 minutes"
+                                                              ],
+                                                    "benefits":  [
+                                                                     "Reduces anxiety and stress",
+                                                                     "Lowers blood pressure",
+                                                                     "Improves focus and clarity",
+                                                                     "Induces relaxation"
+                                                                 ]
+                                                },
+                                  "stretching":  {
+                                                     "title":  "Morning Stretching",
+                                                     "description":  "Start your day with energy and flexibility",
+                                                     "category":  "morning",
+                                                     "difficulty":  "easy",
+                                                     "duration":  "10 min",
+                                                     "steps":  [
+                                                                   "Stand up and stretch your arms upward",
+                                                                   "Gently rotate your neck in circles",
+                                                                   "Stretch your arms to the sides",
+                                                                   "Bend sideways, stretching each side",
+                                                                   "Do forward bends, touching your toes",
+                                                                   "Finish with hip rotations"
+                                                               ],
+                                                     "benefits":  [
+                                                                      "Activates circulation",
+                                                                      "Reduces muscle stiffness",
+                                                                      "Improves flexibility",
+                                                                      "Increases energy"
+                                                                  ]
+                                                 },
+                                  "meditation":  {
+                                                     "title":  "Quick Meditation",
+                                                     "description":  "Find your inner peace in just minutes",
+                                                     "category":  "anytime",
+                                                     "difficulty":  "easy",
+                                                     "duration":  "10 min",
+                                                     "steps":  [
+                                                                   "Sit in a comfortable position",
+                                                                   "Close your eyes and relax your body",
+                                                                   "Focus on your breathing",
+                                                                   "When thoughts arise, acknowledge them and let them go",
+                                                                   "Maintain focus on your breath",
+                                                                   "Slowly open your eyes when finished"
+                                                               ],
+                                                     "benefits":  [
+                                                                      "Reduces mental stress",
+                                                                      "Improves concentration",
+                                                                      "Promotes emotional well-being",
+                                                                      "Cultivates mindfulness"
+                                                                  ]
+                                                 },
+                                  "walking":  {
+                                                  "title":  "Active Walk",
+                                                  "description":  "Move your body and clear your mind",
+                                                  "category":  "work",
+                                                  "difficulty":  "easy",
+                                                  "duration":  "15 min",
+                                                  "steps":  [
+                                                                "Leave your workspace",
+                                                                "Walk at a comfortable pace",
+                                                                "Observe your surroundings mindfully",
+                                                                "Breathe deeply as you walk",
+                                                                "Stretch gently after finishing"
+                                                            ],
+                                                  "benefits":  [
+                                                                   "Improves mood",
+                                                                   "Increases energy",
+                                                                   "Reduces muscle tension",
+                                                                   "Clears the mind"
+                                                               ]
+                                              },
+                                  "visualRest":  {
+                                                     "title":  "Visual Rest",
+                                                     "description":  "Relieve eye strain from screens",
+                                                     "category":  "work",
+                                                     "difficulty":  "easy",
+                                                     "duration":  "5 min",
+                                                     "steps":  [
+                                                                   "Look at a distant object for 20 seconds",
+                                                                   "Close your eyes and rest them",
+                                                                   "Gently massage your temples",
+                                                                   "Blink several times",
+                                                                   "Look at different distances",
+                                                                   "Repeat the cycle"
+                                                               ],
+                                                     "benefits":  [
+                                                                      "Reduces eye fatigue",
+                                                                      "Prevents headaches",
+                                                                      "Improves concentration",
+                                                                      "Prevents visual stress"
+                                                                  ]
+                                                 },
+                                  "gratitude":  {
+                                                    "title":  "Gratitude Practice",
+                                                    "description":  "End your day with a positive mindset",
+                                                    "category":  "evening",
+                                                    "difficulty":  "easy",
+                                                    "duration":  "10 min",
+                                                    "steps":  [
+                                                                  "Sit or lie down comfortably",
+                                                                  "Think of three positive things from your day",
+                                                                  "Reflect on why they are meaningful",
+                                                                  "Feel gratitude for those moments",
+                                                                  "Write them down if desired",
+                                                                  "Go to sleep with this positive feeling"
+                                                              ],
+                                                    "benefits":  [
+                                                                     "Improves mood",
+                                                                     "Promotes better sleep",
+                                                                     "Cultivates optimism",
+                                                                     "Reduces anxiety"
+                                                                 ]
+                                                },
+                                  "muscleRelaxation":  {
+                                                           "title":  "Muscle Relaxation",
+                                                           "description":  "Release accumulated physical tension",
+                                                           "category":  "evening",
+                                                           "difficulty":  "medium",
+                                                           "duration":  "15 min",
+                                                           "steps":  [
+                                                                         "Lie down comfortably",
+                                                                         "Tense your feet for 5 seconds, then relax",
+                                                                         "Tense your legs, then release",
+                                                                         "Continue with each muscle group upward",
+                                                                         "Include arms, shoulders, neck, and face",
+                                                                         "Feel the full relaxation at the end"
+                                                                     ],
+                                                           "benefits":  [
+                                                                            "Reduces muscle tension",
+                                                                            "Improves sleep quality",
+                                                                            "Decreases physical stress",
+                                                                            "Promotes deep relaxation"
+                                                                        ]
+                                                       },
+                                  "mindfulCoffee":  {
+                                                        "title":  "Mindful Coffee",
+                                                        "description":  "Transform your coffee break into a moment of calm",
+                                                        "category":  "morning",
+                                                        "difficulty":  "easy",
+                                                        "duration":  "10 min",
+                                                        "steps":  [
+                                                                      "Prepare your favorite beverage",
+                                                                      "Observe the color, aroma, and temperature",
+                                                                      "Take the first sip slowly",
+                                                                      "Feel the temperature and flavor in your mouth",
+                                                                      "Breathe between each sip",
+                                                                      "Enjoy each moment without distractions"
+                                                                  ],
+                                                        "benefits":  [
+                                                                         "Practices mindfulness",
+                                                                         "Reduces morning anxiety",
+                                                                         "Improves focus",
+                                                                         "Creates a peaceful start"
+                                                                     ]
+                                                    }
+                              },
+                     "modal":  {
+                                   "close":  "Close",
+                                   "markComplete":  "Mark as Completed",
+                                   "alreadyCompleted":  "Routine completed today! Excellent work 🎉",
+                                   "cancelCompletion":  "Cancel completion",
+                                   "duration":  "Duration",
+                                   "difficulty":  "Difficulty",
+                                   "category":  "Category",
+                                   "steps":  "Steps to Follow",
+                                   "benefits":  "Benefits"
+                               },
+                     "congratulations":  {
+                                             "title":  "Congratulations!",
+                                             "message":  "You have completed all of today\u0027s routines. That\u0027s all for today! 🎉",
+                                             "routinesCompleted":  "Routines completed",
+                                             "minutesDedicated":  "Minutes dedicated",
+                                             "motivationalMessage":  "Your well-being is important. Keep it up and you will see great changes in your life.",
+                                             "understood":  "Got it",
+                                             "redoActivities":  "Redo activities"
+                                         }
+                 },
+    "breathingExercises":  {
+                               "title":  "Breathing Exercises",
+                               "description":  "Choose a breathing exercise to reduce stress and improve your mental well-being.",
+                               "close":  "Close",
+                               "back":  "Back",
+                               "start":  "Start",
+                               "startExercise":  "Start exercise",
+                               "pause":  "Pause",
+                               "resume":  "Resume",
+                               "stop":  "Stop",
+                               "cycles":  "cycles",
+                               "cycle":  "Cycle",
+                               "time":  "Time",
+                               "phases":  {
+                                              "inhale":  "Inhale",
+                                              "hold1":  "Hold",
+                                              "exhale":  "Exhale",
+                                              "hold2":  "Hold"
+                                          },
+                               "instructions":  {
+                                                    "inhale":  "Breathe in deeply through your nose",
+                                                    "exhale":  "Breathe out slowly through your mouth",
+                                                    "hold":  "Hold your breath"
+                                                },
+                               "exercises":  {
+                                                 "box":  {
+                                                             "name":  "Box Breathing",
+                                                             "description":  "Military technique to reduce stress and anxiety through controlled breathing.",
+                                                             "benefit1":  "Reduces stress quickly",
+                                                             "benefit2":  "Improves concentration",
+                                                             "benefit3":  "Calms the nervous system"
+                                                         },
+                                                 "calm":  {
+                                                              "name":  "4-7-8 Breathing",
+                                                              "description":  "Technique for better sleep and deep relaxation.",
+                                                              "benefit1":  "Facilitates sleep",
+                                                              "benefit2":  "Reduces anxiety",
+                                                              "benefit3":  "Calms the mind"
+                                                          },
+                                                 "energize":  {
+                                                                  "name":  "Energizing Breath",
+                                                                  "description":  "Quick breathing to increase energy and mental clarity.",
+                                                                  "benefit1":  "Increases energy",
+                                                                  "benefit2":  "Improves alertness",
+                                                                  "benefit3":  "Oxygenates the brain"
+                                                              },
+                                                 "deep":  {
+                                                              "name":  "Deep Breathing",
+                                                              "description":  "Diaphragmatic breathing for relaxation and balance.",
+                                                              "benefit1":  "Deeply relaxes",
+                                                              "benefit2":  "Reduces muscle tension",
+                                                              "benefit3":  "Balances emotions"
+                                                          }
+                                             }
+                           },
+    "reminders":  {
+                      "title":  "Wellness Reminders",
+                      "description":  "Set up reminders to maintain your healthy habits throughout the day.",
+                      "close":  "Close",
+                      "addNew":  "Add reminder",
+                      "newReminder":  "New reminder",
+                      "cancel":  "Cancel",
+                      "add":  "Add",
+                      "delete":  "Delete",
+                      "empty":  "You have no reminders set up. Add the first one!",
+                      "everyday":  "Every day",
+                      "weekdays":  "Weekdays",
+                      "sound":  "Sound",
+                      "notification":  "Notification",
+                      "form":  {
+                                   "type":  "Reminder type",
+                                   "customTitle":  "Custom title",
+                                   "customTitlePlaceholder":  "E.g: Take vitamins",
+                                   "time":  "Time",
+                                   "days":  "Days of the week",
+                                   "settings":  "Settings"
+                               },
+                      "types":  {
+                                    "assessment":  "Stress assessment",
+                                    "breathing":  "Breathing exercise",
+                                    "break":  "Take a break",
+                                    "water":  "Drink water",
+                                    "posture":  "Check posture",
+                                    "custom":  "Custom"
+                                },
+                      "days":  {
+                                   "mon":  "Mon",
+                                   "tue":  "Tue",
+                                   "wed":  "Wed",
+                                   "thu":  "Thu",
+                                   "fri":  "Fri",
+                                   "sat":  "Sat",
+                                   "sun":  "Sun"
+                               }
+                  },
+    "wellnessTips":  {
+                         "title":  "Wellness Tips",
+                         "description":  "Quick and effective exercises to improve your well-being during the day.",
+                         "close":  "Close",
+                         "back":  "Back",
+                         "tryNow":  "Try now",
+                         "startExercise":  "Start exercise",
+                         "steps":  "steps",
+                         "stepsTitle":  "Steps to follow",
+                         "step":  "Step",
+                         "seconds":  "seconds",
+                         "pause":  "Pause",
+                         "resume":  "Resume",
+                         "stop":  "Stop",
+                         "next":  "Next",
+                         "checkItems":  "Check each item as you complete it",
+                         "breathing":  {
+                                           "title":  "Quick Breathing",
+                                           "description":  "Calm your mind in just 1 minute with controlled breathing.",
+                                           "step1":  "Breathe in deeply through your nose",
+                                           "step2":  "Hold your breath",
+                                           "step3":  "Breathe out slowly through your mouth"
+                                       },
+                         "stretching":  {
+                                            "title":  "Quick Stretches",
+                                            "description":  "Release muscle tension with simple stretches.",
+                                            "step1":  "Stretch arms up overhead",
+                                            "step2":  "Roll shoulders backward",
+                                            "step3":  "Tilt head to each side",
+                                            "step4":  "Rotate torso to both sides",
+                                            "step5":  "Stretch your legs",
+                                            "step6":  "Breathe deeply"
+                                        },
+                         "mindfulness":  {
+                                             "title":  "5-Minute Mindfulness",
+                                             "description":  "Practice mindfulness to reduce stress and improve focus.",
+                                             "step1":  "Find a comfortable position and close your eyes",
+                                             "step2":  "Focus on your breathing, notice each inhale and exhale",
+                                             "step3":  "If your mind wanders, gently return your attention to your breath"
+                                         },
+                         "hydration":  {
+                                           "title":  "Conscious Hydration",
+                                           "description":  "Improve your health by staying well hydrated during the day.",
+                                           "step1":  "Drink a glass of water now",
+                                           "step2":  "Notice how the water feels in your body",
+                                           "step3":  "Schedule your next glass in 2 hours"
+                                       },
+                         "posture":  {
+                                         "title":  "Posture Check",
+                                         "description":  "Prevent pain and improve your posture with these quick adjustments.",
+                                         "step1":  "Sit up straight with feet on the floor",
+                                         "step2":  "Relax shoulders down and back",
+                                         "step3":  "Place screen at eye level",
+                                         "step4":  "Keep arms at 90-degree angle"
+                                     }
+                     },
+    "videoCall":  {
+                      "waitingFor":  "Waiting for",
+                      "cameraOn":  "Camera",
+                      "turnOnCamera":  "Turn on camera",
+                      "unmute":  "Unmute",
+                      "title":  "Video Call",
+                      "cameraOff":  "Camera off",
+                      "unmuteMic":  "Unmute microphone",
+                      "online":  "Online",
+                      "connecting":  "Connecting...",
+                      "thankYou":  "Thank you for your session. The report has been saved to your history.",
+                      "duration":  "Duration",
+                      "shareScreen":  "Share screen",
+                      "mute":  "Mute",
+                      "sharingScreen":  "Sharing screen",
+                      "stopSharing":  "Stop sharing",
+                      "share":  "Share",
+                      "turnOffCamera":  "Turn off camera",
+                      "muteMic":  "Mute microphone",
+                      "callEnded":  "Call ended",
+                      "endCall":  "End call"
+                  },
+    "subscription":  {
+                         "checkout":  {
+                                          "paypalRedirect":  "You will be redirected to PayPal to complete the payment.",
+                                          "cvv":  "CVV",
+                                          "fullName":  "Full Name",
+                                          "email":  "Email Address",
+                                          "cancel":  "Cancel",
+                                          "confirmPayment":  "Confirm Payment",
+                                          "cardNumber":  "Card Number",
+                                          "expiry":  "Expires",
+                                          "scanQR":  "Scan this QR to pay",
+                                          "paymentData":  "Payment Details",
+                                          "paymentMethod":  "Payment Method",
+                                          "yourSubscription":  "Your Subscription"
+                                      },
+                         "cancelModal":  {
+                                             "confirm":  "Yes, cancel subscription",
+                                             "title":  "Cancel Subscription",
+                                             "message":  "Are you sure you want to cancel your subscription?",
+                                             "keepPlan":  "No, keep my plan",
+                                             "warning":  "You will lose access to all premium features immediately."
+                                         },
+                         "receipt":  {
+                                         "thankYou":  "Thank you for trusting MinDora",
+                                         "backHome":  "Back to Home",
+                                         "method":  "Payment Method",
+                                         "user":  "User",
+                                         "email":  "Email",
+                                         "perMonth":  "month",
+                                         "success":  "Payment Successful!",
+                                         "plan":  "Plan",
+                                         "date":  "Date",
+                                         "title":  "Payment Receipt",
+                                         "cancelPlan":  "Cancel Subscription",
+                                         "amount":  "Amount"
+                                     },
+                         "methods":  {
+                                         "paypal":  "PayPal",
+                                         "card":  "Card",
+                                         "yape":  "Yape"
+                                     },
+                         "plans":  {
+                                       "free":  {
+                                                    "feature1":  "Basic stress test",
+                                                    "feature3":  "Limited reports",
+                                                    "feature2":  "5 guided exercises",
+                                                    "name":  "Free Plan"
+                                                },
+                                       "popular":  {
+                                                       "name":  "Popular Plan",
+                                                       "feature1":  "Up to 5 profiles",
+                                                       "feature4":  "Downloadable reports",
+                                                       "feature5":  "Chat support",
+                                                       "feature3":  "20 exercises \u0026 meditations",
+                                                       "feature2":  "Monthly session with psychologist"
+                                                   },
+                                       "premium":  {
+                                                       "name":  "Premium Plan",
+                                                       "feature1":  "Unlimited profiles",
+                                                       "feature4":  "Advanced metrics",
+                                                       "feature5":  "Priority support",
+                                                       "feature3":  "Corporate programs",
+                                                       "feature2":  "Custom tests"
+                                                   }
+                                   }
+                     },
+    "profileSettings":  {
+                            "title":  "Profile Settings",
+                            "subtitle":  "Manage your account settings and preferences",
+                            "backHome":  "Back to Home",
+                            "tabs":  {
+                                         "profile":  "Profile Information",
+                                         "password":  "Password \u0026 Security",
+                                         "preferences":  "Notifications",
+                                         "language":  "Language \u0026 Plan",
+                                         "plan":  "Plan"
+                                     },
+                            "profile":  {
+                                            "title":  "Profile Information",
+                                            "editProfile":  "Edit Profile",
+                                            "saveChanges":  "Save Changes",
+                                            "cancel":  "Cancel",
+                                            "fullName":  "Full Name",
+                                            "email":  "Email Address",
+                                            "phone":  "Phone Number",
+                                            "district":  "District/City",
+                                            "bio":  "Bio",
+                                            "bioPlaceholder":  "Tell us about yourself...",
+                                            "phonePlaceholder":  "+1 (555) 123-4567",
+                                            "districtPlaceholder":  "Enter your district",
+                                            "charactersCount":  "characters",
+                                            "success":  "Profile updated successfully!",
+                                            "error":  "Error updating profile. Please try again.",
+                                            "validation":  {
+                                                               "required":  "This field is required",
+                                                               "invalidEmail":  "Invalid email format",
+                                                               "minLength":  "Minimum {0} characters required",
+                                                               "maxLength":  "Maximum {0} characters allowed",
+                                                               "invalidFormat":  "Invalid format"
+                                                           }
+                                        },
+                            "password":  {
+                                             "title":  "Password \u0026 Security",
+                                             "currentPassword":  "Current Password",
+                                             "newPassword":  "New Password",
+                                             "confirmPassword":  "Confirm New Password",
+                                             "changePassword":  "Change Password",
+                                             "passwordHint":  "Password must be at least 6 characters long",
+                                             "passwordMismatch":  "Passwords do not match",
+                                             "success":  "Password changed successfully!",
+                                             "error":  "Current password is incorrect.",
+                                             "dangerZone":  "Danger Zone",
+                                             "deleteAccount":  "Delete Account",
+                                             "deleteWarning":  "Once you delete your account, there is no going back. Please be certain.",
+                                             "deleteConfirm":  "Are you sure you want to delete your account? This action cannot be undone."
+                                         },
+                            "notifications":  {
+                                                  "title":  "Notification Preferences",
+                                                  "subtitle":  "Choose how you want to receive notifications and updates",
+                                                  "email":  {
+                                                                "title":  "Email Notifications",
+                                                                "description":  "Receive notifications via email"
+                                                            },
+                                                  "sms":  {
+                                                              "title":  "SMS Notifications",
+                                                              "description":  "Receive notifications via text message"
+                                                          },
+                                                  "weeklyReports":  {
+                                                                        "title":  "Weekly Progress Reports",
+                                                                        "description":  "Get weekly summaries of your mental health progress"
+                                                                    },
+                                                  "appointmentReminders":  {
+                                                                               "title":  "Appointment Reminders",
+                                                                               "description":  "Receive reminders before scheduled appointments"
+                                                                           },
+                                                  "success":  "Preferences updated successfully!"
+                                              },
+                            "languageAndPlan":  {
+                                                    "title":  "Language \u0026 Plan",
+                                                    "languageSection":  {
+                                                                            "title":  "App Language",
+                                                                            "description":  "Select your preferred language",
+                                                                            "spanish":  "Spanish",
+                                                                            "english":  "English",
+                                                                            "success":  "Language changed successfully!"
+                                                                        },
+                                                    "planSection":  {
+                                                                        "title":  "Your Subscription Plan",
+                                                                        "description":  "Manage your current plan and billing",
+                                                                        "currentPlan":  "Current Plan",
+                                                                        "status":  "Status",
+                                                                        "active":  "Active",
+                                                                        "inactive":  "Inactive",
+                                                                        "renewalDate":  "Renewal Date",
+                                                                        "price":  "Price",
+                                                                        "perMonth":  "/month",
+                                                                        "managePlan":  "Manage Plan",
+                                                                        "upgradePlan":  "Upgrade Plan",
+                                                                        "cancelPlan":  "Cancel Subscription",
+                                                                        "viewInvoices":  "View Invoices",
+                                                                        "noPlan":  "You don\u0027t have an active plan",
+                                                                        "upgradeNow":  "Upgrade Now",
+                                                                        "freePlan":  "Free Plan"
+                                                                    }
+                                                },
+                            "plan":  {
+                                         "title":  "Your Subscription Plan",
+                                         "description":  "Manage your current plan and billing",
+                                         "currentPlan":  "Current Plan",
+                                         "status":  "Status",
+                                         "active":  "Active",
+                                         "inactive":  "Inactive",
+                                         "renewalDate":  "Renewal Date",
+                                         "price":  "Price",
+                                         "perMonth":  "/month",
+                                         "managePlan":  "Manage Plan",
+                                         "upgradePlan":  "Upgrade Plan",
+                                         "cancelPlan":  "Cancel Subscription",
+                                         "viewInvoices":  "View Invoices",
+                                         "noPlan":  "You don\u0027t have an active plan",
+                                         "upgradeNow":  "Upgrade Now",
+                                         "freePlan":  "Free Plan"
+                                     }
+                        }
 }

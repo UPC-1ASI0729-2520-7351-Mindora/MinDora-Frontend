@@ -1,9 +1,10 @@
 import { Component, signal } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
-import { AppointmentsService } from './appointments.service';
+import { AppointmentsService, StoredAppointment } from './appointments.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { CreateAppointmentModalComponent, AppointmentData } from '../home/modals/create-appointment-modal/create-appointment-modal.component';
+import { VideoCallModalComponent } from '../shared/video-call-modal/video-call-modal.component';
 
 
 interface Psychologist {
@@ -36,6 +37,33 @@ interface ForumTopic {
   replies: number;
   views: number;
   lastActivity: string;
+}
+
+interface ForumPost {
+  id: number;
+  author: string;
+  content: string;
+  timestamp: string;
+  likes: number;
+}
+
+interface Event {
+  id: number;
+  title: string;
+  date: string;
+  time: string;
+  description: string;
+  registered: boolean;
+  capacity: number;
+  enrolled: number;
+}
+
+interface ChatMessage {
+  id: number;
+  author: string;
+  message: string;
+  timestamp: string;
+  isOwnMessage: boolean;
 }
 type ApptStatus = Appointment['status'];
 const CANCELLED: ApptStatus = 'cancelled';
@@ -70,9 +98,17 @@ interface Group {
   joined: boolean;
 }
 
+interface WellnessTip {
+  id: number;
+  icon: string;
+  title: string;
+  content: string;
+  category: string;
+}
+
 @Component({
   selector: 'app-coaching',
-  imports: [TranslateModule, CommonModule, FormsModule, CreateAppointmentModalComponent],
+  imports: [TranslateModule, CommonModule, FormsModule, CreateAppointmentModalComponent, VideoCallModalComponent],
   templateUrl: './coaching.html',
   styleUrl: './coaching.css',
 })
@@ -86,6 +122,55 @@ export class Coaching {
   activeTab = signal<'psychologists' | 'community' | 'appointments'>('psychologists');
   selectedFilter = signal('all');
   searchQuery = signal('');
+
+  // Wellness Tips
+  private wellnessTips = signal<WellnessTip[]>([
+    {
+      id: 1,
+      icon: 'fa-spa',
+      title: 'coaching.community.tips.list.mindfulness.title',
+      content: 'coaching.community.tips.list.mindfulness.content',
+      category: 'coaching.community.tips.categories.mindfulness'
+    },
+    {
+      id: 2,
+      icon: 'fa-person-walking',
+      title: 'coaching.community.tips.list.movement.title',
+      content: 'coaching.community.tips.list.movement.content',
+      category: 'coaching.community.tips.categories.physical'
+    },
+    {
+      id: 3,
+      icon: 'fa-moon',
+      title: 'coaching.community.tips.list.sleep.title',
+      content: 'coaching.community.tips.list.sleep.content',
+      category: 'coaching.community.tips.categories.sleep'
+    },
+    {
+      id: 4,
+      icon: 'fa-utensils',
+      title: 'coaching.community.tips.list.nutrition.title',
+      content: 'coaching.community.tips.list.nutrition.content',
+      category: 'coaching.community.tips.categories.nutrition'
+    },
+    {
+      id: 5,
+      icon: 'fa-users',
+      title: 'coaching.community.tips.list.social.title',
+      content: 'coaching.community.tips.list.social.content',
+      category: 'coaching.community.tips.categories.social'
+    },
+    {
+      id: 6,
+      icon: 'fa-water',
+      title: 'coaching.community.tips.list.hydration.title',
+      content: 'coaching.community.tips.list.hydration.content',
+      category: 'coaching.community.tips.categories.physical'
+    }
+  ]);
+  
+  currentTipIndex = signal(0);
+  currentTip = signal(this.wellnessTips()[0]);
 
 
 /////
@@ -164,6 +249,205 @@ confirmReschedule() {
   this.apptsSvc.save(updated as any);
   this.closeReschedule();
 }
+
+// ===== Video Call Methods =====
+joinVideoCall(appointment: Appointment) {
+  const storedAppt: StoredAppointment = {
+    id: appointment.id,
+    psychologist: appointment.psychologist,
+    date: appointment.date,
+    time: appointment.time,
+    type: appointment.type,
+    status: appointment.status as ApptStatus,
+  };
+  this.selectedAppointmentForCall.set(storedAppt);
+  this.showVideoCallModal.set(true);
+}
+
+closeVideoCall() {
+  this.showVideoCallModal.set(false);
+  this.selectedAppointmentForCall.set(null);
+}
+// ===== fin Video Call =====
+
+// ===== Event Methods =====
+registerForEvent(eventId: number) {
+  this.events.update(events => 
+    events.map(e => e.id === eventId 
+      ? { ...e, registered: true, enrolled: e.enrolled + 1 } 
+      : e
+    )
+  );
+}
+
+unregisterFromEvent(eventId: number) {
+  this.events.update(events => 
+    events.map(e => e.id === eventId 
+      ? { ...e, registered: false, enrolled: Math.max(0, e.enrolled - 1) } 
+      : e
+    )
+  );
+}
+
+// ===== Forum Methods =====
+openForumTopic(topic: ForumTopic) {
+  this.selectedForumTopic.set(topic);
+  // Simular posts del tema
+  const mockPosts: ForumPost[] = [
+    {
+      id: 1,
+      author: topic.author,
+      content: 'Contenido inicial del tema... Me gustaría saber su opinión sobre este tema importante.',
+      timestamp: 'Hace 2 días',
+      likes: 12
+    },
+    {
+      id: 2,
+      author: 'Usuario123',
+      content: 'Excelente tema, yo también paso por lo mismo. Lo que me ha ayudado es...',
+      timestamp: 'Hace 1 día',
+      likes: 8
+    },
+    {
+      id: 3,
+      author: 'MindfulPerson',
+      content: 'Gracias por compartir. En mi experiencia, establecer límites claros es fundamental.',
+      timestamp: 'Hace 12 horas',
+      likes: 15
+    }
+  ];
+  this.forumPosts.set(mockPosts);
+  this.showForumTopicModal.set(true);
+}
+
+closeForumTopic() {
+  this.showForumTopicModal.set(false);
+  this.selectedForumTopic.set(null);
+  this.newForumReply.set('');
+}
+
+openCreateTopic() {
+  this.showCreateTopicModal.set(true);
+}
+
+closeCreateTopic() {
+  this.showCreateTopicModal.set(false);
+  this.newTopicTitle.set('');
+  this.newTopicCategory.set('general');
+  this.newTopicContent.set('');
+}
+
+createForumTopic() {
+  if (!this.newTopicTitle().trim() || !this.newTopicContent().trim()) return;
+  
+  const newTopic: ForumTopic = {
+    id: this.forumTopics().length + 1,
+    title: this.newTopicTitle(),
+    category: this.newTopicCategory(),
+    author: 'Tú',
+    replies: 0,
+    views: 0,
+    lastActivity: 'Ahora'
+  };
+  
+  this.forumTopics.update(topics => [newTopic, ...topics]);
+  this.closeCreateTopic();
+}
+
+deleteForumTopic(topicId: number) {
+  if (!confirm('¿Estás seguro de que quieres eliminar este tema?')) return;
+  
+  this.forumTopics.update(topics => topics.filter(t => t.id !== topicId));
+  this.closeForumTopic();
+}
+
+postForumReply() {
+  if (!this.newForumReply().trim()) return;
+  
+  const newPost: ForumPost = {
+    id: this.forumPosts().length + 1,
+    author: 'Tú',
+    content: this.newForumReply(),
+    timestamp: 'Ahora',
+    likes: 0
+  };
+  
+  this.forumPosts.update(posts => [...posts, newPost]);
+  this.newForumReply.set('');
+  
+  // Incrementar replies en el tema
+  const topic = this.selectedForumTopic();
+  if (topic) {
+    this.forumTopics.update(topics => 
+      topics.map(t => t.id === topic.id 
+        ? { ...t, replies: t.replies + 1, lastActivity: 'Ahora' } 
+        : t
+      )
+    );
+  }
+}
+
+deleteForumPost(postId: number) {
+  if (!confirm('¿Estás seguro de que quieres eliminar esta respuesta?')) return;
+  
+  this.forumPosts.update(posts => posts.filter(p => p.id !== postId));
+  
+  // Decrementar replies en el tema
+  const topic = this.selectedForumTopic();
+  if (topic) {
+    this.forumTopics.update(topics => 
+      topics.map(t => t.id === topic.id 
+        ? { ...t, replies: Math.max(0, t.replies - 1) } 
+        : t
+      )
+    );
+  }
+}
+
+// ===== Chat Methods =====
+openChat() {
+  this.showChatModal.set(true);
+}
+
+closeChat() {
+  this.showChatModal.set(false);
+}
+
+sendChatMessage() {
+  if (!this.newChatMessage().trim()) return;
+  
+  const newMessage: ChatMessage = {
+    id: this.chatMessages().length + 1,
+    author: 'Tú',
+    message: this.newChatMessage(),
+    timestamp: new Date().toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit' }),
+    isOwnMessage: true
+  };
+  
+  this.chatMessages.update(messages => [...messages, newMessage]);
+  this.newChatMessage.set('');
+  
+  // Simular respuesta automática después de 2-5 segundos
+  setTimeout(() => {
+    const responses = [
+      '¡Gracias por compartir!',
+      'Estoy de acuerdo contigo.',
+      'Muy buen punto.',
+      '¿Alguien más ha probado esto?',
+      'Interesante perspectiva.'
+    ];
+    const randomResponse = responses[Math.floor(Math.random() * responses.length)];
+    const botMessage: ChatMessage = {
+      id: this.chatMessages().length + 1,
+      author: 'Usuario' + Math.floor(Math.random() * 100),
+      message: randomResponse,
+      timestamp: new Date().toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit' }),
+      isOwnMessage: false
+    };
+    this.chatMessages.update(messages => [...messages, botMessage]);
+  }, 2000 + Math.random() * 3000);
+}
+// ===== fin Chat Methods =====
 
 openCancel(a: Appointment) {
   this.apptToEdit.set(a);
@@ -430,6 +714,65 @@ private saveGroups() {
   rescheduleTime = signal<string>(''); // HH:mm
   rescheduleError = signal<string>('');
   // ===== fin US09 =====
+
+  // ===== Video Call Modal =====
+  showVideoCallModal = signal(false);
+  selectedAppointmentForCall = signal<StoredAppointment | null>(null);
+  
+  // Events
+  events = signal<Event[]>([
+    {
+      id: 1,
+      title: 'Taller: Manejo de Estrés Laboral',
+      date: '2025-12-15',
+      time: '18:00',
+      description: 'Aprende técnicas efectivas para manejar el estrés en el trabajo y mejorar tu bienestar.',
+      registered: false,
+      capacity: 30,
+      enrolled: 18
+    },
+    {
+      id: 2,
+      title: 'Sesión de Mindfulness Grupal',
+      date: '2025-12-18',
+      time: '19:00',
+      description: 'Practica mindfulness en grupo y conecta con otros en el camino del bienestar.',
+      registered: false,
+      capacity: 25,
+      enrolled: 12
+    },
+    {
+      id: 3,
+      title: 'Webinar: Prevención del Burnout',
+      date: '2025-12-20',
+      time: '17:00',
+      description: 'Identifica las señales tempranas del burnout y aprende a prevenirlo.',
+      registered: false,
+      capacity: 50,
+      enrolled: 35
+    }
+  ]);
+  
+  // Forum
+  showForumTopicModal = signal(false);
+  showCreateTopicModal = signal(false);
+  selectedForumTopic = signal<ForumTopic | null>(null);
+  forumPosts = signal<ForumPost[]>([]);
+  newTopicTitle = signal('');
+  newTopicCategory = signal('general');
+  newTopicContent = signal('');
+  newForumReply = signal('');
+  
+  // Chat
+  showChatModal = signal(false);
+  chatMessages = signal<ChatMessage[]>([
+    { id: 1, author: 'Laura M.', message: '¡Hola a todos! ¿Cómo están hoy?', timestamp: '10:30 AM', isOwnMessage: false },
+    { id: 2, author: 'Juan P.', message: 'Muy bien, gracias. Acabo de hacer mi ejercicio de respiración matutino.', timestamp: '10:32 AM', isOwnMessage: false },
+    { id: 3, author: 'Ana S.', message: 'Yo también, me siento mucho más calmada ahora.', timestamp: '10:35 AM', isOwnMessage: false }
+  ]);
+  newChatMessage = signal('');
+  chatUsersOnline = signal(24);
+  // ===== fin Video Call =====
 
   // ===== US15 =====
   showShareModal = signal(false);
@@ -917,5 +1260,17 @@ get filteredResources() {
 
   getPsychologistInfo(name: string) {
     return this.psychologists().find(p => p.name === name);
+  }
+
+  // Wellness Tips Methods
+  refreshTip() {
+    const tips = this.wellnessTips();
+    let newIndex = (this.currentTipIndex() + 1) % tips.length;
+    this.currentTipIndex.set(newIndex);
+    this.currentTip.set(tips[newIndex]);
+  }
+
+  joinedGroupsCount(): number {
+    return this.groups().filter(g => g.joined).length;
   }
 }

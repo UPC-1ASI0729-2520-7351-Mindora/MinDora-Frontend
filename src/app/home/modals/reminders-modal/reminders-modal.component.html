@@ -1,0 +1,180 @@
+<div class="modal-overlay" (click)="closeModal()">
+  <div class="modal-container" (click)="$event.stopPropagation()">
+    
+    <div class="modal-header">
+      <h2>
+        <i class="fa-solid fa-bell me-2"></i>
+        {{ 'reminders.title' | translate }}
+      </h2>
+      <button class="btn-close" (click)="closeModal()" [attr.aria-label]="'reminders.close' | translate">
+        <i class="fa-solid fa-times"></i>
+      </button>
+    </div>
+
+    <div class="modal-body">
+      @if (!showAddForm()) {
+        <p class="modal-description">
+          {{ 'reminders.description' | translate }}
+        </p>
+
+        <!-- Reminders List -->
+        <div class="reminders-list">
+          @for (reminder of reminders(); track reminder.id) {
+            <div class="reminder-card" [class.disabled]="!reminder.enabled">
+              <div class="reminder-icon" [style.background-color]="getReminderColor(reminder.type) + '20'" [style.color]="getReminderColor(reminder.type)">
+                <i class="fa-solid {{ getReminderIcon(reminder.type) }}"></i>
+              </div>
+              
+              <div class="reminder-content">
+                <h4 class="reminder-title">
+                  @if (reminder.type === 'custom') {
+                    {{ reminder.title }}
+                  } @else {
+                    {{ reminder.title | translate }}
+                  }
+                </h4>
+                <div class="reminder-details">
+                  <span class="time-badge">
+                    <i class="fa-solid fa-clock me-1"></i>
+                    {{ reminder.time }}
+                  </span>
+                  <span class="days-text">
+                    @if (reminder.days.length === 7) {
+                      {{ 'reminders.everyday' | translate }}
+                    } @else if (reminder.days.length === 5 && !reminder.days.includes('sat') && !reminder.days.includes('sun')) {
+                      {{ 'reminders.weekdays' | translate }}
+                    } @else {
+                      @for (day of reminder.days; track day; let last = $last) {
+                        <span>{{ 'reminders.days.' + day | translate }}@if(!last){, }</span>
+                      }
+                    }
+                  </span>
+                </div>
+                <div class="reminder-settings">
+                  @if (reminder.sound) {
+                    <span class="setting-badge">
+                      <i class="fa-solid fa-volume-high"></i>
+                      {{ 'reminders.sound' | translate }}
+                    </span>
+                  }
+                  @if (reminder.notification) {
+                    <span class="setting-badge">
+                      <i class="fa-solid fa-bell"></i>
+                      {{ 'reminders.notification' | translate }}
+                    </span>
+                  }
+                </div>
+              </div>
+
+              <div class="reminder-actions">
+                <label class="toggle-switch">
+                  <input type="checkbox" [checked]="reminder.enabled" (change)="toggleReminder(reminder)">
+                  <span class="slider"></span>
+                </label>
+                <button class="btn-delete" (click)="deleteReminder(reminder)" [attr.aria-label]="'reminders.delete' | translate">
+                  <i class="fa-solid fa-trash"></i>
+                </button>
+              </div>
+            </div>
+          }
+
+          @if (reminders().length === 0) {
+            <div class="empty-state">
+              <i class="fa-solid fa-bell-slash"></i>
+              <p>{{ 'reminders.empty' | translate }}</p>
+            </div>
+          }
+        </div>
+
+        <button class="btn-add" (click)="openAddForm()">
+          <i class="fa-solid fa-plus me-2"></i>
+          {{ 'reminders.addNew' | translate }}
+        </button>
+
+      } @else {
+        <!-- Add Reminder Form -->
+        <h3 class="form-title">{{ 'reminders.newReminder' | translate }}</h3>
+
+        <div class="form-section">
+          <label class="form-label">{{ 'reminders.form.type' | translate }}</label>
+          <div class="type-selector">
+            @for (type of reminderTypes; track type.id) {
+              <div 
+                class="type-option" 
+                [class.selected]="newReminderType() === type.id"
+                (click)="newReminderType.set(type.id)"
+                [style.border-color]="newReminderType() === type.id ? type.color : '#e9ecef'"
+              >
+                <i class="fa-solid {{ type.icon }}" [style.color]="type.color"></i>
+                <span>{{ type.titleKey | translate }}</span>
+              </div>
+            }
+          </div>
+        </div>
+
+        @if (newReminderType() === 'custom') {
+          <div class="form-section">
+            <label class="form-label">{{ 'reminders.form.customTitle' | translate }}</label>
+            <input 
+              type="text" 
+              class="form-control" 
+              [(ngModel)]="newReminderCustomTitle"
+              [placeholder]="'reminders.form.customTitlePlaceholder' | translate"
+            >
+          </div>
+        }
+
+        <div class="form-section">
+          <label class="form-label">{{ 'reminders.form.time' | translate }}</label>
+          <input type="time" class="form-control" [(ngModel)]="newReminderTime">
+        </div>
+
+        <div class="form-section">
+          <label class="form-label">{{ 'reminders.form.days' | translate }}</label>
+          <div class="days-selector">
+            @for (day of weekDays; track day.id) {
+              <button 
+                class="day-button" 
+                [class.selected]="isDaySelected(day.id)"
+                (click)="toggleDay(day.id)"
+              >
+                {{ day.label | translate }}
+              </button>
+            }
+          </div>
+        </div>
+
+        <div class="form-section">
+          <label class="form-label">{{ 'reminders.form.settings' | translate }}</label>
+          <div class="settings-options">
+            <label class="checkbox-option">
+              <input type="checkbox" [(ngModel)]="newReminderSound">
+              <span>
+                <i class="fa-solid fa-volume-high me-2"></i>
+                {{ 'reminders.sound' | translate }}
+              </span>
+            </label>
+            <label class="checkbox-option">
+              <input type="checkbox" [(ngModel)]="newReminderNotification">
+              <span>
+                <i class="fa-solid fa-bell me-2"></i>
+                {{ 'reminders.notification' | translate }}
+              </span>
+            </label>
+          </div>
+        </div>
+
+        <div class="form-actions">
+          <button class="btn-secondary" (click)="cancelAdd()">
+            {{ 'reminders.cancel' | translate }}
+          </button>
+          <button class="btn-primary" (click)="addReminder()">
+            <i class="fa-solid fa-plus me-2"></i>
+            {{ 'reminders.add' | translate }}
+          </button>
+        </div>
+      }
+    </div>
+
+  </div>
+</div>

@@ -6,14 +6,14 @@
         <div class="col-lg-8">
           <h1 class="display-5 fw-bold mb-2">
             <i class="fa-solid fa-user-gear me-3"></i>
-            Profile Settings
+            {{ 'profileSettings.title' | translate }}
           </h1>
-          <p class="lead mb-0">Manage your account settings and preferences</p>
+          <p class="lead mb-0">{{ 'profileSettings.subtitle' | translate }}</p>
         </div>
         <div class="col-lg-4 text-lg-end mt-3 mt-lg-0">
           <button class="btn btn-outline-light" routerLink="/home">
             <i class="fa-solid fa-arrow-left me-2"></i>
-            Back to Home
+            {{ 'profileSettings.backHome' | translate }}
           </button>
         </div>
       </div>
@@ -50,21 +50,28 @@
                 [class.active]="activeTab() === 'profile'"
                 (click)="setActiveTab('profile')">
                 <i class="fa-solid fa-user me-2"></i>
-                Profile Information
+                {{ 'profileSettings.tabs.profile' | translate }}
               </button>
               <button 
                 class="list-group-item list-group-item-action"
                 [class.active]="activeTab() === 'password'"
                 (click)="setActiveTab('password')">
                 <i class="fa-solid fa-lock me-2"></i>
-                Password & Security
+                {{ 'profileSettings.tabs.password' | translate }}
               </button>
               <button 
                 class="list-group-item list-group-item-action"
                 [class.active]="activeTab() === 'preferences'"
                 (click)="setActiveTab('preferences')">
                 <i class="fa-solid fa-bell me-2"></i>
-                Notifications
+                {{ 'profileSettings.tabs.preferences' | translate }}
+              </button>
+              <button 
+                class="list-group-item list-group-item-action"
+                [class.active]="activeTab() === 'plan'"
+                (click)="setActiveTab('plan')">
+                <i class="fa-solid fa-credit-card me-2"></i>
+                {{ 'profileSettings.tabs.plan' | translate }}
               </button>
             </div>
           </div>
@@ -91,12 +98,12 @@
             <div class="d-flex justify-content-between align-items-center">
               <h4 class="mb-0">
                 <i class="fa-solid fa-user me-2"></i>
-                Profile Information
+                {{ 'profileSettings.profile.title' | translate }}
               </h4>
               @if (!isEditingProfile()) {
               <button class="btn btn-primary" (click)="toggleEditProfile()">
                 <i class="fa-solid fa-edit me-2"></i>
-                Edit Profile
+                {{ 'profileSettings.profile.editProfile' | translate }}
               </button>
               }
             </div>
@@ -105,7 +112,7 @@
             <form [formGroup]="profileForm" (ngSubmit)="saveProfile()">
               <div class="row">
                 <div class="col-md-6 mb-3">
-                  <label for="name" class="form-label">Full Name *</label>
+                  <label for="name" class="form-label">{{ 'profileSettings.profile.fullName' | translate }} *</label>
                   <input 
                     type="text" 
                     class="form-control" 
@@ -118,7 +125,7 @@
                 </div>
 
                 <div class="col-md-6 mb-3">
-                  <label for="email" class="form-label">Email Address *</label>
+                  <label for="email" class="form-label">{{ 'profileSettings.profile.email' | translate }} *</label>
                   <input 
                     type="email" 
                     class="form-control" 
@@ -131,13 +138,13 @@
                 </div>
 
                 <div class="col-md-6 mb-3">
-                  <label for="phone" class="form-label">Phone Number</label>
+                  <label for="phone" class="form-label">{{ 'profileSettings.profile.phone' | translate }}</label>
                   <input 
                     type="tel" 
                     class="form-control" 
                     id="phone" 
                     formControlName="phone"
-                    placeholder="+1 (555) 123-4567"
+                    [placeholder]="'profileSettings.profile.phonePlaceholder' | translate"
                     [class.is-invalid]="getFieldError(profileForm, 'phone')">
                   @if (getFieldError(profileForm, 'phone')) {
                   <div class="invalid-feedback">{{ getFieldError(profileForm, 'phone') }}</div>
@@ -145,28 +152,28 @@
                 </div>
 
                 <div class="col-md-6 mb-3">
-                  <label for="district" class="form-label">District/City</label>
+                  <label for="district" class="form-label">{{ 'profileSettings.profile.district' | translate }}</label>
                   <input 
                     type="text" 
                     class="form-control" 
                     id="district" 
                     formControlName="district"
-                    placeholder="Enter your district">
+                    [placeholder]="'profileSettings.profile.districtPlaceholder' | translate">
                 </div>
 
                 <div class="col-12 mb-3">
-                  <label for="bio" class="form-label">Bio</label>
+                  <label for="bio" class="form-label">{{ 'profileSettings.profile.bio' | translate }}</label>
                   <textarea 
                     class="form-control" 
                     id="bio" 
                     formControlName="bio" 
                     rows="4"
-                    placeholder="Tell us about yourself..."
+                    [placeholder]="'profileSettings.profile.bioPlaceholder' | translate"
                     [class.is-invalid]="getFieldError(profileForm, 'bio')"></textarea>
                   @if (getFieldError(profileForm, 'bio')) {
                   <div class="invalid-feedback">{{ getFieldError(profileForm, 'bio') }}</div>
                   }
-                  <small class="text-muted">{{ profileForm.get('bio')?.value?.length || 0 }}/500 characters</small>
+                  <small class="text-muted">{{ profileForm.get('bio')?.value?.length || 0 }}/500 {{ 'profileSettings.profile.charactersCount' | translate }}</small>
                 </div>
               </div>
 
@@ -174,14 +181,14 @@
               <div class="d-flex gap-2 justify-content-end">
                 <button type="button" class="btn btn-outline-secondary" (click)="toggleEditProfile()">
                   <i class="fa-solid fa-times me-2"></i>
-                  Cancel
+                  {{ 'profileSettings.profile.cancel' | translate }}
                 </button>
                 <button type="submit" class="btn btn-primary" [disabled]="isSavingProfile()">
                   @if (isSavingProfile()) {
                   <span class="spinner-border spinner-border-sm me-2"></span>
                   }
                   <i class="fa-solid fa-save me-2"></i>
-                  Save Changes
+                  {{ 'profileSettings.profile.saveChanges' | translate }}
                 </button>
               </div>
               }
@@ -196,13 +203,13 @@
           <div class="card-header">
             <h4 class="mb-0">
               <i class="fa-solid fa-lock me-2"></i>
-              Password & Security
+              {{ 'profileSettings.password.title' | translate }}
             </h4>
           </div>
           <div class="card-body">
             <form [formGroup]="passwordForm" (ngSubmit)="changePassword()">
               <div class="mb-3">
-                <label for="currentPassword" class="form-label">Current Password *</label>
+                <label for="currentPassword" class="form-label">{{ 'profileSettings.password.currentPassword' | translate }} *</label>
                 <input 
                   type="password" 
                   class="form-control" 
@@ -215,7 +222,7 @@
               </div>
 
               <div class="mb-3">
-                <label for="newPassword" class="form-label">New Password *</label>
+                <label for="newPassword" class="form-label">{{ 'profileSettings.password.newPassword' | translate }} *</label>
                 <input 
                   type="password" 
                   class="form-control" 
@@ -225,11 +232,11 @@
                 @if (getFieldError(passwordForm, 'newPassword')) {
                 <div class="invalid-feedback">{{ getFieldError(passwordForm, 'newPassword') }}</div>
                 }
-                <small class="text-muted">Password must be at least 6 characters long</small>
+                <small class="text-muted">{{ 'profileSettings.password.passwordHint' | translate }}</small>
               </div>
 
               <div class="mb-4">
-                <label for="confirmPassword" class="form-label">Confirm New Password *</label>
+                <label for="confirmPassword" class="form-label">{{ 'profileSettings.password.confirmPassword' | translate }} *</label>
                 <input 
                   type="password" 
                   class="form-control" 
@@ -240,7 +247,7 @@
                 <div class="invalid-feedback">{{ getFieldError(passwordForm, 'confirmPassword') }}</div>
                 }
                 @if (getPasswordMismatchError()) {
-                <div class="invalid-feedback">Passwords do not match</div>
+                <div class="invalid-feedback">{{ 'profileSettings.password.passwordMismatch' | translate }}</div>
                 }
               </div>
 
@@ -250,7 +257,7 @@
                   <span class="spinner-border spinner-border-sm me-2"></span>
                   }
                   <i class="fa-solid fa-key me-2"></i>
-                  Change Password
+                  {{ 'profileSettings.password.changePassword' | translate }}
                 </button>
               </div>
             </form>
@@ -261,12 +268,12 @@
             <div class="danger-zone">
               <h5 class="text-danger mb-3">
                 <i class="fa-solid fa-exclamation-triangle me-2"></i>
-                Danger Zone
+                {{ 'profileSettings.password.dangerZone' | translate }}
               </h5>
-              <p class="text-muted mb-3">Once you delete your account, there is no going back. Please be certain.</p>
+              <p class="text-muted mb-3">{{ 'profileSettings.password.deleteWarning' | translate }}</p>
               <button class="btn btn-outline-danger" (click)="deleteAccount()">
                 <i class="fa-solid fa-trash me-2"></i>
-                Delete Account
+                {{ 'profileSettings.password.deleteAccount' | translate }}
               </button>
             </div>
           </div>
@@ -279,18 +286,18 @@
           <div class="card-header">
             <h4 class="mb-0">
               <i class="fa-solid fa-bell me-2"></i>
-              Notification Preferences
+              {{ 'profileSettings.notifications.title' | translate }}
             </h4>
           </div>
           <div class="card-body">
-            <p class="text-muted mb-4">Choose how you want to receive notifications and updates</p>
+            <p class="text-muted mb-4">{{ 'profileSettings.notifications.subtitle' | translate }}</p>
 
             <!-- Email Notifications -->
             <div class="preference-item">
               <div class="d-flex justify-content-between align-items-center">
                 <div>
-                  <h6 class="mb-1">Email Notifications</h6>
-                  <p class="text-muted small mb-0">Receive notifications via email</p>
+                  <h6 class="mb-1">{{ 'profileSettings.notifications.email.title' | translate }}</h6>
+                  <p class="text-muted small mb-0">{{ 'profileSettings.notifications.email.description' | translate }}</p>
                 </div>
                 <div class="form-check form-switch">
                   <input 
@@ -309,8 +316,8 @@
             <div class="preference-item">
               <div class="d-flex justify-content-between align-items-center">
                 <div>
-                  <h6 class="mb-1">SMS Notifications</h6>
-                  <p class="text-muted small mb-0">Receive notifications via text message</p>
+                  <h6 class="mb-1">{{ 'profileSettings.notifications.sms.title' | translate }}</h6>
+                  <p class="text-muted small mb-0">{{ 'profileSettings.notifications.sms.description' | translate }}</p>
                 </div>
                 <div class="form-check form-switch">
                   <input 
@@ -329,8 +336,8 @@
             <div class="preference-item">
               <div class="d-flex justify-content-between align-items-center">
                 <div>
-                  <h6 class="mb-1">Weekly Progress Reports</h6>
-                  <p class="text-muted small mb-0">Get weekly summaries of your mental health progress</p>
+                  <h6 class="mb-1">{{ 'profileSettings.notifications.weeklyReports.title' | translate }}</h6>
+                  <p class="text-muted small mb-0">{{ 'profileSettings.notifications.weeklyReports.description' | translate }}</p>
                 </div>
                 <div class="form-check form-switch">
                   <input 
@@ -349,8 +356,8 @@
             <div class="preference-item">
               <div class="d-flex justify-content-between align-items-center">
                 <div>
-                  <h6 class="mb-1">Appointment Reminders</h6>
-                  <p class="text-muted small mb-0">Receive reminders before scheduled appointments</p>
+                  <h6 class="mb-1">{{ 'profileSettings.notifications.appointmentReminders.title' | translate }}</h6>
+                  <p class="text-muted small mb-0">{{ 'profileSettings.notifications.appointmentReminders.description' | translate }}</p>
                 </div>
                 <div class="form-check form-switch">
                   <input 
@@ -362,6 +369,72 @@
                 </div>
               </div>
             </div>
+          </div>
+        </div>
+        }
+
+        <!-- Plan Tab -->
+        @if (activeTab() === 'plan') {
+        <div class="card settings-card mb-4">
+          <div class="card-header">
+            <h4 class="mb-0">
+              <i class="fa-solid fa-credit-card me-2"></i>
+              {{ 'profileSettings.plan.title' | translate }}
+            </h4>
+          </div>
+          <div class="card-body">
+            <p class="text-muted mb-4">{{ 'profileSettings.plan.description' | translate }}</p>
+
+              @if (subscriptionPlan()) {
+              <!-- Active Plan Info -->
+              <div class="plan-info-card p-4 bg-light rounded">
+                <div class="row align-items-center">
+                  <div class="col-md-8">
+                    <h6 class="text-uppercase text-muted mb-1">{{ 'profileSettings.plan.currentPlan' | translate }}</h6>
+                    <h4 class="mb-2">{{ subscriptionPlan()!.name | translate }}</h4>
+                    <p class="mb-2">
+                      <span class="badge" [class.bg-success]="subscriptionPlan()!.isActive" [class.bg-secondary]="!subscriptionPlan()!.isActive">
+                        <i class="fa-solid" [class.fa-check-circle]="subscriptionPlan()!.isActive" [class.fa-times-circle]="!subscriptionPlan()!.isActive" ></i>
+                        {{ subscriptionPlan()!.isActive ? ('profileSettings.plan.active' | translate) : ('profileSettings.plan.inactive' | translate) }}
+                      </span>
+                    </p>
+                    <div class="mb-0">
+                      <small class="text-muted">
+                        <i class="fa-solid fa-calendar me-1"></i>
+                        {{ 'profileSettings.plan.renewalDate' | translate }}: {{ subscriptionPlan()!.renewalDate }}
+                      </small>
+                    </div>
+                  </div>
+                  <div class="col-md-4 text-md-end mt-3 mt-md-0">
+                    <h3 class="mb-0">${{ subscriptionPlan()!.price }}<small class="text-muted">{{ 'profileSettings.plan.perMonth' | translate }}</small></h3>
+                  </div>
+                </div>
+
+                <hr class="my-3">
+
+                <div class="d-flex gap-2 flex-wrap">
+                  <button class="btn btn-primary" (click)="navigateToSubscription()">
+                    <i class="fa-solid fa-arrow-up me-2"></i>
+                    {{ 'profileSettings.plan.upgradePlan' | translate }}
+                  </button>
+                  <button class="btn btn-outline-secondary">
+                    <i class="fa-solid fa-file-invoice me-2"></i>
+                    {{ 'profileSettings.plan.viewInvoices' | translate }}
+                  </button>
+                </div>
+              </div>
+              } @else {
+              <!-- No Plan -->
+              <div class="no-plan-card p-4 text-center bg-light rounded">
+                <i class="fa-solid fa-box-open fa-3x text-muted mb-3"></i>
+                <h5 class="mb-2">{{ 'profileSettings.plan.noPlan' | translate }}</h5>
+                <p class="text-muted mb-3">{{ 'profileSettings.plan.freePlan' | translate }}</p>
+                <button class="btn btn-primary" (click)="navigateToSubscription()">
+                  <i class="fa-solid fa-rocket me-2"></i>
+                  {{ 'profileSettings.plan.upgradeNow' | translate }}
+                </button>
+              </div>
+              }
           </div>
         </div>
         }

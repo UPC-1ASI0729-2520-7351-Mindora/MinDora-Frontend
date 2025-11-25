@@ -11,8 +11,12 @@ import {
   CreateAppointmentModalComponent,
   AppointmentData,
 } from './modals/create-appointment-modal/create-appointment-modal.component';
+import { BreathingExercisesModalComponent } from './modals/breathing-exercises-modal/breathing-exercises-modal.component';
+import { RemindersModalComponent } from './modals/reminders-modal/reminders-modal.component';
+import { WellnessTipModalComponent } from './modals/wellness-tip-modal/wellness-tip-modal.component';
+import { VideoCallModalComponent } from '../shared/video-call-modal/video-call-modal.component';
 import { AssessmentHistoryService } from '../services/assessment-history.service';
-import { AppointmentsService } from '../coaching/appointments.service';
+import { AppointmentsService, StoredAppointment } from '../coaching/appointments.service';
 
 interface StressLevel {
   value: number; // 0-100
@@ -47,6 +51,10 @@ interface NavigationCard {
     TranslateModule,
     StressAssessmentModalComponent,
     CreateAppointmentModalComponent,
+    BreathingExercisesModalComponent,
+    RemindersModalComponent,
+    WellnessTipModalComponent,
+    VideoCallModalComponent,
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css',
@@ -116,6 +124,24 @@ export class HomeComponent {
     },
   ]);
 
+  // Upcoming appointments from coaching
+  upcomingAppointments = computed(() => {
+    const allAppointments = this.appointmentsService.load();
+    const now = new Date();
+    return allAppointments
+      .filter(apt => {
+        if (apt.status !== 'upcoming') return false;
+        const aptDate = new Date(`${apt.date}T${apt.time}`);
+        return aptDate >= now;
+      })
+      .sort((a, b) => {
+        const dateA = new Date(`${a.date}T${a.time}`);
+        const dateB = new Date(`${b.date}T${b.time}`);
+        return dateA.getTime() - dateB.getTime();
+      })
+      .slice(0, 3); // Show only next 3
+  });
+
   // Recent activity (mock data)
   recentActivity = signal([
     {
@@ -150,11 +176,14 @@ export class HomeComponent {
   showBreathingModal = signal(false);
   showRemindersModal = signal(false);
   showBookSessionModal = signal(false);
+  showWellnessTipModal = signal(false);
+  showVideoCallModal = signal(false);
+  selectedAppointmentForCall = signal<StoredAppointment | null>(null);
 
   constructor(
     private authService: AuthService,
     private assessmentHistoryService: AssessmentHistoryService,
-    private appointmentsService: AppointmentsService
+    public appointmentsService: AppointmentsService
   ) {
     // Load latest assessment from history
     const latestAssessment = this.assessmentHistoryService.getLatestAssessment();
@@ -170,14 +199,42 @@ export class HomeComponent {
 
   startBreathingExercise() {
     this.showBreathingModal.set(true);
-    console.log('Starting breathing exercise...');
-    // TODO: Implement breathing exercise modal
+  }
+
+  onBreathingModalClose() {
+    this.showBreathingModal.set(false);
   }
 
   manageReminders() {
     this.showRemindersModal.set(true);
-    console.log('Managing reminders...');
-    // TODO: Implement reminders modal
+  }
+
+  onRemindersModalClose() {
+    this.showRemindersModal.set(false);
+  }
+
+  tryWellnessTip() {
+    this.showWellnessTipModal.set(true);
+  }
+
+  onWellnessTipModalClose() {
+    this.showWellnessTipModal.set(false);
+  }
+
+  joinVideoCall(appointment: StoredAppointment) {
+    this.selectedAppointmentForCall.set(appointment);
+    this.showVideoCallModal.set(true);
+  }
+
+  onVideoCallClose() {
+    this.showVideoCallModal.set(false);
+    this.selectedAppointmentForCall.set(null);
+  }
+
+  formatAppointmentDate(date: string): string {
+    const d = new Date(date);
+    const months = ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'];
+    return `${months[d.getMonth()]} ${d.getDate()}, ${d.getFullYear()}`;
   }
 
   bookSession() {

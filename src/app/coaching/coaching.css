@@ -274,3 +274,109 @@
     margin-top: 1rem;
   }
 }
+
+/* Stats Dashboard */
+.bg-gradient-primary {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.stat-card {
+  padding: 1rem;
+  transition: transform 0.2s ease;
+}
+
+.stat-card:hover {
+  transform: translateY(-3px);
+}
+
+.stat-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  margin: 0 auto 0.75rem;
+}
+
+.stat-value {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #1f2937;
+  line-height: 1;
+  margin-bottom: 0.5rem;
+}
+
+.stat-label {
+  font-size: 0.875rem;
+  color: #6b7280;
+  font-weight: 500;
+}
+
+.bg-success-subtle {
+  background-color: #d1fae5;
+}
+
+.bg-primary-subtle {
+  background-color: #dbeafe;
+}
+
+.bg-warning-subtle {
+  background-color: #fef3c7;
+}
+
+.bg-danger-subtle {
+  background-color: #fee2e2;
+}
+
+/* Wellness Tips */
+.wellness-tip-card {
+  padding: 1.5rem;
+  background: linear-gradient(135deg, #f8f9ff 0%, #ffffff 100%);
+  border-radius: 12px;
+  border-left: 4px solid #ffc107;
+  transition: all 0.3s ease;
+}
+
+.wellness-tip-card:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border-left-width: 6px;
+}
+
+.tip-icon {
+  width: 56px;
+  height: 56px;
+  background: linear-gradient(135deg, #ffc107 0%, #ff9800 100%);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 1.75rem;
+  margin-bottom: 1rem;
+  box-shadow: 0 4px 8px rgba(255, 193, 7, 0.3);
+}
+
+.tip-title {
+  font-weight: 700;
+  color: #1f2937;
+  margin-bottom: 0.75rem;
+  font-size: 1.125rem;
+}
+
+.tip-content {
+  color: #4b5563;
+  line-height: 1.6;
+  margin-bottom: 1rem;
+  font-size: 0.95rem;
+}
+
+.tip-category {
+  display: inline-flex;
+}
+
+.tip-category .badge {
+  font-size: 0.8rem;
+  padding: 0.4rem 0.8rem;
+}

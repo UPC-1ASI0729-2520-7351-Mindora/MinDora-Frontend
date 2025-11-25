@@ -1,0 +1,171 @@
+<div class="modal-overlay" (click)="closeModal()">
+  <div class="modal-container" (click)="$event.stopPropagation()">
+    
+    @if (!selectedTip()) {
+      <!-- Tips Selection View -->
+      <div class="modal-header">
+        <h2>
+          <i class="fa-solid fa-lightbulb me-2"></i>
+          {{ 'wellnessTips.title' | translate }}
+        </h2>
+        <button class="btn-close" (click)="closeModal()" [attr.aria-label]="'wellnessTips.close' | translate">
+          <i class="fa-solid fa-times"></i>
+        </button>
+      </div>
+
+      <div class="modal-body">
+        <p class="modal-description">
+          {{ 'wellnessTips.description' | translate }}
+        </p>
+
+        <div class="tips-grid">
+          @for (tip of tips(); track tip.id) {
+            <div class="tip-card" (click)="selectTip(tip)" [style.border-color]="tip.color">
+              <div class="tip-icon" [style.background-color]="tip.color + '20'" [style.color]="tip.color">
+                <i class="fa-solid {{ tip.icon }}"></i>
+              </div>
+              
+              <h3 class="tip-title">{{ tip.title | translate }}</h3>
+              <p class="tip-description">{{ tip.description | translate }}</p>
+              
+              <div class="tip-meta">
+                @if (tip.exercise.duration > 0) {
+                  <span class="duration-badge">
+                    <i class="fa-solid fa-clock me-1"></i>
+                    {{ tip.exercise.duration }}s
+                  </span>
+                }
+                <span class="steps-badge">
+                  {{ tip.exercise.steps.length }} {{ 'wellnessTips.steps' | translate }}
+                </span>
+              </div>
+
+              <button class="btn-try" [style.background-color]="tip.color">
+                {{ 'wellnessTips.tryNow' | translate }}
+                <i class="fa-solid fa-arrow-right ms-2"></i>
+              </button>
+            </div>
+          }
+        </div>
+      </div>
+
+    } @else {
+      <!-- Exercise View -->
+      <div class="modal-header">
+        <button class="btn-back" (click)="backToList()">
+          <i class="fa-solid fa-arrow-left me-2"></i>
+          {{ 'wellnessTips.back' | translate }}
+        </button>
+        <h2>{{ selectedTip()!.title | translate }}</h2>
+        <button class="btn-close" (click)="closeModal()" [attr.aria-label]="'wellnessTips.close' | translate">
+          <i class="fa-solid fa-times"></i>
+        </button>
+      </div>
+
+      <div class="modal-body exercise-view">
+        @if (!isExercising()) {
+          <!-- Exercise Preview -->
+          <div class="exercise-preview">
+            <div class="preview-icon" [style.background-color]="selectedTip()!.color + '20'" [style.color]="selectedTip()!.color">
+              <i class="fa-solid {{ selectedTip()!.icon }}"></i>
+            </div>
+            <p class="preview-description">{{ selectedTip()!.description | translate }}</p>
+            
+            <div class="steps-preview">
+              <h4>{{ 'wellnessTips.stepsTitle' | translate }}</h4>
+              <ul class="steps-list">
+                @for (step of selectedTip()!.exercise.steps; track $index) {
+                  <li>
+                    <i class="fa-solid fa-circle-check"></i>
+                    <span>{{ step.instruction | translate }}</span>
+                    @if (step.duration > 0) {
+                      <span class="step-duration">({{ step.duration }}s)</span>
+                    }
+                  </li>
+                }
+              </ul>
+            </div>
+
+            <button class="btn-start" [style.background-color]="selectedTip()!.color" (click)="startExercise()">
+              <i class="fa-solid fa-play me-2"></i>
+              {{ 'wellnessTips.startExercise' | translate }}
+            </button>
+          </div>
+
+        } @else {
+          <!-- Active Exercise -->
+          <div class="active-exercise">
+            @if (selectedTip()!.exercise.type === 'checklist') {
+              <!-- Checklist Exercise -->
+              <div class="checklist-exercise">
+                <h4>{{ 'wellnessTips.checkItems' | translate }}</h4>
+                <div class="checklist">
+                  @for (step of selectedTip()!.exercise.steps; track $index) {
+                    <label class="checklist-item" [class.completed]="isStepCompleted($index)">
+                      <input 
+                        type="checkbox" 
+                        [checked]="isStepCompleted($index)"
+                        (change)="toggleChecklistItem($index)"
+                      >
+                      <span class="checkmark"></span>
+                      <span class="item-text">{{ step.instruction | translate }}</span>
+                    </label>
+                  }
+                </div>
+              </div>
+
+            } @else {
+              <!-- Timed Exercise -->
+              <div class="timed-exercise">
+                <div class="current-step-display">
+                  <div class="step-number">
+                    {{ 'wellnessTips.step' | translate }} {{ currentStepIndex() + 1 }} / {{ selectedTip()!.exercise.steps.length }}
+                  </div>
+                  <h3 class="step-instruction">{{ currentStep()!.instruction | translate }}</h3>
+                  
+                  @if (currentStep()!.duration > 0) {
+                    <div class="timer-circle" [style.border-color]="selectedTip()!.color">
+                      <div class="timer-value">{{ secondsLeft() }}</div>
+                      <div class="timer-label">{{ 'wellnessTips.seconds' | translate }}</div>
+                    </div>
+                  }
+                </div>
+
+                <div class="progress-bar-container">
+                  <div class="progress-bar-fill" [style.width.%]="progress()" [style.background-color]="selectedTip()!.color"></div>
+                </div>
+
+                <div class="exercise-controls">
+                  @if (currentStep()!.duration > 0) {
+                    @if (!isPaused()) {
+                      <button class="btn-control btn-warning" (click)="pause()">
+                        <i class="fa-solid fa-pause me-2"></i>
+                        {{ 'wellnessTips.pause' | translate }}
+                      </button>
+                    } @else {
+                      <button class="btn-control btn-success" (click)="resume()">
+                        <i class="fa-solid fa-play me-2"></i>
+                        {{ 'wellnessTips.resume' | translate }}
+                      </button>
+                    }
+                  } @else {
+                    <button class="btn-control btn-primary" (click)="nextStep()" [style.background-color]="selectedTip()!.color">
+                      <i class="fa-solid fa-arrow-right me-2"></i>
+                      {{ 'wellnessTips.next' | translate }}
+                    </button>
+                  }
+                  
+                  <button class="btn-control btn-secondary" (click)="stop()">
+                    <i class="fa-solid fa-stop me-2"></i>
+                    {{ 'wellnessTips.stop' | translate }}
+                  </button>
+                </div>
+              </div>
+            }
+          </div>
+        }
+      </div>
+    }
+
+  </div>
+</div>

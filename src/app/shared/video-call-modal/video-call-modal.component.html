@@ -1,0 +1,121 @@
+<div class="video-call-overlay" (click)="endCall()">
+  <div class="video-call-container" (click)="$event.stopPropagation()">
+    
+    @if (callStatus() === 'connecting') {
+      <!-- Connecting State -->
+      <div class="connecting-state">
+        <div class="connecting-animation">
+          <div class="spinner"></div>
+        </div>
+        <h2>{{ 'videoCall.connecting' | translate }}</h2>
+        <p>{{ 'videoCall.waitingFor' | translate }} {{ psychologistName }}...</p>
+      </div>
+    }
+
+    @if (callStatus() === 'connected') {
+      <!-- Connected State -->
+      <div class="video-area">
+        <!-- Remote Video (Psychologist) -->
+        <div class="remote-video">
+          <div class="video-placeholder">
+            <div class="avatar-large">
+              <i class="fa-solid fa-user-doctor"></i>
+            </div>
+            <div class="participant-info">
+              <h3>{{ psychologistName }}</h3>
+              <span class="status-badge">
+                <i class="fa-solid fa-circle"></i>
+                {{ 'videoCall.online' | translate }}
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Local Video (Self) -->
+        <div class="local-video" [class.camera-off]="isCameraOff()">
+          @if (isCameraOff()) {
+            <div class="camera-off-placeholder">
+              <i class="fa-solid fa-video-slash"></i>
+              <span>{{ 'videoCall.cameraOff' | translate }}</span>
+            </div>
+          } @else {
+            <div class="video-placeholder-small">
+              <div class="avatar-small">
+                <i class="fa-solid fa-user"></i>
+              </div>
+            </div>
+          }
+        </div>
+
+        <!-- Call Info -->
+        <div class="call-info">
+          <div class="call-timer">
+            <i class="fa-solid fa-clock me-2"></i>
+            {{ formatDuration() }}
+          </div>
+          @if (isScreenSharing()) {
+            <div class="sharing-indicator">
+              <i class="fa-solid fa-desktop me-2"></i>
+              {{ 'videoCall.sharingScreen' | translate }}
+            </div>
+          }
+        </div>
+      </div>
+
+      <!-- Controls -->
+      <div class="call-controls">
+        <button 
+          class="control-btn" 
+          [class.active]="isMicMuted()"
+          (click)="toggleMic()"
+          [attr.aria-label]="isMicMuted() ? ('videoCall.unmuteMic' | translate) : ('videoCall.muteMic' | translate)"
+        >
+          <i class="fa-solid" [class.fa-microphone]="!isMicMuted()" [class.fa-microphone-slash]="isMicMuted()"></i>
+          <span>{{ isMicMuted() ? ('videoCall.unmute' | translate) : ('videoCall.mute' | translate) }}</span>
+        </button>
+
+        <button 
+          class="control-btn" 
+          [class.active]="isCameraOff()"
+          (click)="toggleCamera()"
+          [attr.aria-label]="isCameraOff() ? ('videoCall.turnOnCamera' | translate) : ('videoCall.turnOffCamera' | translate)"
+        >
+          <i class="fa-solid" [class.fa-video]="!isCameraOff()" [class.fa-video-slash]="isCameraOff()"></i>
+          <span>{{ isCameraOff() ? ('videoCall.cameraOn' | translate) : ('videoCall.cameraOff' | translate) }}</span>
+        </button>
+
+        <button 
+          class="control-btn" 
+          [class.active]="isScreenSharing()"
+          (click)="toggleScreenShare()"
+          [attr.aria-label]="'videoCall.shareScreen' | translate"
+        >
+          <i class="fa-solid fa-desktop"></i>
+          <span>{{ isScreenSharing() ? ('videoCall.stopSharing' | translate) : ('videoCall.share' | translate) }}</span>
+        </button>
+
+        <button 
+          class="control-btn end-call-btn" 
+          (click)="endCall()"
+          [attr.aria-label]="'videoCall.endCall' | translate"
+        >
+          <i class="fa-solid fa-phone-slash"></i>
+          <span>{{ 'videoCall.endCall' | translate }}</span>
+        </button>
+      </div>
+    }
+
+    @if (callStatus() === 'ended') {
+      <!-- Call Ended State -->
+      <div class="call-ended-state">
+        <div class="ended-icon">
+          <i class="fa-solid fa-phone-slash"></i>
+        </div>
+        <h2>{{ 'videoCall.callEnded' | translate }}</h2>
+        <p>{{ 'videoCall.duration' | translate }}: {{ formatDuration() }}</p>
+        <p class="thank-you">{{ 'videoCall.thankYou' | translate }}</p>
+      </div>
+    }
+
+  </div>
+</div>

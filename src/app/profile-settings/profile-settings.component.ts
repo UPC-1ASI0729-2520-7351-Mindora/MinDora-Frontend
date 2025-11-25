@@ -3,7 +3,15 @@ import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { AuthService, User } from '../services/auth.service';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
+
+interface SubscriptionPlan {
+  id: string;
+  name: string;
+  price: number;
+  renewalDate: string;
+  isActive: boolean;
+}
 
 interface ProfileFormData {
   name: string;
@@ -32,7 +40,7 @@ export class ProfileSettingsComponent implements OnInit {
   passwordForm!: FormGroup;
 
   // UI State
-  activeTab = signal<'profile' | 'password' | 'preferences'>('profile');
+  activeTab = signal<'profile' | 'password' | 'preferences' | 'plan'>('profile');
   isEditingProfile = signal(false);
   isSavingProfile = signal(false);
   isChangingPassword = signal(false);
@@ -47,7 +55,15 @@ export class ProfileSettingsComponent implements OnInit {
   weeklyReports = signal(true);
   appointmentReminders = signal(true);
 
-  constructor(private fb: FormBuilder, private authService: AuthService, private router: Router) {}
+  // Subscription Plan
+  subscriptionPlan = signal<SubscriptionPlan | null>(null);
+
+  constructor(
+    private fb: FormBuilder,
+    private authService: AuthService,
+    private router: Router,
+    private translate: TranslateService
+  ) {}
 
   ngOnInit(): void {
     // Load current user
@@ -63,6 +79,9 @@ export class ProfileSettingsComponent implements OnInit {
 
     // Load preferences from localStorage
     this.loadPreferences();
+
+    // Load subscription plan
+    this.loadSubscriptionPlan();
   }
 
   private initializeForms(): void {
@@ -126,8 +145,19 @@ export class ProfileSettingsComponent implements OnInit {
     localStorage.setItem('userPreferences', JSON.stringify(preferences));
   }
 
+  private loadSubscriptionPlan(): void {
+    const planData = localStorage.getItem('userSubscription');
+    if (planData) {
+      try {
+        this.subscriptionPlan.set(JSON.parse(planData));
+      } catch (e) {
+        console.error('Error loading subscription plan', e);
+      }
+    }
+  }
+
   // Tab navigation
-  setActiveTab(tab: 'profile' | 'password' | 'preferences'): void {
+  setActiveTab(tab: 'profile' | 'password' | 'preferences' | 'plan'): void {
     this.activeTab.set(tab);
     this.clearMessages();
   }
@@ -185,11 +215,11 @@ export class ProfileSettingsComponent implements OnInit {
         localStorage.setItem('currentUser', JSON.stringify(updatedUser));
         this.currentUser.set(updatedUser);
 
-        this.successMessage.set('Profile updated successfully!');
+        this.successMessage.set(this.translate.instant('profileSettings.profile.success'));
         this.isEditingProfile.set(false);
         this.profileForm.disable();
       } else {
-        this.errorMessage.set('Error updating profile. Please try again.');
+        this.errorMessage.set(this.translate.instant('profileSettings.profile.error'));
       }
 
       this.isSavingProfile.set(false);
@@ -219,10 +249,10 @@ export class ProfileSettingsComponent implements OnInit {
         user.password = formData.newPassword;
         localStorage.setItem('users', JSON.stringify(users));
 
-        this.successMessage.set('Password changed successfully!');
+        this.successMessage.set(this.translate.instant('profileSettings.password.success'));
         this.passwordForm.reset();
       } else {
-        this.errorMessage.set('Current password is incorrect.');
+        this.errorMessage.set(this.translate.instant('profileSettings.password.error'));
       }
 
       this.isChangingPassword.set(false);
@@ -247,10 +277,14 @@ export class ProfileSettingsComponent implements OnInit {
     }
 
     this.savePreferences();
-    this.successMessage.set('Preferences updated successfully!');
+    this.successMessage.set(this.translate.instant('profileSettings.notifications.success'));
 
     // Clear message after 3 seconds
     setTimeout(() => this.clearMessages(), 3000);
+  }
+
+  navigateToSubscription(): void {
+    this.router.navigate(['/subscription']);
   }
 
   // Helper methods
@@ -274,13 +308,13 @@ export class ProfileSettingsComponent implements OnInit {
   getFieldError(formGroup: FormGroup, fieldName: string): string | null {
     const field = formGroup.get(fieldName);
     if (field?.touched && field?.errors) {
-      if (field.errors['required']) return 'This field is required';
-      if (field.errors['email']) return 'Invalid email format';
+      if (field.errors['required']) return this.translate.instant('profileSettings.profile.validation.required');
+      if (field.errors['email']) return this.translate.instant('profileSettings.profile.validation.invalidEmail');
       if (field.errors['minlength'])
-        return `Minimum ${field.errors['minlength'].requiredLength} characters required`;
+        return this.translate.instant('profileSettings.profile.validation.minLength', { 0: field.errors['minlength'].requiredLength });
       if (field.errors['maxlength'])
-        return `Maximum ${field.errors['maxlength'].requiredLength} characters allowed`;
-      if (field.errors['pattern']) return 'Invalid format';
+        return this.translate.instant('profileSettings.profile.validation.maxLength', { 0: field.errors['maxlength'].requiredLength });
+      if (field.errors['pattern']) return this.translate.instant('profileSettings.profile.validation.invalidFormat');
     }
     return null;
   }
@@ -294,7 +328,7 @@ export class ProfileSettingsComponent implements OnInit {
   }
 
   deleteAccount(): void {
-    if (confirm('Are you sure you want to delete your account? This action cannot be undone.')) {
+    if (confirm(this.translate.instant('profileSettings.password.deleteConfirm'))) {
       // Remove user from users array
       const users = this.getStoredUsers();
       const filteredUsers = users.filter((u: any) => u.id !== this.currentUser()?.id);

@@ -1,0 +1,146 @@
+<div class="modal-overlay" (click)="closeModal()">
+  <div class="modal-container" (click)="$event.stopPropagation()">
+    
+    @if (!selectedExercise()) {
+      <!-- Exercise Selection View -->
+      <div class="modal-header">
+        <h2>
+          <i class="fa-solid fa-wind me-2"></i>
+          {{ 'breathingExercises.title' | translate }}
+        </h2>
+        <button class="btn-close" (click)="closeModal()" [attr.aria-label]="'breathingExercises.close' | translate">
+          <i class="fa-solid fa-times"></i>
+        </button>
+      </div>
+
+      <div class="modal-body">
+        <p class="modal-description">
+          {{ 'breathingExercises.description' | translate }}
+        </p>
+
+        <div class="exercises-grid">
+          @for (exercise of exercises(); track exercise.id) {
+            <div class="exercise-card" (click)="selectExercise(exercise)" [style.border-color]="exercise.color">
+              <div class="exercise-icon" [style.background-color]="exercise.color + '20'" [style.color]="exercise.color">
+                <i class="fa-solid {{ exercise.icon }}"></i>
+              </div>
+              
+              <h3 class="exercise-name">{{ exercise.name | translate }}</h3>
+              <p class="exercise-description">{{ exercise.description | translate }}</p>
+              
+              <div class="exercise-pattern">
+                <span class="pattern-badge">
+                  {{ exercise.pattern[0] }}-{{ exercise.pattern[1] }}-{{ exercise.pattern[2] }}-{{ exercise.pattern[3] }}
+                </span>
+                <span class="cycles-badge">{{ exercise.cycles }} {{ 'breathingExercises.cycles' | translate }}</span>
+              </div>
+
+              <div class="exercise-benefits">
+                @for (benefit of exercise.benefits; track $index) {
+                  <div class="benefit-item">
+                    <i class="fa-solid fa-check-circle"></i>
+                    <span>{{ benefit | translate }}</span>
+                  </div>
+                }
+              </div>
+
+              <button class="btn-start" [style.background-color]="exercise.color">
+                {{ 'breathingExercises.start' | translate }}
+                <i class="fa-solid fa-arrow-right ms-2"></i>
+              </button>
+            </div>
+          }
+        </div>
+      </div>
+
+    } @else {
+      <!-- Exercise Execution View -->
+      <div class="modal-header">
+        <button class="btn-back" (click)="backToList()">
+          <i class="fa-solid fa-arrow-left me-2"></i>
+          {{ 'breathingExercises.back' | translate }}
+        </button>
+        <h2>{{ selectedExercise()!.name | translate }}</h2>
+        <button class="btn-close" (click)="closeModal()" [attr.aria-label]="'breathingExercises.close' | translate">
+          <i class="fa-solid fa-times"></i>
+        </button>
+      </div>
+
+      <div class="modal-body exercise-view">
+        <!-- Visual Breathing Guide -->
+        <div class="breathing-visual">
+          <div class="breathing-circle-container">
+            <div 
+              class="breathing-circle" 
+              [style.background]="'radial-gradient(circle, ' + selectedExercise()!.color + '40, ' + selectedExercise()!.color + '10)'"
+              [style.transform]="'scale(' + breathScale() + ')'"
+              [style.transition]="isRunning() && !isPaused() ? 'transform ' + secondsLeft() + 's ease-in-out' : 'none'"
+            >
+              <div class="breathing-center" [style.border-color]="selectedExercise()!.color">
+                <div class="phase-text">{{ getPhaseTranslationKey() | translate }}</div>
+                <div class="seconds-text">{{ secondsLeft() }}</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="breathing-instruction">
+            @if (currentPhase() === 'inhale') {
+              <i class="fa-solid fa-arrow-up instruction-icon"></i>
+              <span>{{ 'breathingExercises.instructions.inhale' | translate }}</span>
+            } @else if (currentPhase() === 'exhale') {
+              <i class="fa-solid fa-arrow-down instruction-icon"></i>
+              <span>{{ 'breathingExercises.instructions.exhale' | translate }}</span>
+            } @else {
+              <i class="fa-solid fa-pause instruction-icon"></i>
+              <span>{{ 'breathingExercises.instructions.hold' | translate }}</span>
+            }
+          </div>
+        </div>
+
+        <!-- Progress Info -->
+        <div class="progress-section">
+          <div class="progress-info">
+            <div class="info-item">
+              <span class="info-label">{{ 'breathingExercises.cycle' | translate }}</span>
+              <span class="info-value">{{ currentCycle() }} / {{ selectedExercise()!.cycles }}</span>
+            </div>
+            <div class="info-item">
+              <span class="info-label">{{ 'breathingExercises.time' | translate }}</span>
+              <span class="info-value">{{ elapsedSeconds() }}s / {{ totalSeconds() }}s</span>
+            </div>
+          </div>
+
+          <div class="progress-bar-container">
+            <div class="progress-bar-fill" [style.width.%]="progress()" [style.background-color]="selectedExercise()!.color"></div>
+          </div>
+        </div>
+
+        <!-- Controls -->
+        <div class="controls">
+          @if (!isRunning()) {
+            <button class="btn-control btn-primary" (click)="start()" [style.background-color]="selectedExercise()!.color">
+              <i class="fa-solid fa-play me-2"></i>
+              {{ 'breathingExercises.startExercise' | translate }}
+            </button>
+          } @else if (isPaused()) {
+            <button class="btn-control btn-success" (click)="resume()">
+              <i class="fa-solid fa-play me-2"></i>
+              {{ 'breathingExercises.resume' | translate }}
+            </button>
+          } @else {
+            <button class="btn-control btn-warning" (click)="pause()">
+              <i class="fa-solid fa-pause me-2"></i>
+              {{ 'breathingExercises.pause' | translate }}
+            </button>
+          }
+          
+          <button class="btn-control btn-secondary" (click)="stop()">
+            <i class="fa-solid fa-stop me-2"></i>
+            {{ 'breathingExercises.stop' | translate }}
+          </button>
+        </div>
+      </div>
+    }
+
+  </div>
+</div>
