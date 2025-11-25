@@ -542,5 +542,193 @@
         "emotional": "El bienestar emocional necesita atención. Considera prácticas de mindfulness y conectarte con personas que te apoyen."
       }
     }
+  },
+  "routines": {
+    "title": "Rutinas Diarias",
+    "subtitle": "Ejercicios simples para reducir el estrés durante tu día",
+    "completed": "Completado",
+    "filters": {
+      "all": "Todas",
+      "morning": "Mañana",
+      "work": "Trabajo",
+      "evening": "Noche",
+      "anytime": "Cualquier momento"
+    },
+    "difficulty": {
+      "easy": "Fácil",
+      "medium": "Medio",
+      "hard": "Difícil"
+    },
+    "categories": {
+      "morning": "Mañana",
+      "work": "Trabajo",
+      "evening": "Noche",
+      "anytime": "Cualquier momento"
+    },
+    "list": {
+      "breathing": {
+        "title": "Respiración Profunda",
+        "description": "Calma tu mente y cuerpo con respiración controlada",
+        "steps": [
+          "Encuentra un lugar tranquilo y cómodo",
+          "Cierra los ojos y relaja tus hombros",
+          "Inhala lentamente por la nariz durante 4 segundos",
+          "Mantén la respiración durante 4 segundos",
+          "Exhala lentamente por la boca durante 6 segundos",
+          "Repite durante 5 minutos"
+        ],
+        "benefits": [
+          "Reduce la ansiedad y el estrés",
+          "Disminuye la presión arterial",
+          "Mejora el enfoque y la claridad mental",
+          "Induce la relajación"
+        ]
+      },
+      "stretching": {
+        "title": "Estiramiento Matutino",
+        "description": "Comienza tu día con energía y flexibilidad",
+        "steps": [
+          "Ponte de pie y estira los brazos hacia arriba",
+          "Gira suavemente el cuello en círculos",
+          "Estira los brazos hacia los lados",
+          "Inclínate lateralmente, estirando cada lado",
+          "Haz inclinaciones hacia adelante, tocando los dedos de los pies",
+          "Termina con rotaciones de cadera"
+        ],
+        "benefits": [
+          "Activa la circulación",
+          "Reduce la rigidez muscular",
+          "Mejora la flexibilidad",
+          "Aumenta la energía"
+        ]
+      },
+      "meditation": {
+        "title": "Meditación Rápida",
+        "description": "Encuentra tu paz interior en solo minutos",
+        "steps": [
+          "Siéntate en una posición cómoda",
+          "Cierra los ojos y relaja tu cuerpo",
+          "Concéntrate en tu respiración",
+          "Cuando surjan pensamientos, reconócelos y déjalos ir",
+          "Mantén el enfoque en tu respiración",
+          "Abre los ojos lentamente cuando termines"
+        ],
+        "benefits": [
+          "Reduce el estrés mental",
+          "Mejora la concentración",
+          "Promueve el bienestar emocional",
+          "Cultiva la atención plena"
+        ]
+      },
+      "walking": {
+        "title": "Caminata Activa",
+        "description": "Mueve tu cuerpo y despeja tu mente",
+        "steps": [
+          "Sal de tu espacio de trabajo",
+          "Camina a un ritmo cómodo",
+          "Observa tu entorno con atención plena",
+          "Respira profundamente mientras caminas",
+          "Estírate suavemente al terminar"
+        ],
+        "benefits": [
+          "Mejora el estado de ánimo",
+          "Aumenta la energía",
+          "Reduce la tensión muscular",
+          "Despeja la mente"
+        ]
+      },
+      "visualRest": {
+        "title": "Descanso Visual",
+        "description": "Alivia la fatiga ocular por pantallas",
+        "steps": [
+          "Mira un objeto distante durante 20 segundos",
+          "Cierra los ojos y descánsalos",
+          "Masajea suavemente tus sienes",
+          "Parpadea varias veces",
+          "Mira a diferentes distancias",
+          "Repite el ciclo"
+        ],
+        "benefits": [
+          "Reduce la fatiga ocular",
+          "Previene dolores de cabeza",
+          "Mejora la concentración",
+          "Previene el estrés visual"
+        ]
+      },
+      "gratitude": {
+        "title": "Práctica de Gratitud",
+        "description": "Termina tu día con mentalidad positiva",
+        "steps": [
+          "Siéntate o acuéstate cómodamente",
+          "Piensa en tres cosas positivas de tu día",
+          "Reflexiona sobre por qué son significativas",
+          "Siente gratitud por esos momentos",
+          "Escríbelas si lo deseas",
+          "Ve a dormir con este sentimiento positivo"
+        ],
+        "benefits": [
+          "Mejora el estado de ánimo",
+          "Promueve un mejor sueño",
+          "Cultiva el optimismo",
+          "Reduce la ansiedad"
+        ]
+      },
+      "muscleRelaxation": {
+        "title": "Relajación Muscular",
+        "description": "Libera la tensión física acumulada",
+        "steps": [
+          "Acuéstate cómodamente",
+          "Tensa los pies durante 5 segundos, luego relaja",
+          "Tensa las piernas, luego suelta",
+          "Continúa con cada grupo muscular hacia arriba",
+          "Incluye brazos, hombros, cuello y rostro",
+          "Siente la relajación completa al final"
+        ],
+        "benefits": [
+          "Reduce la tensión muscular",
+          "Mejora la calidad del sueño",
+          "Disminuye el estrés físico",
+          "Promueve relajación profunda"
+        ]
+      },
+      "mindfulCoffee": {
+        "title": "Café Consciente",
+        "description": "Transforma tu pausa de café en un momento de calma",
+        "steps": [
+          "Prepara tu bebida favorita",
+          "Observa el color, aroma y temperatura",
+          "Toma el primer sorbo lentamente",
+          "Siente la temperatura y sabor en tu boca",
+          "Respira entre cada sorbo",
+          "Disfruta cada momento sin distracciones"
+        ],
+        "benefits": [
+          "Practica la atención plena",
+          "Reduce la ansiedad matutina",
+          "Mejora el enfoque",
+          "Crea un inicio tranquilo"
+        ]
+      }
+    },
+    "modal": {
+      "close": "Cerrar",
+      "markComplete": "Marcar como Completada",
+      "alreadyCompleted": "¡Rutina completada hoy! Excelente trabajo 🎉",
+      "cancelCompletion": "Cancelar completada",
+      "duration": "Duración",
+      "difficulty": "Dificultad",
+      "category": "Categoría",
+      "steps": "Pasos a seguir",
+      "benefits": "Beneficios"
+    },
+    "congratulations": {
+      "title": "¡Felicidades!",
+      "message": "Has completado todas las rutinas de hoy. ¡Eso es todo por hoy! 🎉",
+      "routinesCompleted": "Rutinas completadas",
+      "minutesDedicated": "Minutos dedicados",
+      "motivationalMessage": "Tu bienestar es importante. Sigue así y verás grandes cambios en tu vida.",
+      "understood": "Entendido",
+      "redoActivities": "Volver a hacer actividades"
+    }
   }
 }

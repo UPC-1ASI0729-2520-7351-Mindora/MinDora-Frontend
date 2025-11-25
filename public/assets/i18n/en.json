@@ -561,5 +561,217 @@
         "emotional": "Emotional well-being needs attention. Consider mindfulness practices and connecting with supportive people."
       }
     }
+  },
+  "routines": {
+    "title": "Daily Routines",
+    "subtitle": "Simple exercises to reduce stress throughout your day",
+    "completed": "Completed",
+    "filters": {
+      "all": "All",
+      "morning": "Morning",
+      "work": "Work",
+      "evening": "Evening",
+      "anytime": "Anytime"
+    },
+    "difficulty": {
+      "easy": "Easy",
+      "medium": "Medium",
+      "hard": "Hard"
+    },
+    "categories": {
+      "morning": "Morning",
+      "work": "Work",
+      "evening": "Evening",
+      "anytime": "Anytime"
+    },
+    "list": {
+      "breathing": {
+        "title": "Deep Breathing",
+        "description": "Calm your mind and body with controlled breathing",
+        "category": "anytime",
+        "difficulty": "easy",
+        "duration": "5 min",
+        "steps": [
+          "Find a quiet and comfortable place",
+          "Close your eyes and relax your shoulders",
+          "Inhale slowly through your nose for 4 seconds",
+          "Hold your breath for 4 seconds",
+          "Exhale slowly through your mouth for 6 seconds",
+          "Repeat for 5 minutes"
+        ],
+        "benefits": [
+          "Reduces anxiety and stress",
+          "Lowers blood pressure",
+          "Improves focus and clarity",
+          "Induces relaxation"
+        ]
+      },
+      "stretching": {
+        "title": "Morning Stretching",
+        "description": "Start your day with energy and flexibility",
+        "category": "morning",
+        "difficulty": "easy",
+        "duration": "10 min",
+        "steps": [
+          "Stand up and stretch your arms upward",
+          "Gently rotate your neck in circles",
+          "Stretch your arms to the sides",
+          "Bend sideways, stretching each side",
+          "Do forward bends, touching your toes",
+          "Finish with hip rotations"
+        ],
+        "benefits": [
+          "Activates circulation",
+          "Reduces muscle stiffness",
+          "Improves flexibility",
+          "Increases energy"
+        ]
+      },
+      "meditation": {
+        "title": "Quick Meditation",
+        "description": "Find your inner peace in just minutes",
+        "category": "anytime",
+        "difficulty": "easy",
+        "duration": "10 min",
+        "steps": [
+          "Sit in a comfortable position",
+          "Close your eyes and relax your body",
+          "Focus on your breathing",
+          "When thoughts arise, acknowledge them and let them go",
+          "Maintain focus on your breath",
+          "Slowly open your eyes when finished"
+        ],
+        "benefits": [
+          "Reduces mental stress",
+          "Improves concentration",
+          "Promotes emotional well-being",
+          "Cultivates mindfulness"
+        ]
+      },
+      "walking": {
+        "title": "Active Walk",
+        "description": "Move your body and clear your mind",
+        "category": "work",
+        "difficulty": "easy",
+        "duration": "15 min",
+        "steps": [
+          "Leave your workspace",
+          "Walk at a comfortable pace",
+          "Observe your surroundings mindfully",
+          "Breathe deeply as you walk",
+          "Stretch gently after finishing"
+        ],
+        "benefits": [
+          "Improves mood",
+          "Increases energy",
+          "Reduces muscle tension",
+          "Clears the mind"
+        ]
+      },
+      "visualRest": {
+        "title": "Visual Rest",
+        "description": "Relieve eye strain from screens",
+        "category": "work",
+        "difficulty": "easy",
+        "duration": "5 min",
+        "steps": [
+          "Look at a distant object for 20 seconds",
+          "Close your eyes and rest them",
+          "Gently massage your temples",
+          "Blink several times",
+          "Look at different distances",
+          "Repeat the cycle"
+        ],
+        "benefits": [
+          "Reduces eye fatigue",
+          "Prevents headaches",
+          "Improves concentration",
+          "Prevents visual stress"
+        ]
+      },
+      "gratitude": {
+        "title": "Gratitude Practice",
+        "description": "End your day with a positive mindset",
+        "category": "evening",
+        "difficulty": "easy",
+        "duration": "10 min",
+        "steps": [
+          "Sit or lie down comfortably",
+          "Think of three positive things from your day",
+          "Reflect on why they are meaningful",
+          "Feel gratitude for those moments",
+          "Write them down if desired",
+          "Go to sleep with this positive feeling"
+        ],
+        "benefits": [
+          "Improves mood",
+          "Promotes better sleep",
+          "Cultivates optimism",
+          "Reduces anxiety"
+        ]
+      },
+      "muscleRelaxation": {
+        "title": "Muscle Relaxation",
+        "description": "Release accumulated physical tension",
+        "category": "evening",
+        "difficulty": "medium",
+        "duration": "15 min",
+        "steps": [
+          "Lie down comfortably",
+          "Tense your feet for 5 seconds, then relax",
+          "Tense your legs, then release",
+          "Continue with each muscle group upward",
+          "Include arms, shoulders, neck, and face",
+          "Feel the full relaxation at the end"
+        ],
+        "benefits": [
+          "Reduces muscle tension",
+          "Improves sleep quality",
+          "Decreases physical stress",
+          "Promotes deep relaxation"
+        ]
+      },
+      "mindfulCoffee": {
+        "title": "Mindful Coffee",
+        "description": "Transform your coffee break into a moment of calm",
+        "category": "morning",
+        "difficulty": "easy",
+        "duration": "10 min",
+        "steps": [
+          "Prepare your favorite beverage",
+          "Observe the color, aroma, and temperature",
+          "Take the first sip slowly",
+          "Feel the temperature and flavor in your mouth",
+          "Breathe between each sip",
+          "Enjoy each moment without distractions"
+        ],
+        "benefits": [
+          "Practices mindfulness",
+          "Reduces morning anxiety",
+          "Improves focus",
+          "Creates a peaceful start"
+        ]
+      }
+    },
+    "modal": {
+      "close": "Close",
+      "markComplete": "Mark as Completed",
+      "alreadyCompleted": "Routine completed today! Excellent work 🎉",
+      "cancelCompletion": "Cancel completion",
+      "duration": "Duration",
+      "difficulty": "Difficulty",
+      "category": "Category",
+      "steps": "Steps to Follow",
+      "benefits": "Benefits"
+    },
+    "congratulations": {
+      "title": "Congratulations!",
+      "message": "You have completed all of today's routines. That's all for today! 🎉",
+      "routinesCompleted": "Routines completed",
+      "minutesDedicated": "Minutes dedicated",
+      "motivationalMessage": "Your well-being is important. Keep it up and you will see great changes in your life.",
+      "understood": "Got it",
+      "redoActivities": "Redo activities"
+    }
   }
 }

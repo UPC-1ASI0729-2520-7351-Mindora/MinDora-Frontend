@@ -529,16 +529,42 @@
           <h4 class="mb-4">{{ 'coaching.appointments.upcoming' | translate }}</h4>
           @if (upcomingAppointments.length > 0) { @for (appointment of upcomingAppointments; track
           appointment.id) {
-          <div class="card shadow-sm mb-3">
-            <div class="card-body">
+          <div class="card shadow-sm mb-3 appointment-card hover-lift">
+            <div class="card-body p-4">
               <div class="row align-items-center">
-                <div class="col-md-8">
-                  <h5 class="mb-2">{{ appointment.psychologist }}</h5>
-                  <p class="text-muted mb-2">
-                    <i class="fa-solid fa-calendar me-2"></i>
-                    {{ appointment.date }} - {{ appointment.time }}
-                  </p>
-                  <span class="badge bg-primary">{{ appointment.type }}</span>
+                <div class="col-auto">
+                  <img 
+                    [src]="getPsychologistImage(appointment.psychologist)"
+                    [alt]="appointment.psychologist"
+                    class="rounded-circle appointment-avatar"
+                    width="80"
+                    height="80"
+                  />
+                </div>
+                <div class="col">
+                  <div class="d-flex justify-content-between align-items-start mb-2">
+                    <div>
+                      <h5 class="mb-1 fw-bold">{{ appointment.psychologist }}</h5>
+                      <span class="badge bg-primary mb-2">
+                        <i class="fa-solid fa-video me-1"></i>
+                        {{ appointment.type }}
+                      </span>
+                    </div>
+                    <span class="badge bg-success-subtle text-success px-3 py-2">
+                      <i class="fa-solid fa-clock me-1"></i>
+                      Próxima
+                    </span>
+                  </div>
+                  <div class="appointment-details">
+                    <p class="mb-2 text-muted">
+                      <i class="fa-solid fa-calendar-day me-2 text-primary"></i>
+                      <strong>{{ appointment.date }}</strong>
+                    </p>
+                    <p class="mb-0 text-muted">
+                      <i class="fa-solid fa-clock me-2 text-primary"></i>
+                      <strong>{{ appointment.time }}</strong>
+                    </p>
+                  </div>
                 </div>
                 <!--<div class="col-md-4 text-md-end">
                   <button class="btn btn-success mb-2 w-100">
@@ -549,28 +575,32 @@
                     {{ 'coaching.appointments.reschedule' | translate }}
                   </button>
                 </div>-->
-                <div class="col-md-4 text-md-end">
-  <button class="btn btn-success mb-2 w-100">
-    <i class="fa-solid fa-video me-2"></i>
-    {{ 'coaching.appointments.joinVideo' | translate }}
-  </button>
-
-<a class="btn btn-outline-secondary btn-sm w-100"
-     [href]="icsFor(appointment)"
-     download="mindora-appointment.ics">
-    {{ 'coaching.appointments.addToCalendar' | translate }}
-</a>
-
-  <button class="btn btn-outline-secondary btn-sm w-100 mb-2"
-          (click)="openReschedule(appointment)">
-    {{ 'coaching.appointments.reschedule' | translate }}
-  </button>
-
-  <button class="btn btn-outline-danger btn-sm w-100"
-          (click)="openCancel(appointment)">
-    {{ 'coaching.appointments.cancel' | translate }}
-  </button>
-</div>
+              </div>
+              <div class="row mt-3">
+                <div class="col-12">
+                  <div class="d-flex gap-2 flex-wrap">
+                    <button class="btn btn-success flex-grow-1">
+                      <i class="fa-solid fa-video me-2"></i>
+                      {{ 'coaching.appointments.joinVideo' | translate }}
+                    </button>
+                    <a class="btn btn-outline-primary"
+                       [href]="icsFor(appointment)"
+                       download="mindora-appointment.ics"
+                       title="Agregar al calendario">
+                      <i class="fa-solid fa-calendar-plus"></i>
+                    </a>
+                    <button class="btn btn-outline-secondary"
+                            (click)="openReschedule(appointment)"
+                            title="Reprogramar">
+                      <i class="fa-solid fa-clock-rotate-left"></i>
+                    </button>
+                    <button class="btn btn-outline-danger"
+                            (click)="openCancel(appointment)"
+                            title="Cancelar cita">
+                      <i class="fa-solid fa-xmark"></i>
+                    </button>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -590,20 +620,36 @@
           @if (pastAppointments.length > 0) {
           <h4 class="mb-4 mt-5">{{ 'coaching.appointments.past' | translate }}</h4>
           @for (appointment of pastAppointments; track appointment.id) {
-          <div class="card shadow-sm mb-3 opacity-75">
-            <div class="card-body">
+          <div class="card shadow-sm mb-3 past-appointment-card">
+            <div class="card-body p-4">
               <div class="row align-items-center">
-                <div class="col-md-8">
-                  <h5 class="mb-2">{{ appointment.psychologist }}</h5>
-                  <p class="text-muted mb-0">
-                    <i class="fa-solid fa-calendar me-2"></i>
-                    {{ appointment.date }} - {{ appointment.time }}
-                  </p>
+                <div class="col-auto">
+                  <img 
+                    [src]="getPsychologistImage(appointment.psychologist)"
+                    [alt]="appointment.psychologist"
+                    class="rounded-circle appointment-avatar opacity-75"
+                    width="70"
+                    height="70"
+                  />
                 </div>
-                <div class="col-md-4 text-md-end">
-                  <button class="btn btn-outline-secondary btn-sm">
-                    {{ 'coaching.profile.writeReview' | translate }}
-                  </button>
+                <div class="col">
+                  <div class="d-flex justify-content-between align-items-start">
+                    <div>
+                      <h5 class="mb-1">{{ appointment.psychologist }}</h5>
+                      <p class="text-muted mb-2">
+                        <i class="fa-solid fa-calendar-check me-2"></i>
+                        {{ appointment.date }} - {{ appointment.time }}
+                      </p>
+                      <span class="badge bg-secondary">
+                        <i class="fa-solid fa-check me-1"></i>
+                        Completada
+                      </span>
+                    </div>
+                    <button class="btn btn-outline-primary btn-sm">
+                      <i class="fa-solid fa-star me-2"></i>
+                      {{ 'coaching.profile.writeReview' | translate }}
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
@@ -614,47 +660,16 @@
     </div>
   </section>
   }
-  <!-- Overlay simple -->
-@if (showBookingModal()) {
-  <div class="position-fixed top-0 start-0 w-100 h-100 d-flex align-items-center justify-content-center"
-       style="background: rgba(0,0,0,.5); z-index: 2000;">
-    <div class="card shadow" style="max-width: 520px; width: 92%;">
-      <div class="card-header d-flex justify-content-between align-items-center">
-        <h5 class="mb-0">
-          <i class="fa-solid fa-calendar-plus me-2" aria-hidden="true"></i>
-          {{ selectedPsychologist?.name }}
-        </h5>
-        <button class="btn btn-sm btn-outline-secondary" (click)="closeBooking()" aria-label="Cerrar">✕</button>
-      </div>
-      <div class="card-body">
-        @if (bookingError()) {
-          <div class="alert alert-danger py-2">{{ bookingError() }}</div>
-        }
-        <div class="mb-3">
-          <label class="form-label">{{ 'coaching.profile.selectDate' | translate }}</label>
-          <input type="date" class="form-control" [attr.min]="minDate"
-                 [ngModel]="bookingDate()" (ngModelChange)="bookingDate.set($event)" />
-        </div>
-        <div class="mb-3">
-          <label class="form-label">{{ 'coaching.profile.selectTime' | translate }}</label>
-          <input type="time" class="form-control"
-                 [ngModel]="bookingTime()" (ngModelChange)="bookingTime.set($event)" />
-        </div>
-        <div class="d-grid gap-2">
-          <button class="btn btn-primary" (click)="confirmBooking()">
-            {{ 'coaching.profile.confirmBooking' | translate }}
-          </button>
-          <button class="btn btn-outline-secondary" (click)="closeBooking()">
-            Cancelar
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
-}
-<!----------------------->
+  
+  <!-- Modal completo para crear cita -->
+  @if (showCreateAppointmentModal()) {
+  <app-create-appointment-modal
+    (close)="onAppointmentModalClose()"
+    (created)="onAppointmentCreated($event)"
+  ></app-create-appointment-modal>
+  }
 
-<!-- Modal simple: Breathing -->
+  <!-- Overlay simple: Breathing -->
 @if (showBreathModal()) {
   <div class="position-fixed top-0 start-0 w-100 h-100 d-flex align-items-center justify-content-center"
        style="background: rgba(0,0,0,.5); z-index: 2000;">

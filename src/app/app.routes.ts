@@ -8,6 +8,7 @@ import { AssessmentTrackingComponent } from './assessment-tracking/assessment-tr
 import { ProfileSettingsComponent } from './profile-settings/profile-settings.component';
 import { AuthGuard } from './guards/auth.guard';
 import { SubscriptionComponent } from './subscription/subscription.component';
+import { RoutinesComponent } from './routines/routines.component';
 
 export const routes: Routes = [
   { path: '', component: LandingComponent },
@@ -16,6 +17,7 @@ export const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'coaching', component: Coaching, canActivate: [AuthGuard] },
+  { path: 'routines', component: RoutinesComponent, canActivate: [AuthGuard] },
   { path: 'assessment-tracking', component: AssessmentTrackingComponent, canActivate: [AuthGuard] },
   { path: 'profile-settings', component: ProfileSettingsComponent, canActivate: [AuthGuard] },
 

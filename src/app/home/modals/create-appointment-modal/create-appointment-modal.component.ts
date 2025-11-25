@@ -198,12 +198,12 @@ export class CreateAppointmentModalComponent implements OnInit {
         notes: formValue.notes,
       };
 
-      // Save to localStorage (temporary solution)
-      this.saveAppointmentToLocalStorage(appointmentData);
-
+      // Don't save here - let parent component handle it via AppointmentsService
+      // This ensures all appointments go through the same service
+      
       this.submitSuccess.set(true);
       
-      // Emit created event
+      // Emit created event (parent will save via AppointmentsService)
       this.created.emit(appointmentData);
 
       // Close modal after 2 seconds
@@ -215,23 +215,6 @@ export class CreateAppointmentModalComponent implements OnInit {
       this.submitError.set('Failed to create appointment. Please try again.');
       this.isSubmitting.set(false);
     }
-  }
-
-  private saveAppointmentToLocalStorage(appointment: AppointmentData): void {
-    const appointments = this.getAppointmentsFromLocalStorage();
-    const newAppointment = {
-      id: Date.now(),
-      ...appointment,
-      status: 'upcoming',
-      createdAt: new Date().toISOString(),
-    };
-    appointments.push(newAppointment);
-    localStorage.setItem('neurozen_appointments', JSON.stringify(appointments));
-  }
-
-  private getAppointmentsFromLocalStorage(): any[] {
-    const data = localStorage.getItem('neurozen_appointments');
-    return data ? JSON.parse(data) : [];
   }
 
   private delay(ms: number): Promise<void> {

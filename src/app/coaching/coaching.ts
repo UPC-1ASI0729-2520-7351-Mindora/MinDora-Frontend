@@ -3,6 +3,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { AppointmentsService } from './appointments.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { CreateAppointmentModalComponent, AppointmentData } from '../home/modals/create-appointment-modal/create-appointment-modal.component';
 
 
 interface Psychologist {
@@ -71,7 +72,7 @@ interface Group {
 
 @Component({
   selector: 'app-coaching',
-  imports: [TranslateModule, CommonModule, FormsModule],
+  imports: [TranslateModule, CommonModule, FormsModule, CreateAppointmentModalComponent],
   templateUrl: './coaching.html',
   styleUrl: './coaching.css',
 })
@@ -409,35 +410,78 @@ private saveGroups() {
 
 
 
-  // lo que hacemos es desde la tarjeta del psicólogo abrir un modal simple (sin librerías), 
-  // elegir fecha/hora, validar conflictos y guardar en localStorage
+  // Modal completo de crear cita (igual que en Home)
+  showCreateAppointmentModal = signal(false);
+  selectedPsychologistForBooking: Psychologist | null = null;
+
+  // Mantener el modal simple para compatibilidad (ahora oculto)
   showBookingModal = signal(false);
-bookingDate = signal<string>('');
+  bookingDate = signal<string>('');
+  bookingTime = signal<string>('');
+  bookingError = signal<string>('');
+  selectedPsychologist: Psychologist | null = null;
 
-// ===== US09: Reprogramar / Cancelar cita =====
-showCancelModal = signal(false);
-showRescheduleModal = signal(false);
-apptToEdit = signal<Appointment | null>(null);
+  // ===== US09: Reprogramar / Cancelar cita =====
+  showCancelModal = signal(false);
+  showRescheduleModal = signal(false);
+  apptToEdit = signal<Appointment | null>(null);
 
-rescheduleDate = signal<string>(''); // yyyy-mm-dd
-rescheduleTime = signal<string>(''); // HH:mm
-rescheduleError = signal<string>('');
-// ===== fin US09 =====
+  rescheduleDate = signal<string>(''); // yyyy-mm-dd
+  rescheduleTime = signal<string>(''); // HH:mm
+  rescheduleError = signal<string>('');
+  // ===== fin US09 =====
 
-// ===== US15 =====
-showShareModal = signal(false);
-shareEmail = signal<string>('');
-sharePeriod = signal<'30d'|'all'>('30d');
-shareError = signal<string>('');
-shareLink = signal<string | null>(null);
-shareCopied = signal(false);
-private SHARED_KEY = 'mindora_shared_reports';
-// ==========
+  // ===== US15 =====
+  showShareModal = signal(false);
+  shareEmail = signal<string>('');
+  sharePeriod = signal<'30d'|'all'>('30d');
+  shareError = signal<string>('');
+  shareLink = signal<string | null>(null);
+  shareCopied = signal(false);
+  private SHARED_KEY = 'mindora_shared_reports';
+  // ==========
 
-bookingTime = signal<string>('');
-bookingError = signal<string>('');
-selectedPsychologist: Psychologist | null = null;
-// ===== US06=====
+openBooking(p: Psychologist) {
+  // Abrir el modal completo de crear cita
+  this.selectedPsychologistForBooking = p;
+  this.showCreateAppointmentModal.set(true);
+}
+
+// Método para cerrar el modal completo
+onAppointmentModalClose() {
+  this.showCreateAppointmentModal.set(false);
+  this.selectedPsychologistForBooking = null;
+}
+
+// Método cuando se crea una cita desde el modal
+onAppointmentCreated(appointmentData: AppointmentData) {
+  console.log('Cita creada desde coaching:', appointmentData);
+  
+  // Crear nueva cita con el formato correcto
+  const newAppt: Appointment = {
+    id: Date.now(),
+    psychologist: appointmentData.psychologistName,
+    date: appointmentData.date,
+    time: appointmentData.time,
+    type: appointmentData.type === 'video' ? 'Videollamada' : 
+          appointmentData.type === 'phone' ? 'Teléfono' : 'Presencial',
+    status: 'upcoming',
+  };
+
+  // Agregar a la lista
+  const list: Appointment[] = [...this.appointments(), newAppt];
+  this.appointments.set(list);
+  this.apptsSvc.save(list as any);
+  
+  // Cerrar modal
+  this.showCreateAppointmentModal.set(false);
+  this.selectedPsychologistForBooking = null;
+  
+  // Cambiar a la pestaña de citas para ver la nueva cita
+  this.setActiveTab('appointments');
+}
+
+// ===== US06: Ver perfil del psicólogo =====
 showProfileModal = signal(false);
 selectedProfile: Psychologist | null = null;
 
@@ -452,26 +496,22 @@ closeProfile() {
 }
 // ===== fin US06 =====
 
-//private APPTS_KEY = 'mindora_appointments';
-
 ngOnInit() {
   const stored = this.apptsSvc.load();
   const chRaw = localStorage.getItem(this.CHALLENGE_KEY);
-if (chRaw) {
-  try { this.challenges.set(JSON.parse(chRaw)); } catch {}
-}
-const trigRaw = localStorage.getItem(this.TRIGGERS_KEY);
-if (trigRaw) {
-  try { this.triggers.set(JSON.parse(trigRaw)); } catch {}
-}
-const gRaw = localStorage.getItem(this.GROUPS_KEY);
-if (gRaw) {
-  try { this.groups.set(JSON.parse(gRaw)); } catch {}
-}
+  if (chRaw) {
+    try { this.challenges.set(JSON.parse(chRaw)); } catch {}
+  }
+  const trigRaw = localStorage.getItem(this.TRIGGERS_KEY);
+  if (trigRaw) {
+    try { this.triggers.set(JSON.parse(trigRaw)); } catch {}
+  }
+  const gRaw = localStorage.getItem(this.GROUPS_KEY);
+  if (gRaw) {
+    try { this.groups.set(JSON.parse(gRaw)); } catch {}
+  }
 
-
-this.loadSavedResources();
-
+  this.loadSavedResources();
 
   if (stored.length) {
     // Si hay guardadas, reemplaza las de demo
@@ -482,9 +522,7 @@ this.loadSavedResources();
   }
 }
 
-///////////
-
-// ===== US15 =====
+// ===== US15: Compartir reporte =====
 private buildReportCSV(period: '30d'|'all' = 'all'): string {
   const appts = this.appointments();
   const logsRaw = localStorage.getItem(this.BREATH_LOGS_KEY);
@@ -562,31 +600,8 @@ copyShareLink() {
     setTimeout(() => this.shareCopied.set(false), 1500);
   }).catch(() => {});
 }
-// ==========
-
 
 downloadReport() {
-  const appts = this.appointments();
-  const logsRaw = localStorage.getItem(this.BREATH_LOGS_KEY);
-  const logs: Array<{ ts: number; durationSec: number; type: string }> = logsRaw ? JSON.parse(logsRaw) : [];
-
-  const lines: string[] = [];
-  lines.push('Section,Date,Time,Detail,Status/Duration');
-
-  
-  // Citas
-  for (const a of appts) {
-    lines.push(`Appointment,${a.date},${a.time},"${a.psychologist}",${a.status}`);
-  }
-
-  // Respiración
-  for (const l of logs) {
-    const d = new Date(l.ts);
-    const date = d.toISOString().slice(0, 10);
-    const time = d.toTimeString().slice(0, 5);
-    lines.push(`Breathing,${date},${time},"${l.type}",${l.durationSec}s`);
-  }
-
   const csv = this.buildReportCSV('all');
   const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
   const url = URL.createObjectURL(blob);
@@ -598,8 +613,9 @@ downloadReport() {
   a.remove();
   URL.revokeObjectURL(url);
 }
+// ==========
 
-////////////
+// Challenges
 joinChallenge(id: number) {
   this.challenges.set(this.challenges().map(c => c.id === id ? { ...c, joined: true } : c));
   this.saveChallenges();
@@ -622,7 +638,8 @@ resetChallenge(id: number) {
   );
   this.saveChallenges();
 }
-////////////
+
+// Groups
 joinGroup(id: number) {
   this.groups.set(
     this.groups().map(g => g.id === id ? { ...g, joined: true, members: g.members + 1 } : g)
@@ -637,15 +654,7 @@ leaveGroup(id: number) {
   this.saveGroups();
 }
 
-
-openBooking(p: Psychologist) {
-  this.selectedPsychologist = p;
-  this.bookingDate.set('');
-  this.bookingTime.set('');
-  this.bookingError.set('');
-  this.showBookingModal.set(true);
-}
-
+// Métodos del modal simple antiguo (mantener por compatibilidad)
 
 closeBooking() {
   this.showBookingModal.set(false);
@@ -771,6 +780,36 @@ get filteredResources() {
       about:
         'Experta en prevención y recuperación de burnout, con enfoque en desarrollo de resiliencia.',
     },
+    {
+      id: 4,
+      name: 'Dr. Luis Fernández',
+      specialty: 'Relaciones',
+      rating: 4.7,
+      reviews: 89,
+      price: 48,
+      image: 'https://i.pravatar.cc/150?img=13',
+      experience: 10,
+      languages: ['Español', 'Inglés'],
+      nextAvailable: 'Mañana, 2:00 PM',
+      specialties: ['Relaciones', 'Comunicación', 'Conflictos interpersonales'],
+      about:
+        'Especialista en terapia de relaciones y comunicación efectiva, ayudando a mejorar vínculos personales y profesionales.',
+    },
+    {
+      id: 5,
+      name: 'Dra. Sofía López',
+      specialty: 'Equilibrio vida-trabajo',
+      rating: 4.9,
+      reviews: 134,
+      price: 52,
+      image: 'https://i.pravatar.cc/150?img=9',
+      experience: 11,
+      languages: ['Español', 'Inglés'],
+      nextAvailable: 'Hoy, 4:30 PM',
+      specialties: ['Equilibrio vida-trabajo', 'Gestión del tiempo', 'Bienestar integral'],
+      about:
+        'Experta en equilibrio entre vida personal y profesional, enfocada en estrategias de gestión del tiempo y bienestar.',
+    },
   ]);
 
   forumTopics = signal<ForumTopic[]>([
@@ -834,14 +873,30 @@ get filteredResources() {
     const filter = this.selectedFilter();
     const query = this.searchQuery().toLowerCase();
 
+    // Mapeo de filtros a términos de búsqueda en especialidades
+    const filterMap: Record<string, string[]> = {
+      'all': [],
+      'workStress': ['estrés laboral', 'burnout', 'estrés'],
+      'anxiety': ['ansiedad']
+    };
+
     return this.psychologists().filter((p) => {
-      const matchesFilter =
-        filter === 'all' ||
-        p.specialties.some((s) => s.toLowerCase().includes(filter.toLowerCase()));
+      let matchesFilter = false;
+      
+      if (filter === 'all') {
+        matchesFilter = true;
+      } else {
+        const searchTerms = filterMap[filter] || [];
+        matchesFilter = p.specialties.some((s) => 
+          searchTerms.some(term => s.toLowerCase().includes(term))
+        );
+      }
+
       const matchesSearch =
         query === '' ||
         p.name.toLowerCase().includes(query) ||
-        p.specialty.toLowerCase().includes(query);
+        p.specialty.toLowerCase().includes(query) ||
+        p.specialties.some(s => s.toLowerCase().includes(query));
 
       return matchesFilter && matchesSearch;
     });
@@ -853,5 +908,14 @@ get filteredResources() {
 
   get pastAppointments() {
     return this.appointments().filter((a) => a.status === 'past');
+  }
+
+  getPsychologistImage(name: string): string {
+    const psychologist = this.psychologists().find(p => p.name === name);
+    return psychologist?.image || 'https://i.pravatar.cc/150?img=0';
+  }
+
+  getPsychologistInfo(name: string) {
+    return this.psychologists().find(p => p.name === name);
   }
 }

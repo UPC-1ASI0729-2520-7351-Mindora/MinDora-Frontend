@@ -12,6 +12,7 @@ import {
   AppointmentData,
 } from './modals/create-appointment-modal/create-appointment-modal.component';
 import { AssessmentHistoryService } from '../services/assessment-history.service';
+import { AppointmentsService } from '../coaching/appointments.service';
 
 interface StressLevel {
   value: number; // 0-100
@@ -152,7 +153,8 @@ export class HomeComponent {
 
   constructor(
     private authService: AuthService,
-    private assessmentHistoryService: AssessmentHistoryService
+    private assessmentHistoryService: AssessmentHistoryService,
+    private appointmentsService: AppointmentsService
   ) {
     // Load latest assessment from history
     const latestAssessment = this.assessmentHistoryService.getLatestAssessment();
@@ -193,6 +195,26 @@ export class HomeComponent {
 
   onAppointmentCreated(appointmentData: AppointmentData) {
     console.log('Appointment created:', appointmentData);
+    
+    // Crear la cita en el formato correcto
+    const newAppointment = {
+      id: Date.now(),
+      psychologist: appointmentData.psychologistName,
+      date: appointmentData.date,
+      time: appointmentData.time,
+      type: appointmentData.type === 'video' ? 'Videollamada' : 
+            appointmentData.type === 'phone' ? 'Teléfono' : 'Presencial',
+      status: 'upcoming' as const,
+    };
+
+    // Cargar citas existentes y agregar la nueva
+    const currentAppointments = this.appointmentsService.load();
+    const updatedAppointments = [...currentAppointments, newAppointment];
+    
+    // Guardar usando el servicio compartido
+    this.appointmentsService.save(updatedAppointments);
+    
+    console.log('Cita guardada en el servicio compartido');
     // TODO: Refresh appointments list or show notification
   }
 
