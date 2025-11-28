@@ -9,6 +9,7 @@ import { ProfileSettingsComponent } from './profile-settings/profile-settings.co
 import { AuthGuard } from './guards/auth.guard';
 import { SubscriptionComponent } from './subscription/subscription.component';
 import { RoutinesComponent } from './routines/routines.component';
+import { ReportsComponent } from './reports/reports.component';
 
 export const routes: Routes = [
   { path: '', component: LandingComponent },
@@ -20,6 +21,7 @@ export const routes: Routes = [
   { path: 'routines', component: RoutinesComponent, canActivate: [AuthGuard] },
   { path: 'assessment-tracking', component: AssessmentTrackingComponent, canActivate: [AuthGuard] },
   { path: 'profile-settings', component: ProfileSettingsComponent, canActivate: [AuthGuard] },
+  { path: 'reports', component: ReportsComponent, canActivate: [AuthGuard] },
 
   // ➜ Aquí integras el nuevo
   { path: 'subscription/:plan', component: SubscriptionComponent, canActivate: [AuthGuard] },

@@ -1,0 +1,381 @@
+<div class="reports-page">
+  <!-- Header -->
+  <section class="page-header py-5">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-lg-8">
+          <h1 class="display-5 fw-bold mb-2">
+            <i class="fa-solid fa-chart-line me-3"></i>
+            {{ 'reports.title' | translate }}
+          </h1>
+          <p class="lead mb-0">{{ 'reports.subtitle' | translate }}</p>
+        </div>
+        <div class="col-lg-4 text-lg-end mt-3 mt-lg-0">
+          <button class="btn btn-outline-light me-2" (click)="goBack()">
+            <i class="fa-solid fa-arrow-left me-2"></i>
+            {{ 'reports.backToHome' | translate }}
+          </button>
+          <button class="btn btn-primary" (click)="openCreateModal()">
+            <i class="fa-solid fa-plus me-2"></i>
+            {{ 'reports.createNew' | translate }}
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Statistics Cards -->
+  <div class="container py-4">
+    <div class="row g-3">
+      <div class="col-md-3">
+        <div class="stat-card bg-primary text-white">
+          <div class="stat-icon">
+            <i class="fa-solid fa-file-lines"></i>
+          </div>
+          <div class="stat-content">
+            <h3>{{ statistics().total }}</h3>
+            <p>{{ 'reports.stats.totalReports' | translate }}</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="stat-card bg-success text-white">
+          <div class="stat-icon">
+            <i class="fa-solid fa-check-circle"></i>
+          </div>
+          <div class="stat-content">
+            <h3>{{ statistics().completed }}</h3>
+            <p>{{ 'reports.stats.completedTasks' | translate }}</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="stat-card bg-warning text-white">
+          <div class="stat-icon">
+            <i class="fa-solid fa-clock"></i>
+          </div>
+          <div class="stat-content">
+            <h3>{{ statistics().pending }}</h3>
+            <p>{{ 'reports.stats.pendingTasks' | translate }}</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="stat-card bg-danger text-white">
+          <div class="stat-icon">
+            <i class="fa-solid fa-exclamation-triangle"></i>
+          </div>
+          <div class="stat-content">
+            <h3>{{ statistics().blockers }}</h3>
+            <p>{{ 'reports.stats.blockers' | translate }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Filters and Search -->
+  <div class="container py-4">
+    <div class="card">
+      <div class="card-body">
+        <div class="row align-items-center">
+          <div class="col-md-6 mb-3 mb-md-0">
+            <div class="input-group">
+              <span class="input-group-text">
+                <i class="fa-solid fa-search"></i>
+              </span>
+              <input 
+                type="text" 
+                class="form-control" 
+                [placeholder]="'reports.searchPlaceholder' | translate"
+                (input)="onSearchChange($event)">
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="btn-group w-100" role="group">
+              <button 
+                type="button" 
+                class="btn btn-outline-primary"
+                [class.active]="filterType() === 'all'"
+                (click)="setFilter('all')">
+                <i class="fa-solid fa-list me-1"></i>
+                {{ 'reports.filters.all' | translate }}
+              </button>
+              @for (type of reportTypes; track type.value) {
+              <button 
+                type="button" 
+                class="btn btn-outline-primary"
+                [class.active]="filterType() === type.value"
+                (click)="setFilter(type.value)">
+                <i class="fa-solid" [class]="type.icon + ' me-1'"></i>
+                {{ type.label | translate }}
+              </button>
+              }
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Reports List -->
+  <div class="container pb-5">
+    @if (filteredReports().length > 0) {
+    <div class="row g-4">
+      @for (report of filteredReports(); track report.id) {
+      <div class="col-md-6 col-lg-4">
+        <div class="report-card" (click)="viewReport(report)">
+          <div class="report-header" [style.background]="getTypeInfo(report.type).color">
+            <i class="fa-solid" [class]="getTypeInfo(report.type).icon"></i>
+            <span class="report-type">{{ getTypeInfo(report.type).label | translate }}</span>
+          </div>
+          <div class="report-body">
+            <h5 class="report-title">{{ report.title }}</h5>
+            <p class="report-summary">{{ report.summary }}</p>
+            <div class="report-date">
+              <i class="fa-solid fa-calendar me-2"></i>
+              {{ report.reportDate | date:'dd/MM/yyyy' }}
+            </div>
+            <div class="report-stats mt-3">
+              <div class="stat-item">
+                <i class="fa-solid fa-check-circle text-success"></i>
+                <span>{{ report.completedTasks }}</span>
+              </div>
+              <div class="stat-item">
+                <i class="fa-solid fa-clock text-warning"></i>
+                <span>{{ report.pendingTasks }}</span>
+              </div>
+              <div class="stat-item">
+                <i class="fa-solid fa-exclamation-triangle text-danger"></i>
+                <span>{{ report.blockers }}</span>
+              </div>
+            </div>
+          </div>
+          <div class="report-footer">
+            <button class="btn btn-sm btn-outline-primary" (click)="viewReport(report); $event.stopPropagation()">
+              <i class="fa-solid fa-eye me-1"></i>
+              {{ 'reports.viewDetails' | translate }}
+            </button>
+            <button class="btn btn-sm btn-outline-danger" (click)="deleteReport(report.id!); $event.stopPropagation()">
+              <i class="fa-solid fa-trash"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+      }
+    </div>
+    } @else {
+    <div class="empty-state text-center py-5">
+      <i class="fa-solid fa-file-circle-plus fa-5x text-muted mb-4"></i>
+      <h3>{{ 'reports.noReports' | translate }}</h3>
+      <p class="text-muted mb-4">{{ 'reports.noReportsDescription' | translate }}</p>
+      <button class="btn btn-primary" (click)="openCreateModal()">
+        <i class="fa-solid fa-plus me-2"></i>
+        {{ 'reports.createFirst' | translate }}
+      </button>
+    </div>
+    }
+  </div>
+
+  <!-- Create Report Modal -->
+  @if (showCreateModal()) {
+  <div class="modal-overlay" (click)="closeCreateModal()">
+    <div class="modal-content" (click)="$event.stopPropagation()">
+      <div class="modal-header">
+        <h4>
+          <i class="fa-solid fa-plus-circle me-2"></i>
+          {{ 'reports.createNew' | translate }}
+        </h4>
+        <button class="btn-close" (click)="closeCreateModal()"></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="reportForm" (ngSubmit)="createReport()">
+          <div class="row">
+            <div class="col-md-8 mb-3">
+              <label class="form-label">{{ 'reports.form.title' | translate }} *</label>
+              <input 
+                type="text" 
+                class="form-control" 
+                formControlName="title"
+                [placeholder]="'reports.form.titlePlaceholder' | translate"
+                [class.is-invalid]="getFieldError('title')">
+              @if (getFieldError('title')) {
+              <div class="invalid-feedback">{{ getFieldError('title') }}</div>
+              }
+            </div>
+
+            <div class="col-md-4 mb-3">
+              <label class="form-label">{{ 'reports.form.type' | translate }} *</label>
+              <select class="form-select" formControlName="type">
+                @for (type of reportTypes; track type.value) {
+                <option [value]="type.value">{{ type.label | translate }}</option>
+                }
+              </select>
+            </div>
+
+            <div class="col-12 mb-3">
+              <label class="form-label">{{ 'reports.form.summary' | translate }} *</label>
+              <textarea 
+                class="form-control" 
+                formControlName="summary" 
+                rows="2"
+                [placeholder]="'reports.form.summaryPlaceholder' | translate"
+                [class.is-invalid]="getFieldError('summary')"></textarea>
+              @if (getFieldError('summary')) {
+              <div class="invalid-feedback">{{ getFieldError('summary') }}</div>
+              }
+            </div>
+
+            <div class="col-12 mb-3">
+              <label class="form-label">{{ 'reports.form.content' | translate }} *</label>
+              <textarea 
+                class="form-control" 
+                formControlName="content" 
+                rows="5"
+                [placeholder]="'reports.form.contentPlaceholder' | translate"
+                [class.is-invalid]="getFieldError('content')"></textarea>
+              @if (getFieldError('content')) {
+              <div class="invalid-feedback">{{ getFieldError('content') }}</div>
+              }
+            </div>
+
+            <div class="col-md-3 mb-3">
+              <label class="form-label">{{ 'reports.form.completedTasks' | translate }} *</label>
+              <input 
+                type="number" 
+                class="form-control" 
+                formControlName="completedTasks"
+                min="0"
+                [class.is-invalid]="getFieldError('completedTasks')">
+            </div>
+
+            <div class="col-md-3 mb-3">
+              <label class="form-label">{{ 'reports.form.pendingTasks' | translate }} *</label>
+              <input 
+                type="number" 
+                class="form-control" 
+                formControlName="pendingTasks"
+                min="0"
+                [class.is-invalid]="getFieldError('pendingTasks')">
+            </div>
+
+            <div class="col-md-3 mb-3">
+              <label class="form-label">{{ 'reports.form.blockers' | translate }} *</label>
+              <input 
+                type="number" 
+                class="form-control" 
+                formControlName="blockers"
+                min="0"
+                [class.is-invalid]="getFieldError('blockers')">
+            </div>
+
+            <div class="col-md-3 mb-3">
+              <label class="form-label">{{ 'reports.form.reportDate' | translate }} *</label>
+              <input 
+                type="date" 
+                class="form-control" 
+                formControlName="reportDate"
+                [class.is-invalid]="getFieldError('reportDate')">
+            </div>
+          </div>
+
+          <div class="d-flex justify-content-end gap-2 mt-4">
+            <button type="button" class="btn btn-outline-secondary" (click)="closeCreateModal()">
+              <i class="fa-solid fa-times me-2"></i>
+              {{ 'reports.form.cancel' | translate }}
+            </button>
+            <button type="submit" class="btn btn-primary">
+              <i class="fa-solid fa-save me-2"></i>
+              {{ 'reports.form.save' | translate }}
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  }
+
+  <!-- View Report Modal -->
+  @if (showViewModal() && selectedReport()) {
+  <div class="modal-overlay" (click)="closeViewModal()">
+    <div class="modal-content modal-lg" (click)="$event.stopPropagation()">
+      <div class="modal-header" [style.background]="getTypeInfo(selectedReport()!.type).color">
+        <h4 class="text-white">
+          <i class="fa-solid" [class]="getTypeInfo(selectedReport()!.type).icon + ' me-2'"></i>
+          {{ selectedReport()!.title }}
+        </h4>
+        <button class="btn-close btn-close-white" (click)="closeViewModal()"></button>
+      </div>
+      <div class="modal-body">
+        <div class="report-detail-header mb-4">
+          <div class="row">
+            <div class="col-md-6">
+              <p class="mb-2">
+                <strong>{{ 'reports.detail.type' | translate }}:</strong>
+                <span class="badge ms-2" [style.background]="getTypeInfo(selectedReport()!.type).color">
+                  {{ getTypeInfo(selectedReport()!.type).label | translate }}
+                </span>
+              </p>
+              <p class="mb-2">
+                <strong>{{ 'reports.detail.date' | translate }}:</strong>
+                {{ selectedReport()!.reportDate | date:'dd/MM/yyyy' }}
+              </p>
+            </div>
+            <div class="col-md-6">
+              <div class="stats-grid">
+                <div class="stat-box bg-success-subtle">
+                  <i class="fa-solid fa-check-circle text-success"></i>
+                  <div>
+                    <strong>{{ selectedReport()!.completedTasks }}</strong>
+                    <span>{{ 'reports.detail.completed' | translate }}</span>
+                  </div>
+                </div>
+                <div class="stat-box bg-warning-subtle">
+                  <i class="fa-solid fa-clock text-warning"></i>
+                  <div>
+                    <strong>{{ selectedReport()!.pendingTasks }}</strong>
+                    <span>{{ 'reports.detail.pending' | translate }}</span>
+                  </div>
+                </div>
+                <div class="stat-box bg-danger-subtle">
+                  <i class="fa-solid fa-exclamation-triangle text-danger"></i>
+                  <div>
+                    <strong>{{ selectedReport()!.blockers }}</strong>
+                    <span>{{ 'reports.detail.blockers' | translate }}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="report-section mb-4">
+          <h5>
+            <i class="fa-solid fa-file-lines me-2"></i>
+            {{ 'reports.detail.summary' | translate }}
+          </h5>
+          <p class="report-text">{{ selectedReport()!.summary }}</p>
+        </div>
+
+        <div class="report-section">
+          <h5>
+            <i class="fa-solid fa-align-left me-2"></i>
+            {{ 'reports.detail.content' | translate }}
+          </h5>
+          <p class="report-text">{{ selectedReport()!.content }}</p>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-outline-danger" (click)="deleteReport(selectedReport()!.id!); closeViewModal()">
+          <i class="fa-solid fa-trash me-2"></i>
+          {{ 'reports.detail.delete' | translate }}
+        </button>
+        <button class="btn btn-secondary" (click)="closeViewModal()">
+          <i class="fa-solid fa-times me-2"></i>
+          {{ 'reports.detail.close' | translate }}
+        </button>
+      </div>
+    </div>
+  </div>
+  }
+</div>

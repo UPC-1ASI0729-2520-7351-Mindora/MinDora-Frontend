@@ -1131,5 +1131,63 @@
                                          "upgradeNow":  "Mejorar ahora",
                                          "freePlan":  "Plan Gratis"
                                      }
-                        }
+                        },
+    "reports":  {
+                    "title":  "Reportes de Progreso",
+                    "subtitle":  "Gestiona y visualiza tus reportes laborales",
+                    "backToHome":  "Volver al inicio",
+                    "createNew":  "Crear reporte",
+                    "createFirst":  "Crear tu primer reporte",
+                    "noReports":  "No hay reportes disponibles",
+                    "noReportsDescription":  "Comienza a crear reportes para hacer seguimiento de tu progreso laboral",
+                    "searchPlaceholder":  "Buscar por título, resumen o contenido...",
+                    "viewDetails":  "Ver detalles",
+                    "stats":  {
+                                  "totalReports":  "Total de reportes",
+                                  "completedTasks":  "Tareas completadas",
+                                  "pendingTasks":  "Tareas pendientes",
+                                  "blockers":  "Bloqueadores"
+                              },
+                    "filters":  {
+                                    "all":  "Todos",
+                                    "daily":  "Diario",
+                                    "weekly":  "Semanal",
+                                    "monthly":  "Mensual",
+                                    "project":  "Proyecto",
+                                    "incident":  "Incidente"
+                                },
+                    "types":  {
+                                  "daily":  "Diario",
+                                  "weekly":  "Semanal",
+                                  "monthly":  "Mensual",
+                                  "project":  "Proyecto",
+                                  "incident":  "Incidente"
+                              },
+                    "form":  {
+                                 "title":  "Título",
+                                 "titlePlaceholder":  "Ej: Reporte Diario - Desarrollo Frontend",
+                                 "type":  "Tipo de reporte",
+                                 "summary":  "Resumen",
+                                 "summaryPlaceholder":  "Breve resumen de este reporte...",
+                                 "content":  "Contenido detallado",
+                                 "contentPlaceholder":  "Describe en detalle las actividades realizadas, logros y observaciones...",
+                                 "completedTasks":  "Tareas completadas",
+                                 "pendingTasks":  "Tareas pendientes",
+                                 "blockers":  "Bloqueadores",
+                                 "reportDate":  "Fecha del reporte",
+                                 "cancel":  "Cancelar",
+                                 "save":  "Guardar reporte"
+                             },
+                    "detail":  {
+                                   "type":  "Tipo",
+                                   "date":  "Fecha",
+                                   "completed":  "Completadas",
+                                   "pending":  "Pendientes",
+                                   "blockers":  "Bloqueadores",
+                                   "summary":  "Resumen",
+                                   "content":  "Contenido detallado",
+                                   "delete":  "Eliminar reporte",
+                                   "close":  "Cerrar"
+                               }
+                }
 }

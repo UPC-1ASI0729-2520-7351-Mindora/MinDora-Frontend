@@ -1155,5 +1155,63 @@
                                          "upgradeNow":  "Upgrade Now",
                                          "freePlan":  "Free Plan"
                                      }
-                        }
+                        },
+    "reports":  {
+                    "title":  "Progress Reports",
+                    "subtitle":  "Manage and visualize your work reports",
+                    "backToHome":  "Back to Home",
+                    "createNew":  "Create report",
+                    "createFirst":  "Create your first report",
+                    "noReports":  "No reports available",
+                    "noReportsDescription":  "Start creating reports to track your work progress",
+                    "searchPlaceholder":  "Search by title, summary or content...",
+                    "viewDetails":  "View details",
+                    "stats":  {
+                                  "totalReports":  "Total reports",
+                                  "completedTasks":  "Completed tasks",
+                                  "pendingTasks":  "Pending tasks",
+                                  "blockers":  "Blockers"
+                              },
+                    "filters":  {
+                                    "all":  "All",
+                                    "daily":  "Daily",
+                                    "weekly":  "Weekly",
+                                    "monthly":  "Monthly",
+                                    "project":  "Project",
+                                    "incident":  "Incident"
+                                },
+                    "types":  {
+                                  "daily":  "Daily",
+                                  "weekly":  "Weekly",
+                                  "monthly":  "Monthly",
+                                  "project":  "Project",
+                                  "incident":  "Incident"
+                              },
+                    "form":  {
+                                 "title":  "Title",
+                                 "titlePlaceholder":  "E.g: Daily Report - Frontend Development",
+                                 "type":  "Report type",
+                                 "summary":  "Summary",
+                                 "summaryPlaceholder":  "Brief summary of this report...",
+                                 "content":  "Detailed content",
+                                 "contentPlaceholder":  "Describe in detail the activities performed, achievements and observations...",
+                                 "completedTasks":  "Completed tasks",
+                                 "pendingTasks":  "Pending tasks",
+                                 "blockers":  "Blockers",
+                                 "reportDate":  "Report date",
+                                 "cancel":  "Cancel",
+                                 "save":  "Save report"
+                             },
+                    "detail":  {
+                                   "type":  "Type",
+                                   "date":  "Date",
+                                   "completed":  "Completed",
+                                   "pending":  "Pending",
+                                   "blockers":  "Blockers",
+                                   "summary":  "Summary",
+                                   "content":  "Detailed content",
+                                   "delete":  "Delete report",
+                                   "close":  "Close"
+                               }
+                }
 }

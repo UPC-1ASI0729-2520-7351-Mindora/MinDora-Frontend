@@ -1,4 +1,5 @@
 import { Injectable, signal } from '@angular/core';
+import { AssessmentsService } from './assessments.service';
 
 export interface AssessmentResult {
   id: string;
@@ -36,7 +37,7 @@ export class AssessmentHistoryService {
     frequency: 'weekly',
   });
 
-  constructor() {
+  constructor(private assessmentsService: AssessmentsService) {
     this.loadFromLocalStorage();
     this.generateMockData(); // For initial testing
   }
@@ -70,6 +71,34 @@ export class AssessmentHistoryService {
     };
     this.assessmentHistory.update((history) => [...history, newAssessment]);
     this.saveToLocalStorage();
+    
+    // También guardar en el backend
+    this.saveToBackend(newAssessment);
+  }
+
+  // Guardar assessment en el backend
+  private saveToBackend(localAssessment: AssessmentResult): void {
+    try {
+      // Convertir el resultado local al formato del backend
+      const backendAssessment = this.assessmentsService.convertLocalToBackendFormat(
+        localAssessment,
+        1 // employeeId - puedes obtenerlo del usuario autenticado
+      );
+
+      console.log('📤 Enviando assessment al backend:', backendAssessment);
+
+      this.assessmentsService.createAssessment(backendAssessment).subscribe({
+        next: (created) => {
+          console.log('✅ Assessment guardado en backend MySQL:', created);
+        },
+        error: (error) => {
+          console.error('⚠️ No se pudo guardar en backend (continuando en modo offline):', error.message);
+          // No mostramos error al usuario, solo logging
+        }
+      });
+    } catch (error) {
+      console.error('Error al convertir assessment:', error);
+    }
   }
 
   // Delete assessment
