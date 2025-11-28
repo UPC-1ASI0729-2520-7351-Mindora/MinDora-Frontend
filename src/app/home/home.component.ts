@@ -1,4 +1,4 @@
-import { Component, signal, computed } from '@angular/core';
+import { Component, signal, computed, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
@@ -17,6 +17,7 @@ import { WellnessTipModalComponent } from './modals/wellness-tip-modal/wellness-
 import { VideoCallModalComponent } from '../shared/video-call-modal/video-call-modal.component';
 import { AssessmentHistoryService } from '../services/assessment-history.service';
 import { AppointmentsService, StoredAppointment } from '../coaching/appointments.service';
+import { Appointment as BackendAppointment } from '../services/appointments-http.service';
 
 interface StressLevel {
   value: number; // 0-100
@@ -59,7 +60,7 @@ interface NavigationCard {
   templateUrl: './home.component.html',
   styleUrl: './home.component.css',
 })
-export class HomeComponent {
+export class HomeComponent implements OnInit {
   // Current user
   currentUser = computed(() => this.authService.getCurrentUser());
 
@@ -124,11 +125,12 @@ export class HomeComponent {
     },
   ]);
 
-  // Upcoming appointments from coaching
+  // Upcoming appointments from backend
+  private allAppointments = signal<StoredAppointment[]>([]);
+  
   upcomingAppointments = computed(() => {
-    const allAppointments = this.appointmentsService.load();
     const now = new Date();
-    return allAppointments
+    return this.allAppointments()
       .filter(apt => {
         if (apt.status !== 'upcoming') return false;
         const aptDate = new Date(`${apt.date}T${apt.time}`);
@@ -190,6 +192,60 @@ export class HomeComponent {
     if (latestAssessment) {
       this.updateStressLevelFromAssessment(latestAssessment);
     }
+  }
+
+  ngOnInit() {
+    this.loadAppointmentsFromBackend();
+  }
+
+  // Cargar citas desde el backend
+  loadAppointmentsFromBackend() {
+    this.appointmentsService.httpService.getAllAppointments().subscribe({
+      next: (backendAppointments: BackendAppointment[]) => {
+        // Mapear al formato local
+        const mapped = backendAppointments.map(appt => {
+          // Normalizar el ID
+          const appointmentId = typeof appt.id === 'object' && appt.id && 'value' in appt.id 
+            ? (appt.id as any).value 
+            : appt.id || 0;
+          
+          // Mapear status
+          let mappedStatus: 'upcoming' | 'past' | 'cancelled' = 'upcoming';
+          const backendStatus = appt.status?.toUpperCase();
+          
+          if (backendStatus === 'SCHEDULED' || backendStatus === 'CONFIRMED' || backendStatus === 'UPCOMING') {
+            mappedStatus = 'upcoming';
+          } else if (backendStatus === 'CANCELLED') {
+            mappedStatus = 'cancelled';
+          } else if (backendStatus === 'COMPLETED' || backendStatus === 'PAST') {
+            mappedStatus = 'past';
+          }
+          
+          // Mapear tipo
+          const typeMap: {[key: string]: string} = {
+            'video': 'Videollamada',
+            'phone': 'Teléfono',
+            'in-person': 'Presencial'
+          };
+          
+          return {
+            id: appointmentId,
+            psychologist: appt.psychologistName,
+            date: appt.date,
+            time: appt.time,
+            type: typeMap[appt.type] || appt.type,
+            status: mappedStatus
+          };
+        });
+        
+        this.allAppointments.set(mapped as StoredAppointment[]);
+        console.log('✅ [Home] Citas cargadas:', mapped.length);
+      },
+      error: (error: any) => {
+        console.error('❌ [Home] Error al cargar citas:', error);
+        this.allAppointments.set([]);
+      }
+    });
   }
 
   // Quick action methods

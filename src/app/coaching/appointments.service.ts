@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { AppointmentsHttpService, Appointment } from '../services/appointments-http.service';
 
 export type ApptStatus = 'upcoming' | 'past' | 'cancelled';
 
@@ -14,6 +15,8 @@ export interface StoredAppointment {
 @Injectable({ providedIn: 'root' })
 export class AppointmentsService {
   private KEY = 'mindora_appointments';
+
+  constructor(public httpService: AppointmentsHttpService) {}
 
   load(): StoredAppointment[] {
     const raw = localStorage.getItem(this.KEY);

@@ -1,6 +1,7 @@
-import { Component, signal } from '@angular/core';
+import { Component, signal, computed, OnInit } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
 import { AppointmentsService, StoredAppointment } from './appointments.service';
+import { Appointment as BackendAppointment } from '../services/appointments-http.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { CreateAppointmentModalComponent, AppointmentData } from '../home/modals/create-appointment-modal/create-appointment-modal.component';
@@ -69,7 +70,7 @@ type ApptStatus = Appointment['status'];
 const CANCELLED: ApptStatus = 'cancelled';
 
 interface Appointment {
-  id: number;
+  id: number | string;  // Puede ser número o UUID string
   psychologist: string;
   date: string;
   time: string;
@@ -117,7 +118,7 @@ interface WellnessTip {
 
 
 
-export class Coaching {
+export class Coaching implements OnInit {
   constructor(private apptsSvc: AppointmentsService) {}
   activeTab = signal<'psychologists' | 'community' | 'appointments'>('psychologists');
   selectedFilter = signal('all');
@@ -253,7 +254,7 @@ confirmReschedule() {
 // ===== Video Call Methods =====
 joinVideoCall(appointment: Appointment) {
   const storedAppt: StoredAppointment = {
-    id: appointment.id,
+    id: appointment.id as any,  // Convertir a any para compatibilidad con StoredAppointment
     psychologist: appointment.psychologist,
     date: appointment.date,
     time: appointment.time,
@@ -463,13 +464,20 @@ confirmCancel() {
   const appt = this.apptToEdit();
   if (!appt) return;
 
-  const updated: Appointment[] = this.appointments().map(a =>
-    a.id === appt.id ? { ...a, status: CANCELLED } : a
-  );
-
-  this.appointments.set(updated);
-  this.apptsSvc.save(updated as any);
-  this.closeCancel();
+  // Eliminar del backend usando DELETE
+  this.apptsSvc.httpService.deleteAppointment(appt.id).subscribe({
+    next: () => {
+      console.log('✅ Cita eliminada del backend');
+      
+      // Recargar todas las citas desde el backend
+      this.loadAppointments();
+      this.closeCancel();
+    },
+    error: (error: any) => {
+      console.error('❌ Error al eliminar cita:', error);
+      alert('Error al cancelar la cita. Por favor intenta nuevamente.');
+    }
+  });
 }
 /////////////
 icsFor(a: Appointment): string {
@@ -796,32 +804,66 @@ onAppointmentModalClose() {
   this.selectedPsychologistForBooking = null;
 }
 
+// Mapear tipo de cita del backend al local
+mapTypeToLocal(backendType: string): string {
+  const typeMap: {[key: string]: string} = {
+    'video': 'Videollamada',
+    'phone': 'Teléfono',
+    'in-person': 'Presencial'
+  };
+  return typeMap[backendType] || backendType;
+}
+
+// Mapear tipo de cita del local al backend
+mapTypeToBackend(localType: string): 'video' | 'phone' | 'in-person' {
+  const typeMap: {[key: string]: 'video' | 'phone' | 'in-person'} = {
+    'Videollamada': 'video',
+    'video': 'video',
+    'Teléfono': 'phone',
+    'phone': 'phone',
+    'Presencial': 'in-person',
+    'in-person': 'in-person'
+  };
+  return typeMap[localType] || 'video';
+}
+
 // Método cuando se crea una cita desde el modal
 onAppointmentCreated(appointmentData: AppointmentData) {
   console.log('Cita creada desde coaching:', appointmentData);
   
-  // Crear nueva cita con el formato correcto
-  const newAppt: Appointment = {
-    id: Date.now(),
-    psychologist: appointmentData.psychologistName,
+  // Crear el appointment para enviar al backend
+  const backendAppointment = {
+    psychologistId: appointmentData.psychologistId,
+    psychologistName: appointmentData.psychologistName,
+    employeeId: 1, // TODO: Obtener del usuario autenticado
     date: appointmentData.date,
     time: appointmentData.time,
-    type: appointmentData.type === 'video' ? 'Videollamada' : 
-          appointmentData.type === 'phone' ? 'Teléfono' : 'Presencial',
-    status: 'upcoming',
+    type: appointmentData.type,
+    reason: appointmentData.reason,
+    notes: appointmentData.notes || '',
+    status: 'upcoming' as const
   };
-
-  // Agregar a la lista
-  const list: Appointment[] = [...this.appointments(), newAppt];
-  this.appointments.set(list);
-  this.apptsSvc.save(list as any);
+  
+  // Guardar en el backend
+  this.apptsSvc.httpService.createAppointment(backendAppointment).subscribe({
+    next: (created: BackendAppointment) => {
+      console.log('✅ Cita creada con ID:', created.id);
+      
+      // Recargar todas las citas
+      this.loadAppointments();
+      
+      // Cambiar a la pestaña de citas
+      this.setActiveTab('appointments');
+    },
+    error: (error: any) => {
+      console.error('❌ Error al guardar cita:', error);
+      alert('Error al guardar la cita. Por favor intenta nuevamente.');
+    }
+  });
   
   // Cerrar modal
   this.showCreateAppointmentModal.set(false);
   this.selectedPsychologistForBooking = null;
-  
-  // Cambiar a la pestaña de citas para ver la nueva cita
-  this.setActiveTab('appointments');
 }
 
 // ===== US06: Ver perfil del psicólogo =====
@@ -840,7 +882,75 @@ closeProfile() {
 // ===== fin US06 =====
 
 ngOnInit() {
-  const stored = this.apptsSvc.load();
+  console.log('🚀 ngOnInit - Iniciando carga de citas...');
+  this.loadAppointments();
+}
+
+// Método para cargar citas desde el backend
+loadAppointments() {
+  console.log('🔍 [loadAppointments] Iniciando carga...');
+  
+  this.apptsSvc.httpService.getAllAppointments().subscribe({
+    next: (backendAppointments: BackendAppointment[]) => {
+      console.log('📥 [loadAppointments] Respuesta del backend:');
+      console.log('   - Total de citas:', backendAppointments.length);
+      console.log('   - Datos crudos:', JSON.stringify(backendAppointments, null, 2));
+      
+      // Mapear al formato local con validación
+      const mapped = backendAppointments.map((appt, index) => {
+        // Normalizar el ID (puede venir como objeto o número)
+        const appointmentId = typeof appt.id === 'object' && appt.id && 'value' in appt.id 
+          ? (appt.id as any).value 
+          : appt.id || 0;
+        
+        // Mapear status: SCHEDULED/CONFIRMED -> upcoming, CANCELLED/COMPLETED -> past/cancelled
+        let mappedStatus: 'upcoming' | 'past' | 'cancelled' = 'upcoming';
+        const backendStatus = appt.status?.toUpperCase();
+        
+        if (backendStatus === 'SCHEDULED' || backendStatus === 'CONFIRMED' || backendStatus === 'UPCOMING') {
+          mappedStatus = 'upcoming';
+        } else if (backendStatus === 'CANCELLED') {
+          mappedStatus = 'cancelled';
+        } else if (backendStatus === 'COMPLETED' || backendStatus === 'PAST') {
+          mappedStatus = 'past';
+        }
+        
+        const localAppt = {
+          id: appointmentId,
+          psychologist: appt.psychologistName,
+          date: appt.date,
+          time: appt.time,
+          type: this.mapTypeToLocal(appt.type),
+          status: mappedStatus
+        };
+        console.log(`   - Cita ${index + 1}:`, localAppt);
+        return localAppt;
+      });
+      
+      console.log('✅ [loadAppointments] Actualizando signal con', mapped.length, 'citas');
+      this.appointments.set(mapped);
+      
+      // Verificación inmediata
+      console.log('📊 [loadAppointments] Signal actualizado:');
+      console.log('   - appointments().length:', this.appointments().length);
+      console.log('   - appointments() contenido:', this.appointments());
+      console.log('   - upcomingAppointments:', this.upcomingAppointments);
+      console.log('   - upcomingAppointments.length:', this.upcomingAppointments.length);
+      
+      // Forzar actualización del DOM
+      setTimeout(() => {
+        console.log('⏰ [loadAppointments] Verificación después de 100ms:');
+        console.log('   - appointments().length:', this.appointments().length);
+        console.log('   - upcomingAppointments.length:', this.upcomingAppointments.length);
+      }, 100);
+    },
+    error: (error: any) => {
+      console.error('⚠️ Error al cargar citas desde backend:', error);
+      this.appointments.set([]);
+    }
+  });
+  
+  // Cargar otros datos desde localStorage
   const chRaw = localStorage.getItem(this.CHALLENGE_KEY);
   if (chRaw) {
     try { this.challenges.set(JSON.parse(chRaw)); } catch {}
@@ -855,14 +965,6 @@ ngOnInit() {
   }
 
   this.loadSavedResources();
-
-  if (stored.length) {
-    // Si hay guardadas, reemplaza las de demo
-    this.appointments.set(stored as unknown as Appointment[]);
-  } else {
-    // Si no hay, persiste las de ejemplo para que desde ya pasen por el servicio
-    this.apptsSvc.save(this.appointments() as any);
-  }
 }
 
 // ===== US15: Compartir reporte =====
@@ -1010,10 +1112,10 @@ get minDate() {
   return d.toISOString().slice(0, 10);
 }
 
-hasConflict(date: string, time: string, ignoreId?: number) {
+hasConflict(date: string, time: string, ignoreId?: number | string) {
   const when = `${date} ${time}`;
   return this.appointments().some(
-    a => a.id !== (ignoreId ?? -1) &&
+    a => a.id !== ignoreId &&
          `${a.date} ${a.time}` === when &&
          a.status !== 'cancelled'
   );
@@ -1185,24 +1287,8 @@ get filteredResources() {
     },
   ]);
 
-  appointments = signal<Appointment[]>([
-    {
-      id: 1,
-      psychologist: 'Dra. María González',
-      date: '2025-10-10',
-      time: '15:00',
-      type: 'Videollamada',
-      status: 'upcoming',
-    },
-    {
-      id: 2,
-      psychologist: 'Dr. Carlos Ruiz',
-      date: '2025-09-28',
-      time: '10:00',
-      type: 'Videollamada',
-      status: 'past',
-    },
-  ]);
+  // Appointments se cargarán desde el backend en ngOnInit
+  appointments = signal<Appointment[]>([]);
 
   setActiveTab(tab: 'psychologists' | 'community' | 'appointments') {
     this.activeTab.set(tab);
@@ -1246,11 +1332,15 @@ get filteredResources() {
   }
 
   get upcomingAppointments() {
-    return this.appointments().filter((a) => a.status === 'upcoming');
+    const upcoming = this.appointments().filter((a) => a.status === 'upcoming');
+    console.log('🔄 [getter upcomingAppointments]:', upcoming.length, 'citas');
+    return upcoming;
   }
 
   get pastAppointments() {
-    return this.appointments().filter((a) => a.status === 'past');
+    const past = this.appointments().filter((a) => a.status === 'past');
+    console.log('📅 [getter pastAppointments]:', past.length, 'citas');
+    return past;
   }
 
   getPsychologistImage(name: string): string {

@@ -3,19 +3,11 @@
   <section class="welcome-section py-4 bg-light">
     <div class="container">
       <div class="row align-items-center">
-        <div class="col-lg-8">
+        <div class="col-12">
           <h1 class="display-6 fw-bold mb-2">
             {{ getGreeting() | translate }}, {{ currentUser()?.name || 'User' }}!
           </h1>
           <p class="lead text-muted mb-0">{{ 'home.welcome.subtitle' | translate }}</p>
-        </div>
-        <div class="col-lg-4 text-lg-end mt-3 mt-lg-0">
-          <div class="d-flex gap-2 justify-content-lg-end">
-            <button class="btn btn-outline-primary" (click)="bookSession()">
-              <i class="fa-solid fa-calendar-plus me-2"></i>
-              {{ 'home.welcome.bookSession' | translate }}
-            </button>
-          </div>
         </div>
       </div>
     </div>
