@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { BehaviorSubject, Observable, throwError } from 'rxjs';
+import { tap, catchError, map } from 'rxjs/operators';
 
 export interface User {
   id: number;
@@ -18,76 +20,114 @@ export interface RegisterCredentials {
   password: string;
 }
 
+export interface AuthResponse {
+  token: string;
+  user: User;
+}
+
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
+  private apiUrl = 'http://localhost:8080/api/v1/auth';
   private currentUserSubject = new BehaviorSubject<User | null>(null);
   public currentUser$ = this.currentUserSubject.asObservable();
+  private tokenKey = 'auth_token';
+  private userKey = 'currentUser';
 
-  constructor() {
+  constructor(private http: HttpClient) {
     // Verificar si hay un usuario guardado en localStorage
-    const savedUser = localStorage.getItem('currentUser');
-    if (savedUser) {
+    const savedUser = localStorage.getItem(this.userKey);
+    const savedToken = localStorage.getItem(this.tokenKey);
+    
+    if (savedUser && savedToken) {
       this.currentUserSubject.next(JSON.parse(savedUser));
     }
   }
 
-  login(credentials: LoginCredentials): boolean {
-    // Simulación simple de login - en una app real esto sería una llamada HTTP
-    const users = this.getStoredUsers();
-    const user = users.find(u => u.email === credentials.email && u.password === credentials.password);
-    
-    if (user) {
-      const userData = { id: user.id, email: user.email, name: user.name };
-      this.currentUserSubject.next(userData);
-      localStorage.setItem('currentUser', JSON.stringify(userData));
-      return true;
-    }
-    return false;
+  /**
+   * Login de usuario
+   */
+  login(credentials: LoginCredentials): Observable<boolean> {
+    return this.http.post<AuthResponse>(`${this.apiUrl}/login`, credentials).pipe(
+      tap((response: AuthResponse) => {
+        console.log('✅ Login exitoso:', response.user);
+        this.setSession(response);
+      }),
+      map(() => true),
+      catchError((error) => {
+        console.error('❌ Error en login:', error);
+        return throwError(() => new Error(error.error?.message || 'Email o contraseña incorrectos'));
+      })
+    );
   }
 
-  register(credentials: RegisterCredentials): boolean {
-    // Verificar si el email ya existe
-    const users = this.getStoredUsers();
-    if (users.find(u => u.email === credentials.email)) {
-      return false;
-    }
-
-    // Crear nuevo usuario
-    const newUser = {
-      id: Date.now(), // ID simple basado en timestamp
-      name: credentials.name,
-      email: credentials.email,
-      password: credentials.password
-    };
-
-    users.push(newUser);
-    localStorage.setItem('users', JSON.stringify(users));
-
-    // Auto-login después del registro
-    const userData = { id: newUser.id, email: newUser.email, name: newUser.name };
-    this.currentUserSubject.next(userData);
-    localStorage.setItem('currentUser', JSON.stringify(userData));
-    
-    return true;
+  /**
+   * Registro de usuario
+   */
+  register(credentials: RegisterCredentials): Observable<boolean> {
+    return this.http.post<AuthResponse>(`${this.apiUrl}/register`, credentials).pipe(
+      tap((response: AuthResponse) => {
+        console.log('✅ Registro exitoso:', response.user);
+        this.setSession(response);
+      }),
+      map(() => true),
+      catchError((error) => {
+        console.error('❌ Error en registro:', error);
+        return throwError(() => new Error(error.error?.message || 'Error al registrar usuario'));
+      })
+    );
   }
 
+  /**
+   * Logout de usuario
+   */
   logout(): void {
     this.currentUserSubject.next(null);
-    localStorage.removeItem('currentUser');
+    localStorage.removeItem(this.tokenKey);
+    localStorage.removeItem(this.userKey);
+    console.log('👋 Usuario desconectado');
   }
 
+  /**
+   * Verificar si el usuario está autenticado
+   */
   isAuthenticated(): boolean {
-    return this.currentUserSubject.value !== null;
+    const token = this.getToken();
+    return token !== null && this.currentUserSubject.value !== null;
   }
 
+  /**
+   * Obtener usuario actual
+   */
   getCurrentUser(): User | null {
     return this.currentUserSubject.value;
   }
 
-  private getStoredUsers(): any[] {
-    const users = localStorage.getItem('users');
-    return users ? JSON.parse(users) : [];
+  /**
+   * Obtener token JWT
+   */
+  getToken(): string | null {
+    return localStorage.getItem(this.tokenKey);
+  }
+
+  /**
+   * Guardar sesión después de login/registro
+   */
+  private setSession(response: AuthResponse): void {
+    localStorage.setItem(this.tokenKey, response.token);
+    localStorage.setItem(this.userKey, JSON.stringify(response.user));
+    this.currentUserSubject.next(response.user);
+  }
+
+  /**
+   * Obtener headers con token JWT para peticiones autenticadas
+   */
+  getAuthHeaders(): HttpHeaders {
+    const token = this.getToken();
+    return new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    });
   }
 }

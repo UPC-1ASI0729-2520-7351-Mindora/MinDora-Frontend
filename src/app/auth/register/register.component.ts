@@ -50,15 +50,21 @@ export class RegisterComponent {
       this.errorMessage = '';
 
       const credentials = this.registerForm.value;
-      const success = this.authService.register(credentials);
-
-      if (success) {
-        this.router.navigate(['/home']);
-      } else {
-        this.errorMessage = 'El email ya está registrado';
-      }
-
-      this.isLoading = false;
+      
+      this.authService.register(credentials).subscribe({
+        next: (success) => {
+          if (success) {
+            this.router.navigate(['/home']);
+          }
+        },
+        error: (error) => {
+          this.errorMessage = error.message || 'Error al registrar usuario';
+          this.isLoading = false;
+        },
+        complete: () => {
+          this.isLoading = false;
+        }
+      });
     } else {
       this.markFormGroupTouched();
     }

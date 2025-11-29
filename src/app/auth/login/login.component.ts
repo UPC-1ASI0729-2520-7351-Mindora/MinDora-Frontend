@@ -30,15 +30,21 @@ export class LoginComponent {
       this.errorMessage = '';
 
       const credentials = this.loginForm.value;
-      const success = this.authService.login(credentials);
-
-      if (success) {
-        this.router.navigate(['/home']);
-      } else {
-        this.errorMessage = 'Email o contraseña incorrectos';
-      }
-
-      this.isLoading = false;
+      
+      this.authService.login(credentials).subscribe({
+        next: (success) => {
+          if (success) {
+            this.router.navigate(['/home']);
+          }
+        },
+        error: (error) => {
+          this.errorMessage = error.message || 'Email o contraseña incorrectos';
+          this.isLoading = false;
+        },
+        complete: () => {
+          this.isLoading = false;
+        }
+      });
     } else {
       this.markFormGroupTouched();
     }
